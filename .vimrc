@@ -13,9 +13,10 @@ set mouse=a
 set mousemodel=popup
 set autoindent
 set smartindent
-set tabstop=2
+set expandtab
 set softtabstop=2
 set shiftwidth=2
-set expandtab
 set colorcolumn=81
 highlight ColorColumn ctermbg=darkgray
+
+autocmd FileType python set softtabstop=4| set shiftwidth=4
