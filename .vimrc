@@ -1,4 +1,4 @@
-syntax on
+syntax enable
 set number
 set incsearch
 set hlsearch
@@ -19,16 +19,22 @@ set shiftwidth=2
 set colorcolumn=81
 set laststatus=2
 set encoding=utf-8
+
 highlight ColorColumn ctermbg=darkgray
 autocmd FileType python set softtabstop=4| set shiftwidth=4| set shiftwidth=4|
                       \ set textwidth=79| set expandtab| set autoindent|
                       \ set fileformat=unix
-autocmd FileType rust set colorcolumn=101
+autocmd FileType rust set colorcolumn=101|
+                      set softtabstop=4| set shiftwidth=4| set shiftwidth=4|
+autocmd FileType yaml set softtabstop=4| set shiftwidth=4| set shiftwidth=4|
+
 
 map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
+
+let g:ycm_rust_src_path = '/home/omtcyfz/dev/external/source/rust/src'
 
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -46,6 +52,8 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'rust-lang/rust.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'nvie/vim-flake8'
+Plugin 'tpope/vim-fugitive'
+Plugin 'flazz/vim-colorschemes'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -61,3 +69,5 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
+
+colorscheme Revolution
