@@ -5,6 +5,8 @@ set nocompatible
 set encoding=utf-8
 " Start scrolling when cursor is 4 lines off the bound "
 set scrolloff=4
+" Enable filetype plugin
+filetype plugin indent on
 " }}}
 " UI {{{
 " Enable syntax highlighting "
@@ -13,9 +15,17 @@ syntax enable
 set number
 " Display line and column numbers, relative position, etc at the bottom "
 set ruler
+" Highlight current line
+set cursorline
 " Add a vertical line to mark the line width limit "
 set colorcolumn=81
 highlight ColorColumn ctermbg=red
+" Enable visual autocomplete menu
+set wildmenu
+" Do not redraw when unnecessary
+set lazyredraw
+" Highlight matching bracket
+set showmatch
 " }}}
 " Searching {{{
 " Enable incremental search "
