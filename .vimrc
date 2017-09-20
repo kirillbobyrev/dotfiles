@@ -1,27 +1,38 @@
+" Be iMproved "
+set nocompatible
+" Always use UTF-8 encoding "
+set encoding=utf-8
+" Enable syntax highlighting "
 syntax enable
+" Show line numbers "
 set number
+" Enable incremental search "
 set incsearch
+" Highlight chunks of text matching the search pattern "
 set hlsearch
+" Search ignores case unless an uppercase letter appears in the pattern "
 set ignorecase
 set smartcase
-set nocompatible
-set autoindent
-set smartindent
+" Display line and column numbers, relative position, etc at the bottom "
 set ruler
+" Add a vertical line to mark the line width limit "
 set colorcolumn=81
-
+highlight ColorColumn ctermbg=darkgray
+" Always prefer spaces over tabs, use 2 spaces everywhere except in Python "
+set expandtab
 set softtabstop=2
 set shiftwidth=2
-set encoding=utf-8
-
-highlight ColorColumn ctermbg=darkgray
-
+" Don't create backup files "
+set noswapfile
+set nobackup
+set nowb
+" Start scrolling when cursor is 4 lines off the bound "
+set scrolloff=4
+" In Python 4 spaces should be used instead of 2 "
 autocmd FileType python set softtabstop=4| set shiftwidth=4|
-                      \ set textwidth=79| set expandtab| set autoindent|
-                      \ set fileformat=unix
-
+" Autoformat selected code using Clang-format "
 noremap <leader>cf :pyf /home/omtcyfz/dev/src/llvm/tools/clang/tools/clang-format/clang-format.py<cr>
-
+" Install few plugins using vin-plug"
 call plug#begin('~/.vim/plugged')
 Plug 'Valloric/YouCompleteMe'
 Plug 'vim-airline/vim-airline'
