@@ -56,10 +56,4 @@ noremap <leader>cf :pyf /home/omtcyfz/dev/src/llvm/tools/clang/tools/clang-forma
 " In Python 4 spaces should be used instead of 2 "
 autocmd FileType python set softtabstop=4| set shiftwidth=4|
 " }}}
-" vim-plug Plugins {{{
-call plug#begin('~/.vim/plugged')
-Plug 'Valloric/YouCompleteMe'
-Plug 'vim-airline/vim-airline'
-call plug#end()
-" }}}
 " vim:foldmethod=marker:foldlevel=0
