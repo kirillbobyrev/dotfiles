@@ -26,6 +26,9 @@ set wildmenu
 set lazyredraw
 " Highlight matching bracket
 set showmatch
+" Highlight trailing whitespace
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
 " }}}
 " Searching {{{
 " Enable incremental search "
