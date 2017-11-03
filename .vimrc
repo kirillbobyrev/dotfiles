@@ -3,6 +3,7 @@
 set nocompatible
 " Always use UTF-8 encoding
 set encoding=utf-8
+set fileencoding=utf-8
 " Start scrolling when cursor is 4 lines off the bound
 set scrolloff=4
 " Enable filetype plugin
