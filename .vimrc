@@ -8,6 +8,8 @@ set fileencoding=utf-8
 set scrolloff=4
 " Enable filetype plugin
 filetype plugin indent on
+" Always check spelling since I often do typos
+set spell spelllang=en_us
 " }}}
 " UI {{{
 " Enable syntax highlighting
