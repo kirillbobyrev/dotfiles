@@ -4,6 +4,9 @@ set nocompatible
 " Always use UTF-8 encoding
 set encoding=utf-8
 set fileencoding=utf-8
+scriptencoding utf8
+" Use Unix line endings
+set fileformats=unix
 " Start scrolling when cursor is 4 lines off the bound
 set scrolloff=4
 " Enable filetype plugin
@@ -22,7 +25,7 @@ set ruler
 set cursorline
 " Add a vertical line to mark the line width limit
 set colorcolumn=81
-highlight ColorColumn ctermbg=red
+highlight ColorColumn ctermbg=DarkMagenta
 " Enable visual autocomplete menu
 set wildmenu
 " Do not redraw when unnecessary
@@ -61,5 +64,7 @@ noremap <leader>cf :pyf /home/omtcyfz/dev/src/llvm/tools/clang/tools/clang-forma
 " Language-specific settings {{{
 " In Python 4 spaces should be used instead of 2
 autocmd FileType python set softtabstop=4| set shiftwidth=4|
+" Always use LaTeX
+let g:tex_flavor='latex'
 " }}}
 " vim:foldmethod=marker:foldlevel=0
