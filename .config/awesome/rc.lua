@@ -1,3 +1,5 @@
+-- TODO: Reformat to comply with Lua codestyle and my preferences (i.e. use 2
+-- tabs instead of 4, ensure proper formatting and so on).
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
@@ -45,6 +47,9 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
+
+--- Override theme wallpaper
+beautiful.wallpaper = "/home/omtcyfz/Pictures/Wallpapers/BLACK_X.jpg"
 
 -- This is used later as the default terminal and editor to run.
 terminal = "konsole"
@@ -132,6 +137,20 @@ cpuwidget:set_color({ type = "linear", from = { 0, 0 }, to = { 50, 0 },
                       stops = { { 0, "#FF5656" }, { 0.5, "#88A175" },
                               { 1, "#AECF96" }}})
 vicious.register(cpuwidget, vicious.widgets.cpu, "$1", 3)
+
+-- Weather widget
+local weatherwidget = wibox.widget.textbox()
+weather_t = awful.tooltip({ objects = { weatherwidget } })
+vicious.register(weatherwidget, vicious.widgets.weather,
+  function (widget, args)
+    weather_t:set_text("City: " .. args["{city}"] .."\nWind: " ..
+                       args["{windkmh}"] .. "km/h " .. args["{wind}"] ..
+                       "\nSky: " .. args["{sky}"] .. "\nHumidity: " ..
+                       args["{humid}"] .. "%")
+    return "| " .. args["{sky}"] .. ", " .. args["{tempc}"] .. " |"
+  --'600': check every 5 minutes.
+  --'UUEE': Sheremetyevo Airport (Moscow, Russia) ICAO code.
+  end, 600, "UUEE")
 -- }}}
 
 -- Create a wibox for each screen and add it
@@ -230,6 +249,7 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
+            weatherwidget,
             cpuwidget,
             mykeyboardlayout,
             wibox.widget.systray(),
