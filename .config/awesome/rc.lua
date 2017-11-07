@@ -147,7 +147,7 @@ vicious.register(weatherwidget, vicious.widgets.weather,
                        args["{windkmh}"] .. "km/h " .. args["{wind}"] ..
                        "\nSky: " .. args["{sky}"] .. "\nHumidity: " ..
                        args["{humid}"] .. "%")
-    return "| " .. args["{sky}"] .. ", " .. args["{tempc}"] .. " |"
+    return "| " .. args["{sky}"] .. ", " .. args["{tempc}"] .. "°C |"
   --'600': check every 5 minutes.
   --'UUEE': Sheremetyevo Airport (Moscow, Russia) ICAO code.
   end, 600, "UUEE")
