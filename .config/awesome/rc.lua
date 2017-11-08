@@ -147,6 +147,11 @@ myweather = lain.widget.weather({
     widget:set_markup(" | " .. description .. ", " .. units .. "°C | ")
   end,
 })
+
+mycalendar = lain.widget.calendar {
+  cal = "/usr/bin/env TERM=linux /usr/bin/cal --color=always",
+  attach_to = { mytextclock },
+}
 -- }}}
 
 -- Create a wibox for each screen and add it
@@ -249,6 +254,7 @@ awful.screen.connect_for_each_screen(function(s)
             wibox.widget.systray(),
             mykeyboardlayout,
             mytextclock,
+            mycalendar,
             s.mylayoutbox,
         },
     }
