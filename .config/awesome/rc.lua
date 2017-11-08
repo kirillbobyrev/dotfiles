@@ -144,7 +144,7 @@ myweather = lain.widget.weather({
   settings = function(wn)
     description = weather_now["weather"][1]["description"]
     units = math.floor(weather_now["main"]["temp"])
-    widget:set_markup(" | " .. description .. ", " .. units .. "°C | ")
+    widget:set_markup(" Weather: " .. description .. ", " .. units .. "°C ")
   end,
 })
 
@@ -152,6 +152,13 @@ mycalendar = lain.widget.calendar {
   cal = "/usr/bin/env TERM=linux /usr/bin/cal --color=always",
   attach_to = { mytextclock },
 }
+
+mycputemp = lain.widget.temp({
+  tempfile = "/sys/class/thermal/thermal_zone2/temp",
+  settings = function()
+    widget:set_markup(" CPU temp: " .. coretemp_now .. "°C ")
+  end,
+})
 -- }}}
 
 -- Create a wibox for each screen and add it
@@ -250,8 +257,9 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            myweather.widget,
             wibox.widget.systray(),
+            mycputemp.widget,
+            myweather.widget,
             mykeyboardlayout,
             mytextclock,
             mycalendar,
