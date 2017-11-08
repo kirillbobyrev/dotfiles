@@ -16,8 +16,8 @@ local hotkeys_popup = require("awful.hotkeys_popup").widget
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 
--- Use vicious widgets
-local vicious = require("vicious")
+-- Use lain widgets
+local lain = require("lain")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -130,27 +130,23 @@ mytextclock = wibox.widget.textclock()
 
 
 -- {{{ Create widgets
-cpuwidget = awful.widget.graph()
-cpuwidget:set_width(50)
-cpuwidget:set_background_color("#494B4F")
-cpuwidget:set_color({ type = "linear", from = { 0, 0 }, to = { 50, 0 },
-                      stops = { { 0, "#FF5656" }, { 0.5, "#88A175" },
-                              { 1, "#AECF96" }}})
-vicious.register(cpuwidget, vicious.widgets.cpu, "$1", 3)
+local read_pipe = require("lain.helpers").read_pipe
 
--- Weather widget
-local weatherwidget = wibox.widget.textbox()
-weather_t = awful.tooltip({ objects = { weatherwidget } })
-vicious.register(weatherwidget, vicious.widgets.weather,
-  function (widget, args)
-    weather_t:set_text("City: " .. args["{city}"] .."\nWind: " ..
-                       args["{windkmh}"] .. "km/h " .. args["{wind}"] ..
-                       "\nSky: " .. args["{sky}"] .. "\nHumidity: " ..
-                       args["{humid}"] .. "%")
-    return "| " .. args["{sky}"] .. ", " .. args["{tempc}"] .. "°C |"
-  --'600': check every 5 minutes.
-  --'UUEE': Sheremetyevo Airport (Moscow, Russia) ICAO code.
-  end, 600, "UUEE")
+myweather = lain.widget.weather({
+  city_id = 524901,  -- Moscow
+  notification_text_fun = function (wn)
+    local day = os.date("%a %d", wn["dt"])
+    local tmin = math.floor(wn["temp"]["min"])
+    local tmax = math.floor(wn["temp"]["max"])
+    local desc = wn["weather"][1]["description"]
+    return string.format("<b>%s</b>: %s, from %d to %d ", day, desc, tmin, tmax)
+  end,
+  settings = function(wn)
+    description = weather_now["weather"][1]["description"]
+    units = math.floor(weather_now["main"]["temp"])
+    widget:set_markup(" | " .. description .. ", " .. units .. "°C | ")
+  end,
+})
 -- }}}
 
 -- Create a wibox for each screen and add it
@@ -249,10 +245,9 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            weatherwidget,
-            cpuwidget,
-            mykeyboardlayout,
+            myweather.widget,
             wibox.widget.systray(),
+            mykeyboardlayout,
             mytextclock,
             s.mylayoutbox,
         },
