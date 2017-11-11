@@ -1,6 +1,4 @@
 " General settings {{{
-" Be iMproved
-set nocompatible
 " Always use UTF-8 encoding
 set encoding=utf-8
 set fileencoding=utf-8
@@ -16,7 +14,9 @@ set spell spelllang=en_us
 " }}}
 " UI {{{
 " Enable syntax highlighting
-syntax enable
+if !has('g:syntax_on')
+  syntax enable
+endif
 " Show line numbers
 set number
 " Display line and column numbers, relative position, etc at the bottom
@@ -48,8 +48,7 @@ set smartcase
 " Backup {{{
 " Don't create backup files
 set noswapfile
-set nobackup
-set nowb
+set nowritebackup
 " }}}
 " Spaces & Tabs {{{
 " Always prefer spaces over tabs, use 2 spaces everywhere except in Python
