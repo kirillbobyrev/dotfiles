@@ -8,4 +8,5 @@
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
-export QT_QPA_PLATFORMTHEME="qt5ct"
+# Use qt5ct external configuration unless on KDE Plasma.
+[ "$XDG_CURRENT_DESKTOP" = "KDE" ] || export QT_QPA_PLATFORMTHEME="qt5ct"
