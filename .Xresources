@@ -72,3 +72,6 @@ Xft.hintstyle:  hintslight
 ! Fonts
 URxvt*font:         xft:Noto Mono:pixelsize=10
 URxvt*boldFont:     xft:Noto Mono:bold:pixelsize=10
+
+! Custom settings
+URxvt.urlLauncher:  google-chrome-stable
