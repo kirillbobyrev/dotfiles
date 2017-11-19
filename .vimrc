@@ -13,6 +13,8 @@ filetype plugin indent on
 set spell spelllang=en_us
 " }}}
 " UI {{{
+" Be Solarized
+colors solarized
 " Enable syntax highlighting
 if !has('g:syntax_on')
   syntax enable
@@ -33,7 +35,7 @@ set lazyredraw
 " Highlight matching bracket
 set showmatch
 " Highlight trailing whitespace
-highlight ExtraWhitespace ctermbg=red guibg=red
+highlight ExtraWhitespace ctermbg=red
 match ExtraWhitespace /\s\+$/
 " }}}
 " Searching {{{
