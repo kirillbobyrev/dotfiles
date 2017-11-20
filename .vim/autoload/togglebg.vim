@@ -1,5 +1,5 @@
 " Toggle Background
-" Modified:     2011 Apr 29
+" Modified:     2017 November 20
 " Maintainer:   Ethan Schoonover
 " License:      OSI approved MIT license
 
@@ -9,8 +9,8 @@ endif
 let g:loaded_togglebg = 1
 
 " noremap is a bit misleading here if you are unused to vim mapping.
-" in fact, there is remapping, but only of script locally defined remaps, in 
-" this case <SID>TogBG. The <script> argument modifies the noremap scope in 
+" in fact, there is remapping, but only of script locally defined remaps, in
+" this case <SID>TogBG. The <script> argument modifies the noremap scope in
 " this regard (and the noremenu below).
 nnoremap <unique> <script> <Plug>ToggleBackground <SID>TogBG
 inoremap <unique> <script> <Plug>ToggleBackground <ESC><SID>TogBG<ESC>a
