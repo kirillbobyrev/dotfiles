@@ -14,11 +14,13 @@ set spell spelllang=en_us
 " }}}
 " UI {{{
 " Be Solarized
-colors solarized
+set t_Co=256
 " Enable syntax highlighting
 if !has('g:syntax_on')
   syntax enable
 endif
+set background=dark
+colorscheme solarized
 " Show line numbers
 set number
 " Display line and column numbers, relative position, etc at the bottom
