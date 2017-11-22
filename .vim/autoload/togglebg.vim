@@ -1,7 +1,4 @@
 " Toggle Background
-" Modified:     2017 November 20
-" Maintainer:   Ethan Schoonover
-" License:      OSI approved MIT license
 
 if exists("g:loaded_togglebg")
     finish

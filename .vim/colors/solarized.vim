@@ -1,10 +1,6 @@
 " Name:     Solarized vim colorscheme
-" Author:   Ethan Schoonover <es@ethanschoonover.com>
-" URL:      http://ethanschoonover.com/solarized
+" URL:      https://github.com/omtcyfz/solarized
 "           (see this url for latest release & screenshots)
-" License:  OSI approved MIT license (see end of this file)
-" Created:  In the middle of the night
-" Modified: 2017 November 20
 "
 " Usage "{{{
 "
@@ -134,11 +130,15 @@
 " Allow or disallow certain features based on current terminal emulator or
 " environment.
 
-" Terminals that support italics
-if has("gui_running") || ( has("unix") && system("tput sitm") == "\033[3m" )
-    let s:terminal_italic=1
+" Environment has truecolor support
+function s:IsTrueColor()
+  return has('gui_running') || (has('nvim') && $NVIM_TUI_ENABLE_TRUE_COLOR)
+endfunction
+
+if has("gui_running") || (has("unix") && system("tput sitm") == "\033[3m")
+  let s:terminal_italic=1
 else
-    let s:terminal_italic=0
+  let s:terminal_italic=0
 endif
 
 " }}}
@@ -225,7 +225,7 @@ let colors_name = "solarized"
 " leave the hex values out entirely in that case and include only cterm colors)
 " We also check to see if user has set solarized (force use of the
 " neutral gray monotone palette component)
-if (has("gui_running") && g:solarized_degrade == 0)
+if (s:IsTrueColor() && g:solarized_degrade == 0)
     let s:vmode       = "gui"
     let s:base03      = "#002b36"
     let s:base02      = "#073642"
@@ -244,7 +244,7 @@ if (has("gui_running") && g:solarized_degrade == 0)
     let s:cyan        = "#2aa198"
     "let s:green       = "#859900" "original
     let s:green       = "#719e07" "experimental
-elseif (has("gui_running") && g:solarized_degrade == 1)
+elseif (s:IsTrueColor() && g:solarized_degrade == 1)
     " These colors are identical to the 256 color mode. They may be viewed
     " while in gui mode via "let g:solarized_degrade=1", though this is not
     " recommened and is for testing only.
@@ -475,7 +475,7 @@ exe "let s:fmt_revb     = ' ".s:vmode."=NONE".s:r.s:b.  " term=NONE".s:r.s:b."'"
 exe "let s:fmt_revbb    = ' ".s:vmode."=NONE".s:r.s:bb.   " term=NONE".s:r.s:bb."'"
 exe "let s:fmt_revbbu   = ' ".s:vmode."=NONE".s:r.s:bb.s:u." term=NONE".s:r.s:bb.s:u."'"
 
-if has("gui_running")
+if s:IsTrueColor()
     exe "let s:sp_none      = ' guisp=".s:none   ."'"
     exe "let s:sp_back      = ' guisp=".s:back   ."'"
     exe "let s:sp_base03    = ' guisp=".s:base03 ."'"
@@ -605,7 +605,7 @@ exe "hi! MoreMsg"        .s:fmt_none   .s:fg_blue   .s:bg_none
 exe "hi! ModeMsg"        .s:fmt_none   .s:fg_blue   .s:bg_none
 exe "hi! LineNr"         .s:fmt_none   .s:fg_base01 .s:bg_base02
 exe "hi! Question"       .s:fmt_bold   .s:fg_cyan   .s:bg_none
-if ( has("gui_running") || &t_Co > 8 )
+if (s:IsTrueColor() || &t_Co > 8)
     exe "hi! VertSplit"  .s:fmt_none   .s:fg_base00 .s:bg_base00
 else
     exe "hi! VertSplit"  .s:fmt_revbb  .s:fg_base00 .s:bg_base02
@@ -627,7 +627,7 @@ exe "hi! DiffChange"     .s:fmt_undr   .s:fg_yellow .s:bg_none   .s:sp_yellow
 exe "hi! DiffDelete"     .s:fmt_bold   .s:fg_red    .s:bg_none
 exe "hi! DiffText"       .s:fmt_undr   .s:fg_blue   .s:bg_none   .s:sp_blue
 else " normal
-    if has("gui_running")
+    if s:IsTrueColor()
 exe "hi! DiffAdd"        .s:fmt_bold   .s:fg_green  .s:bg_base02 .s:sp_green
 exe "hi! DiffChange"     .s:fmt_bold   .s:fg_yellow .s:bg_base02 .s:sp_yellow
 exe "hi! DiffDelete"     .s:fmt_bold   .s:fg_red    .s:bg_base02
@@ -1075,28 +1075,23 @@ endfunction
 autocmd ColorScheme * if g:colors_name != "solarized" | silent! aunmenu Solarized | else | call SolarizedMenu() | endif
 
 "}}}
-" License "{{{
-" ---------------------------------------------------------------------
-"
-" Copyright (c) 2011 Ethan Schoonover
-"
-" Permission is hereby granted, free of charge, to any person obtaining a copy
-" of this software and associated documentation files (the "Software"), to deal
-" in the Software without restriction, including without limitation the rights
-" to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-" copies of the Software, and to permit persons to whom the Software is
-" furnished to do so, subject to the following conditions:
-"
-" The above copyright notice and this permission notice shall be included in
-" all copies or substantial portions of the Software.
-"
-" THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-" IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-" FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-" AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-" LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-" OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-" THE SOFTWARE.
-"
-" vim:foldmethod=marker:foldlevel=0
-"}}}
+" Neovim Terminal {{{
+if has('nvim')
+  let g:terminal_color_0 = s:base02
+  let g:terminal_color_1 = s:red
+  let g:terminal_color_2 = s:green
+  let g:terminal_color_3 = s:yellow
+  let g:terminal_color_4 = s:blue
+  let g:terminal_color_5 = s:magenta
+  let g:terminal_color_6 = s:cyan
+  let g:terminal_color_7 = s:base2
+  let g:terminal_color_8 = s:base03
+  let g:terminal_color_9 = s:orange
+  let g:terminal_color_10 = s:base01
+  let g:terminal_color_11 = s:base00
+  let g:terminal_color_12 = s:base0
+  let g:terminal_color_13 = s:violet
+  let g:terminal_color_14 = s:base1
+  let g:terminal_color_15 = s:base3
+endif
+ " }}}
