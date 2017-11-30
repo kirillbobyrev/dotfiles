@@ -13,7 +13,6 @@
 #define S_cyan          #2aa198
 #define S_green         #859900
 
-
 ! Set USE_DARK for preferred colorscheme
 ! 0 => Light
 ! 1 => Dark
@@ -48,7 +47,6 @@
 
 #endif
 
-
 ! To only apply colors to your terminal, for example, prefix
 ! the color assignment statement with its name. Example:
 !
@@ -80,14 +78,14 @@
 *color15:                 S_base3
 
 ! URxvt settings
-URxvt.scrollBar: false
-URxvt.saveLines: 0
+URxvt.scrollBar:    false
+URxvt.saveLines:    0
 
-Xft.dpi:        96
-Xft.antialias:  true
-Xft.rgba:       rgba
-Xft.hinting:    true
-Xft.hintstyle:  hintslight
+Xft.dpi:            96
+Xft.antialias:      true
+Xft.rgba:           rgba
+Xft.hinting:        true
+Xft.hintstyle:      hintslight
 
 ! Fonts
 URxvt*font:         xft:Noto Mono:pixelsize=10

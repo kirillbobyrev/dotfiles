@@ -15,13 +15,12 @@ set spell spelllang=en_us
 set smartindent
 " }}}
 " UI {{{
-" Be Solarized
-let g:gruvbox_italic=1
-colorscheme gruvbox
 " Enable syntax highlighting
 if !has('g:syntax_on')
   syntax enable
 endif
+set background=dark
+colorscheme solarized
 " Show line numbers
 set number
 " Display line and column numbers, relative position, etc at the bottom
