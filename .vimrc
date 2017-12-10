@@ -62,7 +62,7 @@ set shiftwidth=2
 " }}}
 " Custom commands & functions {{{
 " Autoformat selected code using Clang-format
-noremap <leader>cf :pyf /home/omtcyfz/dev/src/llvm/tools/clang/tools/clang-format/clang-format.py<cr>
+noremap <leader>cf :pyf /home/omtcvxyz/dev/src/llvm/tools/clang/tools/clang-format/clang-format.py<cr>
 " }}}
 " Language-specific settings {{{
 " In Python 4 spaces should be used instead of 2

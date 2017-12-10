@@ -81,15 +81,18 @@
 URxvt.scrollBar:    false
 URxvt.saveLines:    0
 
-Xft.dpi:            96
-Xft.antialias:      true
-Xft.rgba:           rgba
-Xft.hinting:        true
-Xft.hintstyle:      hintslight
+Xft.dpi:        92
+Xft.lcdfilter:  lcddefault
+Xft.hinting:    1
+Xft.hintstyle:  hintslight
+Xft.autohint:   0
+Xft.rgba:       rgb
+Xft.antialias:  1
 
 ! Fonts
-URxvt*font:         xft:Noto Mono:pixelsize=10
-URxvt*boldFont:     xft:Noto Mono:bold:pixelsize=10
+urxvt.font:     xft:Hack:pixelsize=10,\
+                xft:DejaVu Sans Mono:pixelsize=10,\
+                xft:Symbola:pixelsize=10,
 
 ! Custom settings
 URxvt.urlLauncher:  google-chrome-stable
