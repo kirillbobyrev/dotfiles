@@ -70,4 +70,19 @@ autocmd FileType python set softtabstop=4| set shiftwidth=4|
 " Always use LaTeX
 let g:tex_flavor='latex'
 " }}}
+" Plugins {{{
+" Initialize plugin system
+call plug#begin('~/.vim/plugged')
+
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+Plug 'easymotion/vim-easymotion'
+
+call plug#end()
+" }}}
+" Plugins-specific settings {{{
+let g:airline_powerline_fonts = 1
+let g:airline_theme='solarized'
+" }}}
 " vim:foldmethod=marker:foldlevel=0
