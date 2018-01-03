@@ -19,8 +19,6 @@ set smartindent
 if !has('g:syntax_on')
   syntax enable
 endif
-set background=dark
-colorscheme solarized
 " Show line numbers
 set number
 " Display line and column numbers, relative position, etc at the bottom
@@ -77,7 +75,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
-Plug 'easymotion/vim-easymotion'
+Plug 'omtcvxyz/vim-colors-solarized'
 
 call plug#end()
 " }}}
@@ -85,4 +83,8 @@ call plug#end()
 let g:airline_powerline_fonts = 1
 let g:airline_theme='solarized'
 " }}}
+
+set background=dark
+colorscheme solarized
+
 " vim:foldmethod=marker:foldlevel=0

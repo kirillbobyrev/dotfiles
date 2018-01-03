@@ -91,7 +91,7 @@ Xft.antialias:  1
 URxvt*fading:   10
 
 ! Fonts
-urxvt.font:     xft:Hack:pixelsize=10
+urxvt.font:     xft:Hack:size=9
 
 ! Custom settings
 URxvt.urlLauncher:  google-chrome-stable
