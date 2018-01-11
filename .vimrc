@@ -34,10 +34,6 @@ set wildmenu
 set lazyredraw
 " Highlight matching bracket
 set showmatch
-" Highlight trailing whitespace
-highlight ExtraWhitespace ctermbg=red
-match ExtraWhitespace /\s\+$/
-" }}}
 " Searching {{{
 " Enable incremental search
 set incsearch
@@ -64,27 +60,28 @@ noremap <leader>cf :pyf /home/omtcvxyz/dev/src/llvm/tools/clang/tools/clang-form
 " }}}
 " Language-specific settings {{{
 " In Python 4 spaces should be used instead of 2
-autocmd FileType python set softtabstop=4| set shiftwidth=4|
+autocmd FileType python set softtabstop=4| set shiftwidth=4| set colorcolumn=80
 " Always use LaTeX
 let g:tex_flavor='latex'
 " }}}
 " Plugins {{{
 " Initialize plugin system
 call plug#begin('~/.vim/plugged')
-
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-
 Plug 'omtcvxyz/vim-colors-solarized'
-
 call plug#end()
 " }}}
 " Plugins-specific settings {{{
 let g:airline_powerline_fonts = 1
 let g:airline_theme='solarized'
 " }}}
-
+" Enable solarized colorscheme after its initialization via vim-plug {{{
 set background=dark
 colorscheme solarized
-
+" }}}
+" Highlight trailing whitespace
+highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
+match ExtraWhitespace /\s\+$/
+" }}}
 " vim:foldmethod=marker:foldlevel=0
