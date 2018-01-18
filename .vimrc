@@ -61,15 +61,22 @@ noremap <leader>cf :pyf /home/omtcvxyz/dev/src/llvm/tools/clang/tools/clang-form
 " Language-specific settings {{{
 " In Python 4 spaces should be used instead of 2
 autocmd FileType python set softtabstop=4| set shiftwidth=4| set colorcolumn=80
+autocmd FileType Rust   set softtabstop=4| set shiftwidth=4
 " Always use LaTeX
 let g:tex_flavor='latex'
 " }}}
+" }}}
+" Plugins configuration {{{
 " Plugins {{{
 " Initialize plugin system
 call plug#begin('~/.vim/plugged')
+" UI Plugins
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'omtcvxyz/vim-colors-solarized'
+" Language specific-plugins, LSP servers, etc
+Plug 'rust-lang/rust.vim'
+Plug 'racer-rust/vim-racer'
 call plug#end()
 " }}}
 " Plugins-specific settings {{{
@@ -80,7 +87,7 @@ let g:airline_theme='solarized'
 set background=dark
 colorscheme solarized
 " }}}
-" Highlight trailing whitespace
+" Highlight trailing whitespace {{{
 highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
 match ExtraWhitespace /\s\+$/
 " }}}
