@@ -50,9 +50,11 @@ set nowritebackup
 " }}}
 " Spaces & Tabs {{{
 " Always prefer spaces over tabs, use 2 spaces everywhere except in Python
+set tabstop=8
 set expandtab
 set softtabstop=2
 set shiftwidth=2
+set shiftround
 " }}}
 " Custom commands & functions {{{
 " Autoformat selected code using Clang-format
