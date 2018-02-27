@@ -58,7 +58,7 @@ set shiftround
 " }}}
 " Custom commands & functions {{{
 " Autoformat selected code using Clang-format
-noremap <leader>cf :pyf /home/omtcvxyz/dev/src/llvm/tools/clang/tools/clang-format/clang-format.py<cr>
+noremap <leader>cf :pyf /home/omtcvxyz/dev/open-source/src/llvm/tools/clang/tools/clang-format/clang-format.py<cr>
 " }}}
 " Language-specific settings {{{
 " In Python 4 spaces should be used instead of 2
@@ -72,25 +72,42 @@ let g:tex_flavor='latex'
 " Plugins {{{
 " Initialize plugin system
 call plug#begin('~/.vim/plugged')
-" UI Plugins
+" Language specific-plugins, LSP servers, etc {{{
+" Common {{{
+Plug 'w0rp/ale'
+" }}}
+" Rust {{{
+Plug 'rust-lang/rust.vim'
+Plug 'racer-rust/vim-racer'
+" }}}
+" C++ {{{
+Plug 'octol/vim-cpp-enhanced-highlight'
+" }}}
+" }}}
+" UI Plugins {{{
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'omtcvxyz/vim-colors-solarized'
-" Language specific-plugins, LSP servers, etc
-Plug 'rust-lang/rust.vim'
-Plug 'racer-rust/vim-racer'
+Plug 'Yggdroot/indentLine'
+" }}}
+" LaTeX {{{
+Plug 'lervag/vimtex'
+" }}}
+" }}}
 call plug#end()
 " }}}
 " Plugins-specific settings {{{
 let g:airline_powerline_fonts = 1
 let g:airline_theme='solarized'
-" }}}
 " Enable solarized colorscheme after its initialization via vim-plug {{{
 set background=dark
 colorscheme solarized
 " }}}
 " Highlight trailing whitespace {{{
+" This has to come after plugins configuration, because vim-colors-solarized
+" would prevent extra whitespace highlight otherwise.
 highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
 match ExtraWhitespace /\s\+$/
+" }}}
 " }}}
 " vim:foldmethod=marker:foldlevel=0
