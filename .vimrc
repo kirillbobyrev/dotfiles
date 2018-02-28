@@ -49,7 +49,8 @@ set noswapfile
 set nowritebackup
 " }}}
 " Spaces & Tabs {{{
-" Always prefer spaces over tabs, use 2 spaces everywhere except in Python
+" Always prefer spaces over tabs, use 2 spaces everywhere except in few
+" languages
 set tabstop=8
 set expandtab
 set softtabstop=2
@@ -61,53 +62,67 @@ set shiftround
 noremap <leader>cf :pyf /home/omtcvxyz/dev/open-source/src/llvm/tools/clang/tools/clang-format/clang-format.py<cr>
 " }}}
 " Language-specific settings {{{
-" In Python 4 spaces should be used instead of 2
-autocmd FileType python set softtabstop=4| set shiftwidth=4| set colorcolumn=80
+" In Python and Rust 4 spaces should be used instead of 2
+autocmd FileType Python set softtabstop=4| set shiftwidth=4| set colorcolumn=80
 autocmd FileType Rust   set softtabstop=4| set shiftwidth=4
 " Always use LaTeX
 let g:tex_flavor='latex'
 " }}}
 " }}}
 " Plugins configuration {{{
-" Plugins {{{
+" Vim-Plug directives {{{
 " Initialize plugin system
 call plug#begin('~/.vim/plugged')
+" A bunch of general plugins {{{
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'omtcvxyz/vim-colors-solarized'
+Plug 'godlygeek/tabular'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'junegunn/goyo.vim'
+Plug 'easymotion/vim-easymotion'
+Plug 'SirVer/ultisnips'
+" }}}
 " Language specific-plugins, LSP servers, etc {{{
-" Common {{{
+" Multiple languages {{{
 Plug 'w0rp/ale'
+Plug 'Valloric/YouCompleteMe'
+" }}}
+" C++ {{{
+Plug 'octol/vim-cpp-enhanced-highlight'
 " }}}
 " Rust {{{
 Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer'
 " }}}
-" C++ {{{
-Plug 'octol/vim-cpp-enhanced-highlight'
-" }}}
-" }}}
-" UI Plugins {{{
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'omtcvxyz/vim-colors-solarized'
-Plug 'Yggdroot/indentLine'
-" }}}
 " LaTeX {{{
 Plug 'lervag/vimtex'
+" }}}
+" Markdown {{{
+Plug 'plasticboy/vim-markdown'
 " }}}
 " }}}
 call plug#end()
 " }}}
 " Plugins-specific settings {{{
+" Vim-Airline {{{
 let g:airline_powerline_fonts = 1
 let g:airline_theme='solarized'
-" Enable solarized colorscheme after its initialization via vim-plug {{{
+" }}}
+" vim-colors-solarized {{{
+" Enable solarized colorscheme after its initialization via vim-plug
 set background=dark
 colorscheme solarized
-" }}}
 " Highlight trailing whitespace {{{
 " This has to come after plugins configuration, because vim-colors-solarized
 " would prevent extra whitespace highlight otherwise.
 highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
 match ExtraWhitespace /\s\+$/
+" }}}
+" }}}
+" YouCompleteMe {{{
+let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+" }}}
 " }}}
 " }}}
 " vim:foldmethod=marker:foldlevel=0
