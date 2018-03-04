@@ -74,26 +74,24 @@ let g:tex_flavor='latex'
 " Initialize plugin system
 call plug#begin('~/.vim/plugged')
 " A bunch of general plugins {{{
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'omtcvxyz/vim-colors-solarized'
-Plug 'godlygeek/tabular'
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'junegunn/goyo.vim'
-Plug 'easymotion/vim-easymotion'
 Plug 'SirVer/ultisnips'
+Plug 'easymotion/vim-easymotion'
+Plug 'godlygeek/tabular'
+Plug 'itchyny/lightline.vim'
+Plug 'junegunn/goyo.vim'
+Plug 'majutsushi/tagbar'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'omtcvxyz/vim-colors-solarized'
+Plug 'sheerun/vim-polyglot'
 " }}}
 " Language specific-plugins, LSP servers, etc {{{
 " Multiple languages {{{
-Plug 'w0rp/ale'
 Plug 'Valloric/YouCompleteMe'
-" }}}
-" C++ {{{
-Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'w0rp/ale'
 " }}}
 " Rust {{{
-Plug 'rust-lang/rust.vim'
 Plug 'racer-rust/vim-racer'
+Plug 'rust-lang/rust.vim'
 " }}}
 " LaTeX {{{
 Plug 'lervag/vimtex'
@@ -105,9 +103,11 @@ Plug 'plasticboy/vim-markdown'
 call plug#end()
 " }}}
 " Plugins-specific settings {{{
-" Vim-Airline {{{
-let g:airline_powerline_fonts = 1
-let g:airline_theme='solarized'
+" Vim-Lightline {{{
+let g:lightline = {
+  \ 'colorscheme': 'solarized',
+  \ }
+set laststatus=2
 " }}}
 " vim-colors-solarized {{{
 " Enable solarized colorscheme after its initialization via vim-plug
@@ -122,6 +122,9 @@ match ExtraWhitespace /\s\+$/
 " }}}
 " YouCompleteMe {{{
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+" }}}
+" Vim Markdown {{{
+let g:vim_markdown_folding_disabled = 1
 " }}}
 " }}}
 " }}}
