@@ -126,6 +126,12 @@ let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 " Vim Markdown {{{
 let g:vim_markdown_folding_disabled = 1
 " }}}
+" Vim-Polyglot {{{
+let g:polyglot_disabled = ['latex']
+" }}}
+" Vimtex {{{
+let g:vimtex_compiler_latexmk = {'callback' : 0}
+" }}}
 " }}}
 " }}}
 " vim:foldmethod=marker:foldlevel=0
