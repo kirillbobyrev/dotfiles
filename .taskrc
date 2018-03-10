@@ -14,3 +14,5 @@ data.location=~/.task
 
 # Color theme
 include /usr/share/doc/task/rc/solarized-dark-256.theme
+
+weekstart=monday
