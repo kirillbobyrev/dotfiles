@@ -59,7 +59,7 @@ set shiftround
 " }}}
 " Custom commands & functions {{{
 " Autoformat selected code using Clang-format
-noremap <leader>cf :pyf /home/omtcvxyz/dev/open-source/src/llvm/tools/clang/tools/clang-format/clang-format.py<cr>
+noremap <leader>cf :pyf /home/omtcvxyz/dev/projects/src/llvm/tools/clang/tools/clang-format/clang-format.py<cr>
 " }}}
 " Language-specific settings {{{
 " In Python and Rust 4 spaces should be used instead of 2
@@ -86,7 +86,6 @@ Plug 'sheerun/vim-polyglot'
 " }}}
 " Language specific-plugins, LSP servers, etc {{{
 " Multiple languages {{{
-Plug 'Valloric/YouCompleteMe'
 Plug 'w0rp/ale'
 " }}}
 " Rust {{{
@@ -119,9 +118,6 @@ colorscheme solarized
 highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
 match ExtraWhitespace /\s\+$/
 " }}}
-" }}}
-" YouCompleteMe {{{
-let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 " }}}
 " Vim Markdown {{{
 let g:vim_markdown_folding_disabled = 1
