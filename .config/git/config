@@ -1,0 +1,12 @@
+[user]
+  email = kbobyrev.opensource@gmail.com
+  name = Kirill Bobyrev
+  username = omtcvxyz
+[core]
+  editor = vim
+[web]
+  browser = google-chrome
+[color]
+  ui = true
+[github]
+  user = omtcvxyz
