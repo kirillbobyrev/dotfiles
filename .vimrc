@@ -75,10 +75,11 @@ let g:tex_flavor='latex'
 call plug#begin('~/.vim/plugged')
 " A bunch of general plugins {{{
 Plug 'SirVer/ultisnips'
-Plug 'easymotion/vim-easymotion'
 Plug 'godlygeek/tabular'
+Plug 'honza/vim-snippets'
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/goyo.vim'
+Plug 'justinmk/vim-sneak'
 Plug 'majutsushi/tagbar'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'omtcvxyz/vim-colors-solarized'
