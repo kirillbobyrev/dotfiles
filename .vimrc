@@ -15,6 +15,8 @@ set spell spelllang=en_us
 set smartindent
 " }}}
 " UI {{{
+" Always show status
+set laststatus=2
 " Enable syntax highlighting
 if !has('g:syntax_on')
   syntax enable
@@ -75,15 +77,16 @@ let g:tex_flavor='latex'
 call plug#begin('~/.vim/plugged')
 " A bunch of general plugins {{{
 Plug 'SirVer/ultisnips'
+Plug 'donRaphaco/neotex', { 'for': 'tex' }
 Plug 'godlygeek/tabular'
 Plug 'honza/vim-snippets'
-Plug 'itchyny/lightline.vim'
 Plug 'junegunn/goyo.vim'
 Plug 'justinmk/vim-sneak'
 Plug 'majutsushi/tagbar'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'omtcvxyz/vim-colors-solarized'
-Plug 'sheerun/vim-polyglot'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 " }}}
 " Language specific-plugins, LSP servers, etc {{{
 " Multiple languages {{{
@@ -103,11 +106,8 @@ Plug 'plasticboy/vim-markdown'
 call plug#end()
 " }}}
 " Plugins-specific settings {{{
-" Vim-Lightline {{{
-let g:lightline = {
-  \ 'colorscheme': 'solarized',
-  \ }
-set laststatus=2
+let g:airline_theme='solarized'
+let g:cpp_clangtidy_checks=[]
 " }}}
 " vim-colors-solarized {{{
 " Enable solarized colorscheme after its initialization via vim-plug
