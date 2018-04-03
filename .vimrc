@@ -15,16 +15,17 @@ set spell spelllang=en_us
 set smartindent
 " }}}
 " UI {{{
+" NeoVim cursor
+set guicursor=
 " Always show status
 set laststatus=2
-" Enable syntax highlighting
-if !has('g:syntax_on')
-  syntax enable
-endif
-" Show line numbers
+" Show relative line numbers and the current line number (hybrid mode)
 set number
-" Display line and column numbers, relative position, etc at the bottom
-set ruler
+set relativenumber
+if !has('nvim')
+  " Show line number, etc on bottom
+  set ruler
+endif
 " Highlight current line
 set cursorline
 " Add a vertical line to mark the line width limit
@@ -74,61 +75,52 @@ let g:tex_flavor='latex'
 " Plugins configuration {{{
 " Vim-Plug directives {{{
 " Initialize plugin system
-call plug#begin('~/.vim/plugged')
-" A bunch of general plugins {{{
-Plug 'SirVer/ultisnips'
-Plug 'donRaphaco/neotex', { 'for': 'tex' }
-Plug 'godlygeek/tabular'
-Plug 'honza/vim-snippets'
-Plug 'junegunn/goyo.vim'
-Plug 'justinmk/vim-sneak'
-Plug 'majutsushi/tagbar'
-Plug 'nathanaelkane/vim-indent-guides'
+if has('nvim')
+  call plug#begin('~/.local/share/nvim/plugged')
+else
+  call plug#begin('~/.vim/plugged')
+endif
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'zchee/deoplete-clang'
+  Plug 'sebastianmarkow/deoplete-rust'
+  Plug 'zchee/deoplete-jedi'
+endif
+Plug 'rust-lang/rust.vim'
+Plug 'lervag/vimtex'
 Plug 'omtcvxyz/vim-colors-solarized'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-" }}}
-" Language specific-plugins, LSP servers, etc {{{
-" Multiple languages {{{
-Plug 'w0rp/ale'
-" }}}
-" Rust {{{
-Plug 'racer-rust/vim-racer'
-Plug 'rust-lang/rust.vim'
-" }}}
-" LaTeX {{{
-Plug 'lervag/vimtex'
-" }}}
-" Markdown {{{
-Plug 'plasticboy/vim-markdown'
-" }}}
-" }}}
 call plug#end()
 " }}}
 " Plugins-specific settings {{{
+" Deoplete & friends {{{
+if has('nvim')
+  let g:deoplete#enable_at_startup = 1
+
+  let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
+  let g:deoplete#sources#clang#clang_header = '/usr/lib/clang/6.0.0/include/'
+
+  let g:deoplete#sources#rust#racer_binary = '/home/omtcvxyz/.cargo/bin/racer'
+  let g:deoplete#sources#rust#rust_source_path = '/home/omtcvxyz/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src'
+endif
+" }}}
+" Vimtex {{{
+let g:vimtex_compiler_latexmk = {'callback' : 0}
+" }}}
+" Vim-Airline {{{
 let g:airline_theme='solarized'
-let g:cpp_clangtidy_checks=[]
 " }}}
 " vim-colors-solarized {{{
 " Enable solarized colorscheme after its initialization via vim-plug
 set background=dark
 colorscheme solarized
+" }}}
+" }}}
 " Highlight trailing whitespace {{{
 " This has to come after plugins configuration, because vim-colors-solarized
 " would prevent extra whitespace highlight otherwise.
 highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
 match ExtraWhitespace /\s\+$/
-" }}}
-" }}}
-" Vim Markdown {{{
-let g:vim_markdown_folding_disabled = 1
-" }}}
-" Vim-Polyglot {{{
-let g:polyglot_disabled = ['latex']
-" }}}
-" Vimtex {{{
-let g:vimtex_compiler_latexmk = {'callback' : 0}
-" }}}
-" }}}
 " }}}
 " vim:foldmethod=marker:foldlevel=0
