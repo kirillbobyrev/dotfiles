@@ -11,4 +11,3 @@ PS1='[\u@\h \W]\$ '
 # Custom variables
 PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 PATH="/home/omtcvxyz/.cargo/bin:$PATH"
-TERM_PROGRAM="rxvt"

@@ -22,8 +22,10 @@ set laststatus=2
 " Show relative line numbers and the current line number (hybrid mode)
 set number
 set relativenumber
-" Show line number, etc on bottom
-set ruler
+if !has('nvim')
+  " Show line number, etc on bottom
+  set ruler
+endif
 " Highlight current line
 set cursorline
 " Add a vertical line to mark the line width limit
@@ -73,15 +75,46 @@ let g:tex_flavor='latex'
 " Plugins configuration {{{
 " Vim-Plug directives {{{
 " Initialize plugin system
-call plug#begin('~/.vim/plugged')
+if has('nvim')
+  call plug#begin('~/.local/share/nvim/plugged')
+else
+  call plug#begin('~/.vim/plugged')
+endif
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'zchee/deoplete-clang'
+  Plug 'sebastianmarkow/deoplete-rust'
+  Plug 'zchee/deoplete-jedi'
+endif
 Plug 'rust-lang/rust.vim'
 Plug 'lervag/vimtex'
 Plug 'omtcvxyz/vim-colors-solarized'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'SirVer/ultisnips'
 call plug#end()
 " }}}
 " Plugins-specific settings {{{
+" Deoplete & friends {{{
+if has('nvim')
+  let g:deoplete#enable_at_startup = 1
+
+  let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
+  let g:deoplete#sources#clang#clang_header = '/usr/lib/clang/6.0.0/include/'
+
+  let g:deoplete#sources#rust#racer_binary = '/home/omtcvxyz/.cargo/bin/racer'
+  let g:deoplete#sources#rust#rust_source_path = '/home/omtcvxyz/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src'
+endif
+" }}}
+" Snippets {{{
+" Trigger configuration.
+" TODO(omtcvxyz): Think of a better hotkeys.
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<c-b>"
+let g:UltiSnipsJumpBackwardTrigger = "<c-z>"
+let g:UltiSnipsEditSplit = 'vertical'
+let g:UltiSnipsSnippetsDir = '~/.config/snippets'
+" }}}
 " Vimtex {{{
 let g:vimtex_compiler_latexmk = {'callback' : 0}
 " }}}
@@ -100,5 +133,3 @@ colorscheme solarized
 highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
 match ExtraWhitespace /\s\+$/
 " }}}
-" }}}
-" vim:foldmethod=marker:foldlevel=0

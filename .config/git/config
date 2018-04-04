@@ -3,11 +3,10 @@
   name = Kirill Bobyrev
   username = omtcvxyz
 [core]
-  editor = vim
+  editor = nvim
 [web]
   browser = google-chrome
 [color]
   ui = true
 [github]
   user = omtcvxyz
-  token = ca7f3e54a86d32067c594869bda9c3ee734cebed
