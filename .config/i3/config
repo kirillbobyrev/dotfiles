@@ -116,12 +116,27 @@ bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
+# window colors
+#                       border             background         text                   indicator
+#set $indicator          #FF0000
+#client.focused          $active-bg-color   $active-bg-color   $text-color            $indicator
+#client.unfocused        $bg-color          $bg-color $inactive-text-color            $indicator
+#client.focused_inactive $bg-color          $bg-color $inactive-text-color            $indicator
+#client.urgent           $urgent-bg-color   $urgent-bg-color   $text-color            $indicator
+client.focused          #4c7899 #285577 #ffffff #285577   #285577
+client.focused_inactive #333333 #5f676a #ffffff #5f676a   #5f676a
+client.unfocused        #333333 #222222 #888888 #222222   #222222
+client.urgent           #2f343a #900000 #ffffff #900000   #900000
+client.placeholder      #000000 #0c0c0c #ffffff #0c0c0c   #0c0c0c
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+# lock screen
+bindsym Control+Shift+l exec "i3lock --color=0B6623"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -160,4 +175,4 @@ exec --no-startup-id "feh --bg-scale Pictures/Wallpapers/Green.jpg"
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # Launch redshift
-exec redshift
+exec_always --no-startup-id redshift

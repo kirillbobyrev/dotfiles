@@ -5,38 +5,39 @@ set fileencoding=utf-8
 scriptencoding utf8
 " Use Unix line endings
 set fileformats=unix
-" Start scrolling when cursor is 4 lines off the bound
-set scrolloff=4
+" Start scrolling when cursor is few lines off the bound so that a reasonable
+" chunk of code around selected line is visible
+set scrolloff=10
 " Enable filetype plugin
 filetype plugin indent on
-" Always check spelling since I often do typos
+" Always check spelling to improve grammar and prevent typos
 set spell spelllang=en_us
-" Indent after brackets, etc
+" Use smarter indent rules for better experience
 set smartindent
-" }}}
-" UI {{{
-" NeoVim cursor
+" Set NeoVim cursor to the Vim default one, otherwise it shows a blinking thin
+" line like in most GUI editors
 set guicursor=
 " Always show status
 set laststatus=2
-" Show relative line numbers and the current line number (hybrid mode)
+" Show both relative line numbers and the current line number (hybrid mode)
 set number
 set relativenumber
-if !has('nvim')
-  " Show line number, etc on bottom
+" Display useful info like line number and relative position display on bottom
+if !has('ruler')
   set ruler
 endif
-" Highlight current line
+" Highlight current line to improve visibility
 set cursorline
-" Add a vertical line to mark the line width limit
+" Add a vertical line to mark the line width limit so that its not exceeded
 set colorcolumn=81
 highlight ColorColumn ctermbg=DarkMagenta
 " Enable visual autocomplete menu
 set wildmenu
-" Do not redraw when unnecessary
+" Only redraw when necessary so that the editor takes less resources
 set lazyredraw
 " Highlight matching bracket
 set showmatch
+" }}}
 " Searching {{{
 " Enable incremental search
 set incsearch
@@ -69,8 +70,7 @@ noremap <leader>cf :pyf /home/omtcvxyz/dev/projects/src/llvm/tools/clang/tools/c
 autocmd FileType Python set softtabstop=4| set shiftwidth=4| set colorcolumn=80
 autocmd FileType Rust   set softtabstop=4| set shiftwidth=4
 " Always use LaTeX
-let g:tex_flavor='latex'
-" }}}
+let g:tex_flavor = 'latex'
 " }}}
 " Plugins configuration {{{
 " Vim-Plug directives {{{
@@ -80,18 +80,23 @@ if has('nvim')
 else
   call plug#begin('~/.vim/plugged')
 endif
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'zchee/deoplete-clang'
-  Plug 'sebastianmarkow/deoplete-rust'
-  Plug 'zchee/deoplete-jedi'
-endif
-Plug 'rust-lang/rust.vim'
+" Install Plugins
+Plug 'SirVer/ultisnips'
+Plug 'godlygeek/tabular'
 Plug 'lervag/vimtex'
-Plug 'omtcvxyz/vim-colors-solarized'
+Plug 'iCyMind/NeoSolarized'
+Plug 'rust-lang/rust.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'SirVer/ultisnips'
+Plug 'w0rp/ale'
+" The following section contains NeoVim-specific plugins which rely on
+" additional features, NeoVim async model and so on.
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  Plug 'sebastianmarkow/deoplete-rust'
+  Plug 'zchee/deoplete-clang'
+  Plug 'zchee/deoplete-jedi'
+endif
 call plug#end()
 " }}}
 " Plugins-specific settings {{{
@@ -106,12 +111,20 @@ if has('nvim')
   let g:deoplete#sources#rust#rust_source_path = '/home/omtcvxyz/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src'
 endif
 " }}}
+" ale {{{
+" TODO(omtcvxyz): For now, probably whitelist trusted linters, otherwise ale
+" is quite slow.
+" For the future, blacklist untrusted ones:
+" https://github.com/w0rp/ale/issues/1453
+let g:ale_cpp_clangtidy_checks = ['performance-*', 'modernize-*']
+let g:ale_sign_column_always = 1
+" }}}
 " Snippets {{{
 " Trigger configuration.
 " TODO(omtcvxyz): Think of a better hotkeys.
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<c-b>"
-let g:UltiSnipsJumpBackwardTrigger = "<c-z>"
+let g:UltiSnipsExpandTrigger = '<tab>'
+let g:UltiSnipsJumpForwardTrigger = '<c-b>'
+let g:UltiSnipsJumpBackwardTrigger = '<c-z>'
 let g:UltiSnipsEditSplit = 'vertical'
 let g:UltiSnipsSnippetsDir = '~/.config/snippets'
 " }}}
@@ -119,17 +132,20 @@ let g:UltiSnipsSnippetsDir = '~/.config/snippets'
 let g:vimtex_compiler_latexmk = {'callback' : 0}
 " }}}
 " Vim-Airline {{{
-let g:airline_theme='solarized'
+let g:airline_theme = 'solarized'
 " }}}
-" vim-colors-solarized {{{
+" Solarized colorscheme {{{
 " Enable solarized colorscheme after its initialization via vim-plug
+let g:neosolarized_italic = 1
 set background=dark
-colorscheme solarized
+colorscheme NeoSolarized
 " }}}
 " }}}
 " Highlight trailing whitespace {{{
-" This has to come after plugins configuration, because vim-colors-solarized
-" would prevent extra whitespace highlight otherwise.
+" While this probably belongs to UI it has to come after plugins
+" configuration, because vim-colors-solarized would prevent extra whitespace
+" highlight.
 highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
 match ExtraWhitespace /\s\+$/
 " }}}
+" vim:foldmethod=marker:foldlevel=0
