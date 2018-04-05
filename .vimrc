@@ -12,6 +12,10 @@ set scrolloff=10
 filetype plugin indent on
 " Always check spelling to improve grammar and prevent typos
 set spell spelllang=en_us
+" Use true colors if availible
+if has('termguicolors')
+  set termguicolors
+endif
 " Use smarter indent rules for better experience
 set smartindent
 " Set NeoVim cursor to the Vim default one, otherwise it shows a blinking thin
@@ -83,8 +87,11 @@ endif
 " Install Plugins
 Plug 'SirVer/ultisnips'
 Plug 'godlygeek/tabular'
-Plug 'lervag/vimtex'
 Plug 'iCyMind/NeoSolarized'
+" TODO(omtcvxyz): get through docs, personalize the plugin.
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+Plug 'junegunn/fzf.vim'
+Plug 'lervag/vimtex'
 Plug 'rust-lang/rust.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -139,6 +146,11 @@ let g:airline_theme = 'solarized'
 let g:neosolarized_italic = 1
 set background=dark
 colorscheme NeoSolarized
+" Make Vim work well in tmux as advised by
+" https://github.com/icymind/NeoSolarized#tmux
+" Here is a related issue: https://github.com/lifepillar/vim-solarized8/issues/4
+set t_8f=[38;2;%lu;%lu;%lum
+set t_8b=[48;2;%lu;%lu;%lum
 " }}}
 " }}}
 " Highlight trailing whitespace {{{
