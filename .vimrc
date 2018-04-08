@@ -16,6 +16,13 @@ set spell spelllang=en_us
 if has('termguicolors')
   set termguicolors
 endif
+" Workaround NeoVim + Tmux issue (not needed in Vim):
+" A hack proposed by NeoSolarized to make NoeVim + Tmux + True Colors work
+" https://github.com/icymind/NeoSolarized#tmux
+if has('nvim')
+  set t_8f=^[[38;2;%lu;%lu;%lum
+  set t_8b=^[[48;2;%lu;%lu;%lum
+endif
 " Use smarter indent rules for better experience
 set smartindent
 " Set NeoVim cursor to the Vim default one, otherwise it shows a blinking thin
@@ -142,9 +149,6 @@ let g:UltiSnipsSnippetsDir = '~/.config/snippets'
 " Vimtex {{{
 let g:vimtex_compiler_latexmk = {'callback' : 0}
 " }}}
-" Vim-Airline {{{
-let g:airline_theme = 'nord'
-" }}}
 " Nord colorscheme {{{
 let g:nord_comment_brightness = 15
 let g:nord_italic = 1
@@ -153,7 +157,7 @@ colorscheme nord
 " }}}
 " }}}
 " Highlight trailing whitespace {{{
-highlight ExtraWhitespace ctermbg=darkgreen guibg=yellow
+highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
 match ExtraWhitespace /\s\+$/
 " }}}
 " vim:foldmethod=marker:foldlevel=0
