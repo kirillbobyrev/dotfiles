@@ -20,7 +20,9 @@ endif
 set smartindent
 " Set NeoVim cursor to the Vim default one, otherwise it shows a blinking thin
 " line like in most GUI editors
-set guicursor=
+if has('nvim')
+  set guicursor=
+endif
 " Always show status
 set laststatus=2
 " Show both relative line numbers and the current line number (hybrid mode)
@@ -67,6 +69,7 @@ set shiftround
 " }}}
 " Custom commands & functions {{{
 " Autoformat selected code using Clang-format
+" TODO(omtcvxyz): This doesn't work in NeoVim.
 noremap <leader>cf :pyf /home/omtcvxyz/dev/projects/src/llvm/tools/clang/tools/clang-format/clang-format.py<cr>
 " }}}
 " Language-specific settings {{{
@@ -77,6 +80,7 @@ autocmd FileType Rust   set softtabstop=4| set shiftwidth=4
 let g:tex_flavor = 'latex'
 " }}}
 " Plugins configuration {{{
+" TODO(omtcvxyz): get through docs, personalize the plugin.
 " Vim-Plug directives {{{
 " Initialize plugin system
 if has('nvim')
@@ -86,11 +90,11 @@ else
 endif
 " Install Plugins
 Plug 'SirVer/ultisnips'
+Plug 'arcticicestudio/nord-vim'
 Plug 'godlygeek/tabular'
-Plug 'iCyMind/NeoSolarized'
-" TODO(omtcvxyz): get through docs, personalize the plugin.
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/goyo.vim'
 Plug 'lervag/vimtex'
 Plug 'rust-lang/rust.vim'
 Plug 'vim-airline/vim-airline'
@@ -120,8 +124,7 @@ endif
 " }}}
 " ale {{{
 " TODO(omtcvxyz): For now, probably whitelist trusted linters, otherwise ale
-" is quite slow.
-" For the future, blacklist untrusted ones:
+" is quite slow. For the future, blacklist untrusted ones:
 " https://github.com/w0rp/ale/issues/1453
 let g:ale_cpp_clangtidy_checks = ['performance-*', 'modernize-*']
 let g:ale_sign_column_always = 1
@@ -129,6 +132,7 @@ let g:ale_sign_column_always = 1
 " Snippets {{{
 " Trigger configuration.
 " TODO(omtcvxyz): Think of a better hotkeys.
+" TODO(omtcvxyz): Add better competitive programming snippets.
 let g:UltiSnipsExpandTrigger = '<tab>'
 let g:UltiSnipsJumpForwardTrigger = '<c-b>'
 let g:UltiSnipsJumpBackwardTrigger = '<c-z>'
@@ -139,25 +143,17 @@ let g:UltiSnipsSnippetsDir = '~/.config/snippets'
 let g:vimtex_compiler_latexmk = {'callback' : 0}
 " }}}
 " Vim-Airline {{{
-let g:airline_theme = 'solarized'
+let g:airline_theme = 'nord'
 " }}}
-" Solarized colorscheme {{{
-" Enable solarized colorscheme after its initialization via vim-plug
-let g:neosolarized_italic = 1
-set background=dark
-colorscheme NeoSolarized
-" Make Vim work well in tmux as advised by
-" https://github.com/icymind/NeoSolarized#tmux
-" Here is a related issue: https://github.com/lifepillar/vim-solarized8/issues/4
-set t_8f=[38;2;%lu;%lu;%lum
-set t_8b=[48;2;%lu;%lu;%lum
+" Nord colorscheme {{{
+let g:nord_comment_brightness = 15
+let g:nord_italic = 1
+let g:nord_italic_comments = 1
+colorscheme nord
 " }}}
 " }}}
 " Highlight trailing whitespace {{{
-" While this probably belongs to UI it has to come after plugins
-" configuration, because vim-colors-solarized would prevent extra whitespace
-" highlight.
-highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
+highlight ExtraWhitespace ctermbg=darkgreen guibg=yellow
 match ExtraWhitespace /\s\+$/
 " }}}
 " vim:foldmethod=marker:foldlevel=0
