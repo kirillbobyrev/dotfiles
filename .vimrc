@@ -97,7 +97,7 @@ else
 endif
 " Install Plugins
 Plug 'SirVer/ultisnips'
-Plug 'arcticicestudio/nord-vim'
+Plug 'morhetz/gruvbox'
 Plug 'godlygeek/tabular'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
@@ -129,6 +129,9 @@ if has('nvim')
   let g:deoplete#sources#rust#rust_source_path = '/home/omtcvxyz/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src'
 endif
 " }}}
+" vim-airline {{{
+let g:airline_theme = 'gruvbox'
+" }}}
 " ale {{{
 " TODO(omtcvxyz): For now, probably whitelist trusted linters, otherwise ale
 " is quite slow. For the future, blacklist untrusted ones:
@@ -149,15 +152,21 @@ let g:UltiSnipsSnippetsDir = '~/.config/snippets'
 " Vimtex {{{
 let g:vimtex_compiler_latexmk = {'callback' : 0}
 " }}}
-" Nord colorscheme {{{
-let g:nord_comment_brightness = 15
-let g:nord_italic = 1
-let g:nord_italic_comments = 1
-colorscheme nord
+
+" Gruvbox colorscheme {{{
+" Use Italics regardless of GUI being disabled
+set t_Co=256
+let g:gruvbox_italic = 1
+set background=dark
+colorscheme gruvbox
 " }}}
+
 " }}}
+
 " Highlight trailing whitespace {{{
-highlight ExtraWhitespace ctermbg=darkgreen guibg=darkgreen
+" This makes missing an extra whitespace infinitely harder.
+highlight ExtraWhitespace ctermbg=darkgreen guibg=darkred
 match ExtraWhitespace /\s\+$/
 " }}}
+
 " vim:foldmethod=marker:foldlevel=0
