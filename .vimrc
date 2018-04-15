@@ -2,49 +2,51 @@
 " Plugins configuration
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" TODO(omtcvxyz): Improve LLVM IR editing experience by figuring out how to
+" reuse https://github.com/llvm-mirror/llvm/blob/master/utils/vim in the best
+" possible way.
 " TODO(omtcvxyz): get through docs, personalize some plugins.
-" Use different locations for NeoVim and Vim.
-if has('nvim')
-  call plug#begin('~/.local/share/nvim/plugged')
-else
-  call plug#begin('~/.vim/plugged')
-endif
+call plug#begin('~/.vim/plugged')
 " Install Plugins
+Plug 'rhysd/vim-clang-format'
+Plug 'SirVer/ultisnips'
 Plug 'godlygeek/tabular'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
-Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim'
-Plug 'lervag/vimtex'
+Plug 'mhinz/vim-signify'
 Plug 'morhetz/gruvbox'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'rust-lang/rust.vim'
+
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+Plug 'junegunn/fzf.vim'
+
+Plug 'lervag/vimtex'
+
+Plug 'octol/vim-cpp-enhanced-highlight'
+
+Plug 'rust-lang/rust.vim'
+
 Plug 'w0rp/ale'
-Plug 'sbdchd/neoformat'
-" The following section contains NeoVim-specific plugins which rely on
-" additional features such as NeoVim async model.
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  Plug 'sebastianmarkow/deoplete-rust'
-  Plug 'zchee/deoplete-clang'
-  Plug 'zchee/deoplete-jedi'
-endif
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --system-libclang --system-boost --racer-completer' }
 call plug#end()
 
 " Plugins-specific settings
 
-" Correctly initialize Deoplete.nvim & language-specific friends
-if has('nvim')
-  let g:deoplete#enable_at_startup = 1
-  let g:deoplete#enable_smart_case = 1
+" YouCompleteMe
+let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 
-  let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
-  let g:deoplete#sources#clang#clang_header = '/usr/lib/clang/6.0.0/include/'
+" vim-clang-format
+let g:clang_format#code_style = 'llvm'
 
-  let g:deoplete#sources#rust#racer_binary = '/home/omtcvxyz/.cargo/bin/racer'
-  let g:deoplete#sources#rust#rust_source_path = '/home/omtcvxyz/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src'
-endif
+" UltiSnips
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<C-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
 
 " vim-airline statusbar
 let g:airline_theme = 'gruvbox'
@@ -61,7 +63,6 @@ let g:vimtex_compiler_latexmk = {'callback' : 0}
 
 " Gruvbox colorscheme {{{
 " Use Italics regardless of GUI being disabled
-set t_Co=256
 let g:gruvbox_italic = 1
 set background=dark
 colorscheme gruvbox
@@ -112,27 +113,11 @@ set colorcolumn=81
 highlight ColorColumn ctermbg=DarkMagenta
 
 " Use true colors if availible
-if has('termguicolors')
-  set termguicolors
-endif
-
-" Workaround NeoVim + Tmux issue (not needed in Vim):
-" A hack proposed by NeoSolarized to make NoeVim + Tmux + True Colors work
-" https://github.com/icymind/NeoSolarized#tmux
-if has('nvim')
-  set t_8f=^[[38;2;%lu;%lu;%lum
-  set t_8b=^[[48;2;%lu;%lu;%lum
-endif
+set termguicolors
 
 " Start scrolling when cursor is few lines off the bound so that a reasonable
 " chunk of code around selected line is visible
 set scrolloff=10
-
-" Set NeoVim cursor to the Vim default one, otherwise it shows a blinking thin
-" line like in most GUI editors
-if has('nvim')
-  set guicursor=
-endif
 
 " Always show status
 set laststatus=2
