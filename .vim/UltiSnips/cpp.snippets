@@ -1,0 +1,64 @@
+snippet ans "anonymous namespace"
+namespace {
+  $0
+} // namespace
+endsnippet
+
+snippet lli "long long int"
+long long int $0
+endsnippet
+
+snippet lld "long long double"
+long long double $0
+endsnippet
+
+# TODO(omtcvxyz): For whatever reason the cursor is on $1 here. Probably I have
+# missed something in the docs.
+snippet fori "for loop: i from 0 to n - 1"
+for (${4:int} ${2:i} = 0; $2 < ${1:n}; ${3:++$2}) {
+  $0
+}
+endsnippet
+
+# TODO(omtcvxyz): Read filename and automatically fill it.
+# TODO(omtcvxyz): Fill year automatically.
+snippet head "standard personal project file heading"
+//===--- ${0:Filename.cpp} - ${1:Description} ------------------------------*- C++-*-===//
+//
+// ${2:Project name}
+//
+// Kirill Bobyrev 2018
+//
+// This file is distributed under the Apache 2.0 License. See LICENSE for
+// details.
+//
+//===----------------------------------------------------------------------===//
+endsnippet
+
+# TODO(omtcvxyz): Read filename and automatically fill it.
+snippet llvmhead "LLVM source heading"
+//===--- ${0:Filename.cpp} - ${1:Description} ------------------------------*- C++-*-===//
+//
+//                     The LLVM Compiler Infrastructure
+//
+// This file is distributed under the University of Illinois Open Source
+// License. See LICENSE.TXT for details.
+//
+//===----------------------------------------------------------------------===//
+endsnippet
+
+snippet main "main function definition"
+int main(int argc, char *argv[]) {
+  ${0}
+  return 0;
+}
+endsnippet
+
+snippet guard "pragma #once header guard"
+#pragma once
+endsnippet
+
+# TODO(omtcvxyz): Add class snippet. Take inspiration from
+# https://github.com/honza/vim-snippets/blob/master/UltiSnips/cpp.snippets#L37
+# TODO(omtcvxyz): Add function snippet. Take inspiration from
+# https://github.com/honza/vim-snippets/blob/master/UltiSnips/cpp.snippets#L97
