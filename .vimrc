@@ -2,16 +2,11 @@
 " Plugins configuration
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" TODO(omtcvxyz): Improve LLVM IR editing experience by figuring out how to
-" reuse https://github.com/llvm-mirror/llvm/blob/master/utils/vim in the best
-" possible way.
 " TODO(omtcvxyz): get through docs, personalize some plugins.
 call plug#begin('~/.vim/plugged')
 " Install Plugins
-Plug 'rhysd/vim-clang-format'
 Plug 'SirVer/ultisnips'
 Plug 'godlygeek/tabular'
-Plug 'junegunn/goyo.vim'
 Plug 'mhinz/vim-signify'
 Plug 'morhetz/gruvbox'
 Plug 'ntpeters/vim-better-whitespace'
@@ -22,11 +17,18 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 
-Plug 'lervag/vimtex'
+Plug 'lervag/vimtex', { 'for': 'tex' }
 
-Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'octol/vim-cpp-enhanced-highlight', { 'for': ['cpp', 'c'] }
+Plug 'rhysd/vim-clang-format', { 'for': ['cpp', 'c'] }
 
-Plug 'rust-lang/rust.vim'
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+
+Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
+
+Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
+
+Plug 'llvm-mirror/llvm', { 'rtp': 'utils/vim', 'for': 'llvm' }
 
 Plug 'w0rp/ale'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --system-libclang --system-boost --racer-completer' }
@@ -55,7 +57,7 @@ let g:airline_theme = 'gruvbox'
 " TODO(omtcvxyz): For now, probably whitelist trusted linters, otherwise ale
 " is quite slow. For the future, blacklist untrusted ones:
 " https://github.com/w0rp/ale/issues/1453
-let g:ale_cpp_clangtidy_checks = ['performance-*', 'modernize-*']
+let g:ale_cpp_clangtidy_checks = ['performance*', 'modernize*', 'bugprone*']
 let g:ale_sign_column_always = 1
 
 " Vimtex
@@ -113,7 +115,9 @@ set colorcolumn=81
 highlight ColorColumn ctermbg=DarkMagenta
 
 " Use true colors if availible
-set termguicolors
+if has('termguicolors')
+  set termguicolors
+endif
 
 " Start scrolling when cursor is few lines off the bound so that a reasonable
 " chunk of code around selected line is visible
