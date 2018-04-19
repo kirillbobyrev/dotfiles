@@ -11,6 +11,9 @@ Plug 'mhinz/vim-signify'
 Plug 'morhetz/gruvbox'
 Plug 'ntpeters/vim-better-whitespace'
 
+" TODO(omtcvxyz): It's probably better to use lightline since it looks
+" cleaner, but at the moment AFAIK there is no gruvbox theme for it, I might
+" want to check whether it appears in the future or build it up myself.
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
@@ -30,11 +33,11 @@ Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
 
 Plug 'llvm-mirror/llvm', { 'rtp': 'utils/vim', 'for': 'llvm' }
 
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --system-libclang --system-boost --racer-completer', 'for': ['cpp', 'c', 'python', 'rust']}
 Plug 'w0rp/ale'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --system-libclang --system-boost --racer-completer' }
 call plug#end()
 
-" Plugins-specific settings
+" Plugin-specific settings
 
 " YouCompleteMe
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
@@ -43,6 +46,8 @@ let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 let g:clang_format#code_style = 'llvm'
 
 " UltiSnips
+" TODO(omtcvxyz): Figure out what to do when both YCM completion shows up and
+" UltiSnip snippet can be triggered. Pressing the expand trigger doesn't work.
 " TODO(omtcvxyz): think of a better hotkey. C-j is not really great.
 let g:UltiSnipsExpandTrigger="<C-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
@@ -58,103 +63,112 @@ let g:airline_theme = 'gruvbox'
 " is quite slow. For the future, blacklist untrusted ones:
 " https://github.com/w0rp/ale/issues/1453
 let g:ale_cpp_clangtidy_checks = ['performance*', 'modernize*', 'bugprone*']
+" Always show sign column so that when warnings appear the text is not shifted
 let g:ale_sign_column_always = 1
 
 " Vimtex
 let g:vimtex_compiler_latexmk = {'callback' : 0}
 
-" Gruvbox colorscheme {{{
-" Use Italics regardless of GUI being disabled
+" Gruvbox colorscheme
+" Always use italics regardless of GUI being disabled.
 let g:gruvbox_italic = 1
 set background=dark
 colorscheme gruvbox
+
+" vim-better-whitespace
+" Highlight trailing whitespace. This makes missing an extra whitespace
+" infinitely harder. Also, use the plugin to remove trailing whitespaces upon
+" saving the file.
+let g:better_whitespace_enabled=1
+let g:strip_whitespace_on_save=1
+highlight ExtraWhitespace ctermbg=darkred
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Always use UTF-8 encoding
+" Always use UTF-8 encoding.
 set encoding=utf-8
 set fileencoding=utf-8
 scriptencoding utf8
 
-" Use Unix line endings
+" Use Unix line endings.
 set fileformats=unix
 
-" Enable filetype plugin
+" Enable filetype plugin.
 filetype plugin indent on
 
-" Always check spelling to improve grammar and prevent typos
+" Always check spelling to improve grammar and prevent typos.
 set spell spelllang=en_us
 
 " Spaces & Tabs
 " Always prefer spaces over tabs, use 2 spaces everywhere except in few
-" languages
+" languages.
 set tabstop=8
 set expandtab
 set softtabstop=2
 set shiftwidth=2
 set shiftround
 
-" In Python and Rust 4 spaces should be used instead of 2
-autocmd FileType Python set softtabstop=4| set shiftwidth=4| set colorcolumn=80
+" In Python and Rust 4 spaces should be used instead of 2.
 autocmd FileType Rust   set softtabstop=4| set shiftwidth=4
+" Also, in Python the widthlimit should be 79 and not 80 like everywhere else.
+autocmd FileType Python set softtabstop=4| set shiftwidth=4| set colorcolumn=80
 
-" Use smarter indent rules for better experience. Otherwise I'd have to
+" Use smarter indent rules for better experience.
+" TODO(omtcvxyz): This works good for C-like languages, but I'd probably be
+" willing to find some good plugin for that.
 set smartindent
 
-" Show both relative line numbers and the current line number (hybrid mode)
+" Show both relative line numbers and the current line number (hybrid mode).
+" This way it's easier to move around and do motions.
 set number
 set relativenumber
 
-" Highlight current line to improve visibility
+" Highlight current line to improve visibility.
 set cursorline
 
-" Add a vertical line to mark the line width limit so that its not exceeded
+" Add a vertical line to mark the line width limit so that its not exceeded.
 set colorcolumn=81
 highlight ColorColumn ctermbg=DarkMagenta
 
-" Use true colors if availible
+" Use true colors if availible, for that `termguicolors` are needed.
 if has('termguicolors')
   set termguicolors
 endif
 
 " Start scrolling when cursor is few lines off the bound so that a reasonable
-" chunk of code around selected line is visible
+" chunk of code around selected line is visible.
 set scrolloff=10
 
-" Always show status
+" Always show status.
 set laststatus=2
 
-" Enable visual autocomplete menu
+" Enable visual autocomplete menu.
 set wildmenu
 
-" Only redraw when necessary so that the editor takes less resources
+" Only redraw when necessary so that the editor takes less resources.
 set lazyredraw
 
-" Highlight matching bracket
+" Highlight matching bracket.
 set showmatch
 
-" Enable incremental search
+" Enable incremental search.
 set incsearch
-
-" Highlight chunks of text matching the search pattern
+" Highlight chunks of text matching the search pattern.
 set hlsearch
-
-" Search ignores case unless an uppercase letter appears in the pattern
+" Search ignores case unless an uppercase letter appears in the pattern.
 set ignorecase
 set smartcase
 
-" Don't create backup files
+" Don't create backup files.
 set noswapfile
 set nowritebackup
 
-" Language-specific settings
 " Always use LaTeX
 let g:tex_flavor = 'latex'
 
-" Highlight trailing whitespace. This makes missing an extra whitespace
-" infinitely harder.
-highlight ExtraWhitespace ctermbg=darkred
-let g:better_whitespace_enabled=1
-let g:strip_whitespace_on_save=1
+" Use a hack proposed in https://github.com/icymind/NeoSolarized#tmux to make
+" Vim + True Colors + Tmux work better.
+set t_8f=[38;2;%lu;%lu;%lum
+set t_8b=[48;2;%lu;%lu;%lum
