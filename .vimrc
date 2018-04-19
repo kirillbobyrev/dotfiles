@@ -168,6 +168,8 @@ set nowritebackup
 " Always use LaTeX
 let g:tex_flavor = 'latex'
 
+" Use more colors
+set t_Co=256
 " Use a hack proposed in https://github.com/icymind/NeoSolarized#tmux to make
 " Vim + True Colors + Tmux work better.
 set t_8f=[38;2;%lu;%lu;%lum
