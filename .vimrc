@@ -116,9 +116,7 @@ autocmd FileType Rust   set softtabstop=4| set shiftwidth=4
 autocmd FileType Python set softtabstop=4| set shiftwidth=4| set colorcolumn=80
 
 " Use smarter indent rules for better experience.
-" TODO(omtcvxyz): This works good for C-like languages, but I'd probably be
-" willing to find some good plugin for that.
-set smartindent
+set autoindent
 
 " Show both relative line numbers and the current line number (hybrid mode).
 " This way it's easier to move around and do motions.
