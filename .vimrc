@@ -1,10 +1,8 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins configuration
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 " TODO(omtcvxyz): get through docs, personalize some plugins.
 call plug#begin('~/.vim/plugged')
-" Install Plugins
 Plug 'SirVer/ultisnips'
 Plug 'godlygeek/tabular'
 Plug 'mhinz/vim-signify'
@@ -12,8 +10,8 @@ Plug 'morhetz/gruvbox'
 Plug 'ntpeters/vim-better-whitespace'
 
 " TODO(omtcvxyz): It's probably better to use lightline since it looks
-" cleaner, but at the moment AFAIK there is no gruvbox theme for it, I might
-" want to check whether it appears in the future or build it up myself.
+" cleaner, but AFAIK there is no gruvbox theme for it, I might want to check
+" whether it appears in the future or build it up myself.
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
@@ -30,41 +28,22 @@ Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
 
 Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
-
-Plug 'llvm-mirror/llvm', { 'rtp': 'utils/vim', 'for': 'llvm' }
-
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --clang-completer --system-libclang --system-boost --racer-completer', 'for': ['cpp', 'c', 'python', 'rust']}
-Plug 'w0rp/ale'
 call plug#end()
 
 " Plugin-specific settings
-
-" YouCompleteMe
-let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 
 " vim-clang-format
 let g:clang_format#code_style = 'llvm'
 
 " UltiSnips
-" TODO(omtcvxyz): Figure out what to do when both YCM completion shows up and
-" UltiSnip snippet can be triggered. Pressing the expand trigger doesn't work.
-" TODO(omtcvxyz): think of a better hotkey. C-j is not really great.
-let g:UltiSnipsExpandTrigger="<C-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsExpandTrigger='<tab>'
+let g:UltiSnipsJumpForwardTrigger='<c-b>'
+let g:UltiSnipsJumpBackwardTrigger='<c-z>'
+let g:UltiSnipsEditSplit='vertical'
 let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
 
 " vim-airline statusbar
 let g:airline_theme = 'gruvbox'
-
-" ale linters
-" TODO(omtcvxyz): For now, probably whitelist trusted linters, otherwise ale
-" is quite slow. For the future, blacklist untrusted ones:
-" https://github.com/w0rp/ale/issues/1453
-let g:ale_cpp_clangtidy_checks = ['performance*', 'modernize*', 'bugprone*']
-" Always show sign column so that when warnings appear the text is not shifted
-let g:ale_sign_column_always = 1
 
 " Vimtex
 let g:vimtex_compiler_latexmk = {'callback' : 0}
@@ -110,6 +89,10 @@ set softtabstop=2
 set shiftwidth=2
 set shiftround
 
+" Add a vertical line to mark the line width limit so that its not exceeded.
+set colorcolumn=81
+highlight ColorColumn ctermbg=DarkMagenta
+
 " In Python and Rust 4 spaces should be used instead of 2.
 autocmd FileType Rust   set softtabstop=4| set shiftwidth=4
 " Also, in Python the widthlimit should be 79 and not 80 like everywhere else.
@@ -125,10 +108,6 @@ set relativenumber
 
 " Highlight current line to improve visibility.
 set cursorline
-
-" Add a vertical line to mark the line width limit so that its not exceeded.
-set colorcolumn=81
-highlight ColorColumn ctermbg=DarkMagenta
 
 " Use true colors if availible, for that `termguicolors` are needed.
 if has('termguicolors')
