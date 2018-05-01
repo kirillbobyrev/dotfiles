@@ -9,11 +9,7 @@ Plug 'mhinz/vim-signify'
 Plug 'morhetz/gruvbox'
 Plug 'ntpeters/vim-better-whitespace'
 
-" TODO(omtcvxyz): It's probably better to use lightline since it looks
-" cleaner, but AFAIK there is no gruvbox theme for it, I might want to check
-" whether it appears in the future or build it up myself.
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'itchyny/lightline.vim'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
@@ -42,8 +38,10 @@ let g:UltiSnipsJumpBackwardTrigger='<c-z>'
 let g:UltiSnipsEditSplit='vertical'
 let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
 
-" vim-airline statusbar
-let g:airline_theme = 'gruvbox'
+" lightline.vim
+let g:lightline = {
+      \ 'colorscheme': 'gruvbox',
+      \ }
 
 " Vimtex
 let g:vimtex_compiler_latexmk = {'callback' : 0}
@@ -60,7 +58,7 @@ colorscheme gruvbox
 " saving the file.
 let g:better_whitespace_enabled=1
 let g:strip_whitespace_on_save=1
-highlight ExtraWhitespace ctermbg=darkred
+highlight ExtraWhitespace ctermbg=DarkMagenta
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General settings
