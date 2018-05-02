@@ -8,6 +8,8 @@ Plug 'godlygeek/tabular'
 Plug 'mhinz/vim-signify'
 Plug 'morhetz/gruvbox'
 Plug 'ntpeters/vim-better-whitespace'
+Plug 'justinmk/vim-sneak'
+Plug 'vimwiki/vimwiki'
 
 Plug 'itchyny/lightline.vim'
 
@@ -21,6 +23,7 @@ Plug 'rhysd/vim-clang-format', { 'for': ['cpp', 'c'] }
 
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 
+Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
 
 Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
@@ -47,8 +50,10 @@ let g:lightline = {
 let g:vimtex_compiler_latexmk = {'callback' : 0}
 
 " Gruvbox colorscheme
-" Always use italics regardless of GUI being disabled.
-let g:gruvbox_italic = 1
+" TODO(omtcvxyz): Find a neat way to get around italics being disabled in
+" Alacritty (despite being supported) and the strange hack of checking
+" $TERM_ITALICS in Gruvbox repo. Probably, some .terminfo should be utilized.
+" let g:gruvbox_italic = 1
 set background=dark
 colorscheme gruvbox
 
