@@ -5,7 +5,7 @@
 call plug#begin('~/.vim/plugged')
 Plug 'SirVer/ultisnips'
 Plug 'godlygeek/tabular'
-Plug 'mhinz/vim-signify'
+Plug 'airblade/vim-gitgutter'
 Plug 'morhetz/gruvbox'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'justinmk/vim-sneak'
