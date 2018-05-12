@@ -63,7 +63,10 @@ colorscheme gruvbox
 " saving the file.
 let g:better_whitespace_enabled=1
 let g:strip_whitespace_on_save=1
-highlight ExtraWhitespace ctermbg=DarkMagenta
+augroup CommentsHighlight
+  autocmd!
+  highlight ExtraWhitespace ctermbg=DarkMagenta
+augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General settings
@@ -96,10 +99,12 @@ set shiftround
 set colorcolumn=81
 highlight ColorColumn ctermbg=DarkMagenta
 
-" In Python and Rust 4 spaces should be used instead of 2.
-autocmd FileType Rust   set softtabstop=4| set shiftwidth=4
-" Also, in Python the widthlimit should be 79 and not 80 like everywhere else.
-autocmd FileType Python set softtabstop=4| set shiftwidth=4| set colorcolumn=80
+augroup LanguageSpecifics
+  " In Python and Rust 4 spaces should be used instead of 2.
+  autocmd FileType Rust   set softtabstop=4| set shiftwidth=4
+  " Also, in Python the widthlimit should be 79 and not 80 like everywhere else.
+  autocmd FileType Python set softtabstop=4| set shiftwidth=4| set colorcolumn=80
+augroup END
 
 " Use smarter indent rules for better experience.
 set autoindent
