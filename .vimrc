@@ -4,11 +4,11 @@
 " TODO(omtcvxyz): get through docs, personalize some plugins.
 call plug#begin('~/.vim/plugged')
 Plug 'SirVer/ultisnips'
-Plug 'godlygeek/tabular'
 Plug 'airblade/vim-gitgutter'
+Plug 'godlygeek/tabular'
+Plug 'justinmk/vim-sneak'
 Plug 'morhetz/gruvbox'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'justinmk/vim-sneak'
 Plug 'vimwiki/vimwiki'
 
 Plug 'itchyny/lightline.vim'
@@ -23,7 +23,6 @@ Plug 'rhysd/vim-clang-format', { 'for': ['cpp', 'c'] }
 
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 
-Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
 Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
 
 Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
@@ -49,14 +48,6 @@ let g:lightline = {
 " Vimtex
 let g:vimtex_compiler_latexmk = {'callback' : 0}
 
-" Gruvbox colorscheme
-" TODO(omtcvxyz): Find a neat way to get around italics being disabled in
-" Alacritty (despite being supported) and the strange hack of checking
-" $TERM_ITALICS in Gruvbox repo. Probably, some .terminfo should be utilized.
-" let g:gruvbox_italic = 1
-set background=dark
-colorscheme gruvbox
-
 " vim-better-whitespace
 " Highlight trailing whitespace. This makes missing an extra whitespace
 " infinitely harder. Also, use the plugin to remove trailing whitespaces upon
@@ -80,11 +71,22 @@ scriptencoding utf8
 " Use Unix line endings.
 set fileformats=unix
 
+" Use smarter indent rules for better experience.
+set autoindent
 " Enable filetype plugin.
 filetype plugin indent on
 
 " Always check spelling to improve grammar and prevent typos.
-set spell spelllang=en_us
+set spelllang=en_us
+set spell
+
+" Gruvbox colorscheme
+" TODO(omtcvxyz): Find a neat way to get around italics being disabled in
+" Alacritty (despite being supported) and the strange hack of checking
+" $TERM_ITALICS in Gruvbox repo. Probably, some .terminfo should be utilized.
+" let g:gruvbox_italic = 1
+set background=dark
+colorscheme gruvbox
 
 " Spaces & Tabs
 " Always prefer spaces over tabs, use 2 spaces everywhere except in few
@@ -94,6 +96,9 @@ set expandtab
 set softtabstop=2
 set shiftwidth=2
 set shiftround
+
+" Proper backspace behavior.
+set backspace=indent,eol,start
 
 " Add a vertical line to mark the line width limit so that its not exceeded.
 set colorcolumn=81
@@ -105,9 +110,6 @@ augroup LanguageSpecifics
   " Also, in Python the widthlimit should be 79 and not 80 like everywhere else.
   autocmd FileType Python set softtabstop=4| set shiftwidth=4| set colorcolumn=80
 augroup END
-
-" Use smarter indent rules for better experience.
-set autoindent
 
 " Show both relative line numbers and the current line number (hybrid mode).
 " This way it's easier to move around and do motions.
