@@ -9,6 +9,9 @@ Plug 'godlygeek/tabular'
 Plug 'justinmk/vim-sneak'
 Plug 'morhetz/gruvbox'
 Plug 'ntpeters/vim-better-whitespace'
+Plug 'ryanoasis/vim-devicons'
+Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-commentary'
 Plug 'vimwiki/vimwiki'
 
 Plug 'itchyny/lightline.vim'
@@ -59,6 +62,9 @@ augroup CommentsHighlight
   highlight ExtraWhitespace ctermbg=DarkMagenta
 augroup END
 
+" NerdTree
+map <C-n> :NERDTreeToggle<CR>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -85,6 +91,7 @@ set spell
 " Alacritty (despite being supported) and the strange hack of checking
 " $TERM_ITALICS in Gruvbox repo. Probably, some .terminfo should be utilized.
 " let g:gruvbox_italic = 1
+let g:gruvbox_guisp_fallback = "bg"
 set background=dark
 colorscheme gruvbox
 
@@ -107,8 +114,10 @@ highlight ColorColumn ctermbg=DarkMagenta
 augroup LanguageSpecifics
   " In Python and Rust 4 spaces should be used instead of 2.
   autocmd FileType Rust   set softtabstop=4| set shiftwidth=4
-  " Also, in Python the widthlimit should be 79 and not 80 like everywhere else.
-  autocmd FileType Python set softtabstop=4| set shiftwidth=4| set colorcolumn=80
+  " Also, in Python the width limit should be 79 as opposed to 80 used
+  " everywhere else.
+  autocmd FileType Python set softtabstop=4| set shiftwidth=4
+  autocmd FileType Python set colorcolumn=80
 augroup END
 
 " Show both relative line numbers and the current line number (hybrid mode).
@@ -119,7 +128,7 @@ set relativenumber
 " Highlight current line to improve visibility.
 set cursorline
 
-" Use true colors if availible, for that `termguicolors` are needed.
+" Use true colors if available. Set `termguicolors` for that.
 if has('termguicolors')
   set termguicolors
 endif
