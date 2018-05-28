@@ -1,7 +1,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins configuration
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" TODO(omtcvxyz): get through docs, personalize some plugins.
+" TODO(kbobyrev): get through docs, personalize some plugins.
 call plug#begin('~/.vim/plugged')
 Plug 'SirVer/ultisnips'
 Plug 'airblade/vim-gitgutter'
@@ -37,7 +37,7 @@ let g:ale_sign_error = '◉'
 let g:ale_sign_warning = '◉'
 let g:ale_completion_enabled = 1
 " linters
-" TODO(omtcvxyz): For now, probably whitelist trusted linters, otherwise ale
+" TODO(kbobyrev): For now, probably whitelist trusted linters, otherwise ale
 " is quite slow. For the future, blacklist untrusted ones:
 " https://github.com/w0rp/ale/issues/1453
 let g:ale_cpp_clangtidy_checks = ['performance*', 'modernize*', 'bugprone*',
@@ -105,7 +105,7 @@ set spelllang=en_us
 set spell
 
 " Gruvbox colorscheme
-" TODO(omtcvxyz): Find a neat way to get around italics being disabled in
+" TODO(kbobyrev): Find a neat way to get around italics being disabled in
 " Alacritty (despite being supported) and the strange hack of checking
 " $TERM_ITALICS in Gruvbox repo. Probably, some .terminfo should be utilized.
 " let g:gruvbox_italic = 1

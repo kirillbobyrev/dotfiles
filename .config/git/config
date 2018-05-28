@@ -1,12 +1,13 @@
 [user]
   email = kbobyrev.opensource@gmail.com
   name = Kirill Bobyrev
-  username = omtcvxyz
+  username = kbobyrev
 [core]
-  editor = nvim
+  editor = vim
 [web]
   browser = google-chrome
 [color]
   ui = true
 [github]
-  user = omtcvxyz
+  user = kbobyrev
+  token = ca7f3e54a86d32067c594869bda9c3ee734cebed
