@@ -9,10 +9,9 @@ Plug 'godlygeek/tabular'
 Plug 'justinmk/vim-sneak'
 Plug 'morhetz/gruvbox'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'ryanoasis/vim-devicons'
-Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'vimwiki/vimwiki'
+Plug 'w0rp/ale'
 
 Plug 'itchyny/lightline.vim'
 
@@ -32,6 +31,22 @@ Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
 call plug#end()
 
 " Plugin-specific settings
+
+" ale
+let g:ale_sign_error = '◉'
+let g:ale_sign_warning = '◉'
+let g:ale_completion_enabled = 1
+" linters
+" TODO(omtcvxyz): For now, probably whitelist trusted linters, otherwise ale
+" is quite slow. For the future, blacklist untrusted ones:
+" https://github.com/w0rp/ale/issues/1453
+let g:ale_cpp_clangtidy_checks = ['performance*', 'modernize*', 'bugprone*',
+                                 \'llvm*', 'misc*', 'readability*']
+" Always show sign column so that when warnings appear the text is not shifted
+let g:ale_sign_column_always = 1
+"
+nmap <silent> <C-j> :ALENext<cr>
+nmap <silent> <C-k> :ALEPrevious<cr>
 
 " vim-clang-format
 let g:clang_format#code_style = 'llvm'
@@ -62,8 +77,11 @@ augroup CommentsHighlight
   highlight ExtraWhitespace ctermbg=DarkMagenta
 augroup END
 
-" NerdTree
-map <C-n> :NERDTreeToggle<CR>
+" ClangFormat
+nmap <C-f> :ClangFormat<CR>
+
+" vimwiki
+let g:vimwiki_list = [{'path': '~/.vim/vimwiki'}]
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General settings
