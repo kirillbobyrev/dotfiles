@@ -3,12 +3,17 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " TODO(kbobyrev): get through docs, personalize some plugins.
 call plug#begin('~/.vim/plugged')
+Plug 'Chiel92/vim-autoformat'
 Plug 'SirVer/ultisnips'
 Plug 'airblade/vim-gitgutter'
 Plug 'godlygeek/tabular'
+Plug 'haya14busa/incsearch.vim'
+Plug 'jiangmiao/auto-pairs'
 Plug 'justinmk/vim-sneak'
 Plug 'morhetz/gruvbox'
 Plug 'ntpeters/vim-better-whitespace'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'vimwiki/vimwiki'
 Plug 'w0rp/ale'
@@ -21,13 +26,12 @@ Plug 'junegunn/fzf.vim'
 Plug 'lervag/vimtex', { 'for': 'tex' }
 
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': ['cpp', 'c'] }
-Plug 'rhysd/vim-clang-format', { 'for': ['cpp', 'c'] }
 
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 
-Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
+Plug 'llvm-mirror/llvm', { 'rtp': 'utils/vim', 'for': 'llvm' }
 
-Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
+Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
 call plug#end()
 
 " Plugin-specific settings
@@ -38,7 +42,8 @@ let g:ale_sign_warning = '◉'
 let g:ale_completion_enabled = 1
 " linters
 " TODO(kbobyrev): For now, probably whitelist trusted linters, otherwise ale
-" is quite slow. For the future, blacklist untrusted ones:
+" is quite slow. Hopefully, it will be possible to blacklist certain linters
+" as many of them significantly slow down the editor:
 " https://github.com/w0rp/ale/issues/1453
 let g:ale_cpp_clangtidy_checks = ['performance*', 'modernize*', 'bugprone*',
                                  \'llvm*', 'misc*', 'readability*']
@@ -47,9 +52,6 @@ let g:ale_sign_column_always = 1
 "
 nmap <silent> <C-j> :ALENext<cr>
 nmap <silent> <C-k> :ALEPrevious<cr>
-
-" vim-clang-format
-let g:clang_format#code_style = 'llvm'
 
 " UltiSnips
 let g:UltiSnipsExpandTrigger='<tab>'
@@ -60,8 +62,8 @@ let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
 
 " lightline.vim
 let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
-      \ }
+  \ 'colorscheme': 'gruvbox',
+  \ }
 
 " Vimtex
 let g:vimtex_compiler_latexmk = {'callback' : 0}
@@ -77,8 +79,8 @@ augroup CommentsHighlight
   highlight ExtraWhitespace ctermbg=DarkMagenta
 augroup END
 
-" ClangFormat
-nmap <C-f> :ClangFormat<CR>
+" AutoFormat
+nmap <C-f> :Autoformat<CR>
 
 " vimwiki
 let g:vimwiki_list = [{'path': '~/.vim/vimwiki'}]
