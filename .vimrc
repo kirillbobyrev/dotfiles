@@ -3,7 +3,6 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " TODO(kbobyrev): get through docs, personalize some plugins.
 call plug#begin('~/.vim/plugged')
-Plug 'Chiel92/vim-autoformat'
 Plug 'SirVer/ultisnips'
 Plug 'airblade/vim-gitgutter'
 Plug 'godlygeek/tabular'
@@ -17,7 +16,6 @@ Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'vimwiki/vimwiki'
 Plug 'w0rp/ale'
-
 Plug 'itchyny/lightline.vim'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
@@ -26,8 +24,11 @@ Plug 'junegunn/fzf.vim'
 Plug 'lervag/vimtex', { 'for': 'tex' }
 
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': ['cpp', 'c'] }
+Plug 'rhysd/vim-clang-format', { 'for': ['cpp', 'c'] }
 
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+
+Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
 
 Plug 'llvm-mirror/llvm', { 'rtp': 'utils/vim', 'for': 'llvm' }
 
@@ -54,10 +55,10 @@ nmap <silent> <C-j> :ALENext<cr>
 nmap <silent> <C-k> :ALEPrevious<cr>
 
 " UltiSnips
-let g:UltiSnipsExpandTrigger='<tab>'
-let g:UltiSnipsJumpForwardTrigger='<c-b>'
-let g:UltiSnipsJumpBackwardTrigger='<c-z>'
-let g:UltiSnipsEditSplit='vertical'
+let g:UltiSnipsExpandTrigger = '<tab>'
+let g:UltiSnipsJumpForwardTrigger = '<c-b>'
+let g:UltiSnipsJumpBackwardTrigger = '<c-z>'
+let g:UltiSnipsEditSplit = 'vertical'
 let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
 
 " lightline.vim
@@ -72,16 +73,19 @@ let g:vimtex_compiler_latexmk = {'callback' : 0}
 " Highlight trailing whitespace. This makes missing an extra whitespace
 " infinitely harder. Also, use the plugin to remove trailing whitespaces upon
 " saving the file.
-let g:better_whitespace_enabled=1
-let g:strip_whitespace_on_save=1
+let g:better_whitespace_enabled = 1
+let g:strip_whitespace_on_save = 1
 augroup CommentsHighlight
   autocmd!
   highlight ExtraWhitespace ctermbg=DarkMagenta
 augroup END
 
-" AutoFormat
-nmap <C-f> :Autoformat<CR>
+" ClangFormat
+let g:clang_format#code_style = 'llvm'
+autocmd FileType c,cpp vnoremap <C-f> :ClangFormat<CR>
 
+" YAPF
+autocmd FileType Python vnoremap <C-f> :YAPF<CR>
 " vimwiki
 let g:vimwiki_list = [{'path': '~/.vim/vimwiki'}]
 
@@ -103,7 +107,7 @@ set autoindent
 filetype plugin indent on
 
 " Always check spelling to improve grammar and prevent typos.
-set spelllang=en_us
+set spelllang=en_us,ru_ru
 set spell
 
 " Gruvbox colorscheme
@@ -176,6 +180,8 @@ set hlsearch
 " Search ignores case unless an uppercase letter appears in the pattern.
 set ignorecase
 set smartcase
+" Use magic for regular expressions
+set magic
 
 " Don't create backup files.
 set noswapfile
