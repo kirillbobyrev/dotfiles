@@ -7,14 +7,17 @@ Plug 'SirVer/ultisnips'
 Plug 'airblade/vim-gitgutter'
 Plug 'godlygeek/tabular'
 Plug 'haya14busa/incsearch.vim'
+Plug 'itchyny/lightline.vim'
 Plug 'jiangmiao/auto-pairs'
+Plug 'junegunn/vim-easy-align'
 Plug 'justinmk/vim-sneak'
 Plug 'morhetz/gruvbox'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
 Plug 'vimwiki/vimwiki'
 Plug 'w0rp/ale'
-Plug 'itchyny/lightline.vim'
+Plug 'wellle/targets.vim'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
@@ -84,6 +87,7 @@ autocmd FileType c,cpp vnoremap <C-f> :ClangFormat<CR>
 
 " YAPF
 autocmd FileType Python vnoremap <C-f> :YAPF<CR>
+
 " vimwiki
 let g:vimwiki_list = [{'path': '~/.vim/vimwiki'}]
 
@@ -113,7 +117,7 @@ set spell
 " Alacritty (despite being supported) and the strange hack of checking
 " $TERM_ITALICS in Gruvbox repo. Probably, some .terminfo should be utilized.
 " let g:gruvbox_italic = 1
-let g:gruvbox_guisp_fallback = "bg"
+let g:gruvbox_guisp_fallback = 'bg'
 set background=dark
 colorscheme gruvbox
 
