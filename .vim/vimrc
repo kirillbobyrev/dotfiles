@@ -11,6 +11,8 @@ Plug 'itchyny/lightline.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/vim-easy-align'
 Plug 'justinmk/vim-sneak'
+Plug 'lifepillar/vim-cheat40'
+Plug 'mhinz/vim-startify'
 Plug 'morhetz/gruvbox'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-commentary'
@@ -51,9 +53,8 @@ let g:ale_cpp_clangtidy_checks = ['performance*', 'modernize*', 'bugprone*',
                                  \'llvm*', 'misc*', 'readability*']
 " Always show sign column so that when warnings appear the text is not shifted
 let g:ale_sign_column_always = 1
-"
-nmap <silent> <C-j> :ALENext<cr>
-nmap <silent> <C-k> :ALEPrevious<cr>
+nnoremap <silent> <C-j> :ALENext<CR>
+nnoremap <silent> <C-k> :ALEPrevious<CR>
 
 " UltiSnips
 let g:UltiSnipsExpandTrigger = '<tab>'
@@ -90,6 +91,12 @@ autocmd FileType Python vnoremap <C-f> :YAPF<CR>
 
 " vimwiki
 let g:vimwiki_list = [{'path': '~/.vim/vimwiki'}]
+
+" vim-easy-align
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General settings
@@ -172,6 +179,9 @@ set wildmenu
 " Only redraw when necessary so that the editor takes less resources.
 set lazyredraw
 
+" Redraw faster
+set ttyfast
+
 " Highlight matching bracket.
 set showmatch
 
@@ -189,8 +199,17 @@ set magic
 set noswapfile
 set nowritebackup
 
+" Opens signcolumn by default.
+set signcolumn=yes
+
 " Always use LaTeX
 let g:tex_flavor = 'latex'
+
+" The fish shell is not very compatible to other shells and unexpectedly
+" breaks things that use 'shell'.
+if &shell =~# 'fish$'
+  set shell=/bin/bash
+endif
 
 " Use more colors
 set t_Co=256
