@@ -44,7 +44,7 @@ call plug#end()
 let g:ale_sign_error = '◉'
 let g:ale_sign_warning = '◉'
 let g:ale_completion_enabled = 1
-" linters
+" Configure ale linters
 " TODO(kbobyrev): For now, probably whitelist trusted linters, otherwise ale
 " is quite slow. Hopefully, it will be possible to blacklist certain linters
 " as many of them significantly slow down the editor:
@@ -53,6 +53,7 @@ let g:ale_cpp_clangtidy_checks = ['performance*', 'modernize*', 'bugprone*',
                                  \'llvm*', 'misc*', 'readability*']
 " Always show sign column so that when warnings appear the text is not shifted
 let g:ale_sign_column_always = 1
+" Create handy movement bindings
 nnoremap <silent> <C-j> :ALENext<CR>
 nnoremap <silent> <C-k> :ALEPrevious<CR>
 
@@ -124,6 +125,7 @@ set spell
 " Alacritty (despite being supported) and the strange hack of checking
 " $TERM_ITALICS in Gruvbox repo. Probably, some .terminfo should be utilized.
 " let g:gruvbox_italic = 1
+let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_guisp_fallback = 'bg'
 set background=dark
 colorscheme gruvbox
@@ -146,9 +148,9 @@ highlight ColorColumn ctermbg=DarkMagenta
 
 augroup LanguageSpecifics
   " In Python and Rust 4 spaces should be used instead of 2.
-  autocmd FileType Rust   set softtabstop=4| set shiftwidth=4
   " Also, in Python the width limit should be 79 as opposed to 80 used
-  " everywhere else.
+  " everywhere else, in Rust the width limit is 110 symbols.
+  autocmd FileType Rust   set softtabstop=4| set shiftwidth=4
   autocmd FileType Python set softtabstop=4| set shiftwidth=4
   autocmd FileType Python set colorcolumn=80
 augroup END
