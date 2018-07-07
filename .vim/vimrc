@@ -125,7 +125,6 @@ set spell
 " Alacritty (despite being supported) and the strange hack of checking
 " $TERM_ITALICS in Gruvbox repo. Probably, some .terminfo should be utilized.
 " let g:gruvbox_italic = 1
-let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_guisp_fallback = 'bg'
 set background=dark
 colorscheme gruvbox
