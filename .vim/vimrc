@@ -7,7 +7,6 @@ if has('nvim')
 else
   call plug#begin('~/.vim/plugged')
 endif
-Plug 'SirVer/ultisnips'
 Plug 'airblade/vim-gitgutter'
 Plug 'godlygeek/tabular'
 Plug 'haya14busa/incsearch.vim'
@@ -22,11 +21,24 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'wellle/targets.vim'
+" FIXME(kbobyrev): Use LanguageClient-neovim integration
+Plug 'SirVer/ultisnips'
 
+" LSP Client Plugin used for C++, Python, etc
 Plug 'autozimu/LanguageClient-neovim', {
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
+Plug 'Shougo/echodoc.vim'
+
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
 
 Plug 'lervag/vimtex', { 'for': 'tex' }
 
@@ -48,9 +60,10 @@ call plug#end()
 
 " UltiSnips
 let g:UltiSnipsExpandTrigger = '<tab>'
-let g:UltiSnipsJumpForwardTrigger = '<c-b>'
-let g:UltiSnipsJumpBackwardTrigger = '<c-z>'
+let g:UltiSnipsJumpForwardTrigger = '<c-j>'
+let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
 let g:UltiSnipsEditSplit = 'vertical'
+let g:UltiSnipsRemoveSelectModeMappings = 0
 let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
 
 " lightline.vim
@@ -95,10 +108,13 @@ nmap ga <Plug>(EasyAlign)
 set hidden
 
 let g:LanguageClient_serverCommands = {
-    \ 'rust': ['rustup', 'run', 'stable', 'rls'],
-    \ 'python': ['pyls'],
-    \ 'cpp': ['clangd'],
-    \ }
+  \ 'cpp': ['clangd'],
+  \ 'rust': ['rustup', 'run', 'stable', 'rls'],
+  \ 'python': ['pyls'],
+  \ }
+
+" Echodoc
+set cmdheight=2
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General settings
