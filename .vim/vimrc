@@ -28,9 +28,6 @@ Plug 'autozimu/LanguageClient-neovim', {
     \ 'do': 'bash install.sh',
     \ }
 
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
-Plug 'junegunn/fzf.vim'
-
 Plug 'lervag/vimtex', { 'for': 'tex' }
 
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': ['cpp', 'c'] }
@@ -41,6 +38,8 @@ Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
 
 Plug 'llvm-mirror/llvm', { 'rtp': 'utils/vim', 'for': 'llvm' }
+
+Plug 'Shirk/vim-gas'
 
 Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
 call plug#end()
@@ -80,7 +79,7 @@ let g:clang_format#code_style = 'llvm'
 autocmd FileType c,cpp vnoremap <C-f> :ClangFormat<CR>
 
 " YAPF
-autocmd FileType Python vnoremap <C-f> :YAPF<CR>
+autocmd FileType python vnoremap <C-f> :YAPF<CR>
 
 " vimwiki
 let g:vimwiki_list = [{'path': '~/.vim/vimwiki'}]
@@ -98,6 +97,7 @@ set hidden
 let g:LanguageClient_serverCommands = {
     \ 'rust': ['rustup', 'run', 'stable', 'rls'],
     \ 'python': ['pyls'],
+    \ 'cpp': ['clangd'],
     \ }
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
