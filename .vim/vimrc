@@ -38,7 +38,6 @@ else
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
 endif
-let g:deoplete#enable_at_startup = 1
 
 Plug 'lervag/vimtex', { 'for': 'tex' }
 
@@ -115,6 +114,9 @@ let g:LanguageClient_serverCommands = {
 
 " Echodoc
 set cmdheight=2
+
+" Deoplete
+let g:deoplete#enable_at_startup = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General settings
