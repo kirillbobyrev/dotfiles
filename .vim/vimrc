@@ -42,11 +42,8 @@ endif
 Plug 'lervag/vimtex', { 'for': 'tex' }
 
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': ['cpp', 'c'] }
-Plug 'rhysd/vim-clang-format', { 'for': ['cpp', 'c'] }
 
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-
-Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
 
 Plug 'llvm-mirror/llvm', { 'rtp': 'utils/vim', 'for': 'llvm' }
 
@@ -66,7 +63,7 @@ let g:UltiSnipsRemoveSelectModeMappings = 0
 let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
 
 " lightline.vim
-if !has('mac')
+if has('nvim') && !has('mac')
   let g:lightline = {
     \ 'colorscheme': 'gruvbox',
     \ }
@@ -86,16 +83,6 @@ augroup CommentsHighlight
   highlight ExtraWhitespace ctermbg=DarkMagenta
 augroup END
 
-" ClangFormat
-let g:clang_format#code_style = 'llvm'
-autocmd FileType c,cpp vnoremap <C-f> :ClangFormat<CR>
-
-" YAPF
-autocmd FileType python vnoremap <C-f> :YAPF<CR>
-
-" vimwiki
-let g:vimwiki_list = [{'path': '~/.vim/vimwiki'}]
-
 " vim-easy-align
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
@@ -103,17 +90,24 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 " LanguageClient-neovim
-" Required for operations modifying multiple buffers like rename.
-set hidden
-
 let g:LanguageClient_serverCommands = {
   \ 'cpp': ['clangd'],
-  \ 'rust': ['rustup', 'run', 'stable', 'rls'],
+  \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
   \ 'python': ['pyls'],
   \ }
 
+" Required for operations modifying multiple buffers like rename.
+set hidden
+
+nnoremap <leader>lh :call LanguageClient#textDocument_hover()<CR>
+nnoremap <leader>ld :call LanguageClient#textDocument_definition()<CR>
+nnoremap <leader>lr :call LanguageClient#textDocument_rename()<CR>
+nnoremap <leader>lf :call LanguageClient#textDocument_formatting()<CR>
+
 " Echodoc
 set cmdheight=2
+let g:echodoc#enable_at_startup = 1
+let g:echodoc#type = 'signature'
 
 " Deoplete
 let g:deoplete#enable_at_startup = 1
