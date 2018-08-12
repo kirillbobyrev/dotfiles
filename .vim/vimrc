@@ -148,7 +148,7 @@ set spell
 " TODO(kbobyrev): Find a neat way to get around italics being disabled in
 " Alacritty (despite being supported) and the strange hack of checking
 " $TERM_ITALICS in Gruvbox repo. Probably, some .terminfo should be utilized.
-if !has('mac')
+if has('nvim') && !has('mac')
   let g:gruvbox_italic = 1
   let g:gruvbox_guisp_fallback = 'bg'
   set background=dark
@@ -168,6 +168,7 @@ set shiftround
 set backspace=indent,eol,start
 
 augroup Rust
+  autocmd!
   " In Python and Rust 4 spaces should be used instead of 2.
   " Also, in Python the width limit should be 79 as opposed to 80 used
   " everywhere else, in Rust the width limit is 110 symbols.
@@ -176,6 +177,7 @@ augroup Rust
 augroup END
 
 augroup Python
+  autocmd!
   autocmd FileType python set softtabstop=4| set shiftwidth=4
   autocmd FileType python set colorcolumn=80
 augroup END
