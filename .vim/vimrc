@@ -66,7 +66,7 @@ let g:UltiSnipsRemoveSelectModeMappings = 0
 let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
 
 " lightline.vim
-if has('nvim') && !has('mac')
+if has('nvim')
   let g:lightline = {
     \ 'colorscheme': 'gruvbox',
     \ }
@@ -148,7 +148,7 @@ set spell
 " TODO(kbobyrev): Find a neat way to get around italics being disabled in
 " Alacritty (despite being supported) and the strange hack of checking
 " $TERM_ITALICS in Gruvbox repo. Probably, some .terminfo should be utilized.
-if has('nvim') && !has('mac')
+if has('nvim')
   let g:gruvbox_italic = 1
   let g:gruvbox_guisp_fallback = 'bg'
   set background=dark
@@ -195,7 +195,7 @@ set relativenumber
 set cursorline
 
 " Use true colors if available. Set `termguicolors` for that.
-if has('termguicolors') && !has('nvim')
+if has('termguicolors')
   set termguicolors
 endif
 
@@ -244,8 +244,6 @@ if &shell =~# 'fish$'
   set shell=/bin/bash
 endif
 
-" Use more colors
-set t_Co=256
 " Use a hack proposed in https://github.com/icymind/NeoSolarized#tmux to make
 " Vim + True Colors + Tmux work better.
 set t_8f=[38;2;%lu;%lu;%lum
