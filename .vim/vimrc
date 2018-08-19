@@ -12,9 +12,6 @@ Plug 'godlygeek/tabular'
 Plug 'haya14busa/incsearch.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'jiangmiao/auto-pairs'
-" FIXME(kbobyrev): Customize FZF https://github.com/junegunn/fzf.vim
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'justinmk/vim-sneak'
 Plug 'lifepillar/vim-cheat40'
@@ -109,7 +106,6 @@ augroup LSP
   autocmd FileType cpp,c,python nnoremap <leader>lf :call LanguageClient#textDocument_formatting()<CR>
   autocmd FileType cpp,c,python nnoremap <leader>lt :call LanguageClient#textDocument_typeDefinition()<CR>
   autocmd FileType cpp,c,python nnoremap <leader>lx :call LanguageClient#textDocument_references()<CR>
-  autocmd FileType cpp,c,python nnoremap <leader>lw :call LanguageClient#workspace_symbol()<CR>
   autocmd FileType cpp,c,python nnoremap <leader>la :call LanguageClient_workspace_applyEdit()<CR>
   autocmd FileType cpp,c,python nnoremap <leader>lc :call LanguageClient#textDocument_completion()<CR>
   autocmd FileType cpp,c,python nnoremap <leader>lm :call LanguageClient#LanguageClient_contextMenu()<CR>
