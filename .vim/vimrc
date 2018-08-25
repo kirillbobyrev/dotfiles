@@ -21,6 +21,9 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'wellle/targets.vim'
+" FIXME(kbobyrev): Customize FZF https://github.com/junegunn/fzf.vim
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 " FIXME(kbobyrev): Use LanguageClient-neovim integration
 Plug 'SirVer/ultisnips'
 
@@ -109,6 +112,8 @@ augroup LSP
   autocmd FileType cpp,c,python nnoremap <leader>la :call LanguageClient_workspace_applyEdit()<CR>
   autocmd FileType cpp,c,python nnoremap <leader>lc :call LanguageClient#textDocument_completion()<CR>
   autocmd FileType cpp,c,python nnoremap <leader>lm :call LanguageClient#LanguageClient_contextMenu()<CR>
+  autocmd FileType cpp,c,python nnoremap <leader>lh :call LanguageClient#textDocument_hover()<CR>
+  autocmd FileType cpp,c,python nnoremap <leader>ls :call LanguageClient_textDocument_documentSymbol()<CR>
 augroup END
 
 " Echodoc
