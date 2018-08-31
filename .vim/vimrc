@@ -118,7 +118,7 @@ function SetLSPShortcuts()
   nnoremap <leader>lf :call LanguageClient#textDocument_formatting()<CR>
   nnoremap <leader>lh :call LanguageClient#textDocument_hover()<CR>
   nnoremap <leader>ll :call LanguageClient#debugInfo()<CR><Paste>
-  nnoremap <leader>lm :call LanguageClient#LanguageClient_contextMenu()<CR>
+  nnoremap <leader>lm :call LanguageClient_contextMenu()<CR>
   nnoremap <leader>lr :call LanguageClient#textDocument_rename()<CR>
   nnoremap <leader>ls :call LanguageClient_textDocument_documentSymbol()<CR>
   nnoremap <leader>lt :call LanguageClient#textDocument_typeDefinition()<CR>
