@@ -8,6 +8,9 @@ else
   call plug#begin('~/.vim/plugged')
 endif
 
+" FIXME(kbobyrev): Configure this plugin.
+Plug 'Shougo/denite.nvim'
+Plug 'Shougo/vinarise.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'godlygeek/tabular'
 Plug 'haya14busa/incsearch.vim'
@@ -19,13 +22,15 @@ Plug 'lifepillar/vim-cheat40'
 Plug 'mhinz/vim-startify'
 Plug 'morhetz/gruvbox'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'wellle/targets.vim'
-" FIXME(kbobyrev): Configure this plugin.
-Plug 'Shougo/denite.nvim'
+
+" FIXME(kbobyrev): Configure this.
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'jistr/vim-nerdtree-tabs'
 
 " FIXME(kbobyrev): Customize FZF https://github.com/junegunn/fzf.vim
 if isdirectory('/usr/local/opt/fzf')
@@ -59,7 +64,6 @@ Plug 'octol/vim-cpp-enhanced-highlight', { 'for': ['cpp', 'c'] }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 
 Plug 'llvm-mirror/llvm', { 'rtp': 'utils/vim', 'for': 'llvm' }
-Plug 'swift/swift', { 'rtp': 'utils/vim', 'for': 'swift' }
 
 Plug 'Shirk/vim-gas'
 
@@ -88,10 +92,25 @@ let g:UltiSnipsRemoveSelectModeMappings = 0
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.config/UltiSnips']
 
 " lightline.vim
-" FIXME(kbobyrev): Customize this one.
+" FIXME(kbobyrev): Customize lightline more. Ideas:
+" * Use full path to the file in lightline.
+" * Take a look at example configurations of lightline.
+" * Take a look at configurations of powerline, airline, etc.
 if has('nvim')
+  function! LightLineFiletype()
+    return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+  endfunction
+
+  function! LightLineFileformat()
+    return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
+  endfunction
+
   let g:lightline = {
     \ 'colorscheme': 'gruvbox',
+    \ 'component_function': {
+    \   'filetype': 'LightLineFiletype',
+    \   'fileformat': 'LightLineFileformat',
+    \   }
     \ }
 endif
 
@@ -156,6 +175,11 @@ let g:echodoc#type = 'signature'
 let g:deoplete#enable_at_startup = 1
 " Uprank items from UltiSnips.
 call deoplete#custom#source('ultisnips', 'rank', 1000)
+
+" vim-startify
+function! StartifyEntryFormat()
+    return 'WebDevIconsGetFileTypeSymbol(absolute_path) ." ". entry_path'
+endfunction
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General settings
