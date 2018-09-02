@@ -69,13 +69,6 @@ Plug 'Shirk/vim-gas'
 
 Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
 
-" FIXME(kbobyrev): Start using Nerd Fonts (currently considering Inconsolata,
-" Droid Sans Mono [Nerd fonts patch] and Fira Mono [Nerd fonts patch]). This
-" might require Alacritty config changes rather than Vim (although it is
-" possible, too). Right now, this doesn't properly work.
-" FIXME(kbobyrev): Make sure it works with lightline. If not, switch to
-" powerline and enable Powerline fonts.
-" FIXME(kbobyrev): Make sure this works with vim-startify.
 " IMPORTANT: This has to be the last one.
 Plug 'ryanoasis/vim-devicons'
 
