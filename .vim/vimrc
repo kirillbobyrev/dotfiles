@@ -66,14 +66,12 @@ call plug#end()
 " Plugin-specific settings
 
 " UltiSnips
-" FIXME(kbobyrev): Find a way to make the plugin accessible for both Vim and
-" NeoVim without using relative path. The following wouldn't work in NeoVim:
-" let g:UltiSnipsSnippetsDir = '~/.config/UltiSnips'
 let g:UltiSnipsExpandTrigger = '<tab>'
 let g:UltiSnipsJumpForwardTrigger = '<c-l>'
 let g:UltiSnipsJumpBackwardTrigger = '<c-h>'
 let g:UltiSnipsEditSplit = 'vertical'
 let g:UltiSnipsRemoveSelectModeMappings = 0
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.config/UltiSnips']
 call deoplete#custom#source('ultisnips', 'rank', 1000)
 
 " lightline.vim
@@ -214,7 +212,11 @@ set relativenumber
 " Highlight current line to improve visibility.
 set cursorline
 
-" Use true colors if available. Set `termguicolors` for that.
+" Use 256 colors in Vim.
+if !has('nvim') && !has('termguicolors')
+  set t_Co=256
+endif
+" Use true colors if available (in NeoVim). Set `termguicolors` for that.
 if has('termguicolors')
   set termguicolors
 endif
