@@ -102,7 +102,9 @@ nmap ga <Plug>(EasyAlign)
 
 " LanguageClient-neovim
 let g:LanguageClient_serverCommands = {
+  \ 'c': ['clangd'],
   \ 'cpp': ['clangd'],
+  \ 'haskell': ['hie-wrapper', '--lsp'],
   \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
   \ 'python': ['pyls'],
   \ }
@@ -127,7 +129,7 @@ endfunction()
 
 augroup LSP
   autocmd!
-  autocmd FileType cpp,c,rust,python call SetLSPShortcuts()
+  autocmd FileType cpp,c,haskell,rust,python call SetLSPShortcuts()
 augroup END
 
 " Echodoc
