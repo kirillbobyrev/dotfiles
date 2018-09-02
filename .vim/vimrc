@@ -31,8 +31,8 @@ else
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
   Plug 'junegunn/fzf.vim'
 endif
-" FIXME(kbobyrev): Use LanguageClient-neovim integration
 Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 " LSP Client Plugin used for C++, Python, etc
 Plug 'autozimu/LanguageClient-neovim', {
@@ -66,12 +66,15 @@ call plug#end()
 " Plugin-specific settings
 
 " UltiSnips
+" FIXME(kbobyrev): Find a way to make the plugin accessible for both Vim and
+" NeoVim without using relative path. The following wouldn't work in NeoVim:
+" let g:UltiSnipsSnippetsDir = '~/.config/UltiSnips'
 let g:UltiSnipsExpandTrigger = '<tab>'
-let g:UltiSnipsJumpForwardTrigger = '<c-j>'
-let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
+let g:UltiSnipsJumpForwardTrigger = '<c-l>'
+let g:UltiSnipsJumpBackwardTrigger = '<c-h>'
 let g:UltiSnipsEditSplit = 'vertical'
 let g:UltiSnipsRemoveSelectModeMappings = 0
-let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
+call deoplete#custom#source('ultisnips', 'rank', 1000)
 
 " lightline.vim
 if has('nvim')
