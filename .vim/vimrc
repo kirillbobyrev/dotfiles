@@ -1,14 +1,13 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins configuration
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" FIXME(kbobyrev): get through docs, personalize some plugins.
+" TODO: Get through all plugins, read docs and customize them.
 if has('nvim')
   call plug#begin('~/.local/share/nvim/plugged')
 else
   call plug#begin('~/.vim/plugged')
 endif
 
-" FIXME(kbobyrev): Configure this plugin.
 Plug 'Shougo/denite.nvim'
 Plug 'Shougo/vinarise.vim'
 Plug 'airblade/vim-gitgutter'
@@ -27,12 +26,10 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'wellle/targets.vim'
 
-" FIXME(kbobyrev): Configure this.
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'jistr/vim-nerdtree-tabs'
 
-" FIXME(kbobyrev): Customize FZF https://github.com/junegunn/fzf.vim
 if isdirectory('/usr/local/opt/fzf')
   Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 else
@@ -44,9 +41,9 @@ Plug 'honza/vim-snippets'
 
 " LSP Client Plugin used for C++, Python, etc
 Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
+  \ 'branch': 'next',
+  \ 'do': 'bash install.sh',
+  \ }
 Plug 'Shougo/echodoc.vim'
 
 if has('nvim')
@@ -85,7 +82,7 @@ let g:UltiSnipsRemoveSelectModeMappings = 0
 let g:UltiSnipsSnippetDirectories=[$HOME.'/.config/UltiSnips']
 
 " lightline.vim
-" FIXME(kbobyrev): Customize lightline more. Ideas:
+" TODO: Customize lightline more. Ideas:
 " * Use full path to the file in lightline.
 " * Take a look at example configurations of lightline.
 " * Take a look at configurations of powerline, airline, etc.
@@ -171,7 +168,7 @@ call deoplete#custom#source('ultisnips', 'rank', 1000)
 
 " vim-startify
 function! StartifyEntryFormat()
-    return 'WebDevIconsGetFileTypeSymbol(absolute_path) ." ". entry_path'
+  return 'WebDevIconsGetFileTypeSymbol(absolute_path) ." ". entry_path'
 endfunction
 
 " NERD commenter
@@ -201,7 +198,7 @@ set spelllang=en_us
 set spell
 
 " Gruvbox colorscheme
-" TODO(kbobyrev): Find a neat way to get around italics being disabled in
+" TODO: Find a neat way to get around italics being disabled in
 " Alacritty (despite being supported) and the strange hack of checking
 " $TERM_ITALICS in Gruvbox repo. Probably, some .terminfo should be utilized.
 if has('nvim')
