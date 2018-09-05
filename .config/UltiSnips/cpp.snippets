@@ -22,13 +22,12 @@ for (${4:int} ${2:i} = 0; $2 < ${1:n}; ${3:++$2}) {
 endsnippet
 
 # TODO(kbobyrev): Read filename and automatically fill it.
-# TODO(kbobyrev): Fill year automatically.
 snippet head "standard personal project file heading"
-//===--- ${0:Filename.cpp} - ${1:Description} -----------------------------*- C++ -*-===//
+//===--- `!v expand('%:t')` - ${1:Description} ----------------------------*- C++ -*-===//
 //
 // ${2:Project name}
 //
-// 2018 Kirill Bobyrev
+// `!v strftime("%Y")` Kirill Bobyrev
 //
 // This file is distributed under the Apache 2.0 License. See LICENSE for
 // details.
@@ -38,26 +37,12 @@ endsnippet
 
 # TODO(kbobyrev): Read filename and automatically fill it.
 snippet llvmhead "LLVM source heading"
-//===--- ${0:Filename.cpp} - ${1:Description} -----------------------------*- C++ -*-===//
+//===--- `!v expand('%:t')` - ${1:Description} ----------------------------*- C++ -*-===//
 //
 //                     The LLVM Compiler Infrastructure
 //
 // This file is distributed under the University of Illinois Open Source
 // License. See LICENSE.TXT for details.
-//
-//===----------------------------------------------------------------------===//
-endsnippet
-
-# TODO(kbobyrev): Read filename and automatically fill it.
-snippet hhead "Heathen source heading"
-//===--- ${0:Filename.cpp} - ${1:Description} -----------------------------*- C++ -*-===//
-//
-// The Heathen Programming Language
-//
-// 2018 Kirill Bobyrev, The Heathen Project Contributors
-//
-// This file is distributed under the Apache 2.0 License. See LICENSE for
-// details.
 //
 //===----------------------------------------------------------------------===//
 endsnippet
