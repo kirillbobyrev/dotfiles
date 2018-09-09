@@ -8,7 +8,7 @@ else
   call plug#begin('~/.vim/plugged')
 endif
 
-Plug 'Shougo/denite.nvim'
+Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/vinarise.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'godlygeek/tabular'
@@ -247,13 +247,16 @@ set relativenumber
 " Highlight current line to improve visibility.
 set cursorline
 
-" Use 256 colors in Vim.
 if !has('nvim') && !has('termguicolors')
   set t_Co=256
 endif
 " Use true colors if available (in NeoVim). Set `termguicolors` for that.
 if has('termguicolors')
   set termguicolors
+  " Use a hack proposed in https://github.com/icymind/NeoSolarized#tmux to make
+  " Vim + True Colors + Tmux work better.
+  set t_8f=[38;2;%lu;%lu;%lum
+  set t_8b=[48;2;%lu;%lu;%lum
 endif
 
 " Start scrolling when cursor is few lines off the bound so that a reasonable
@@ -300,11 +303,6 @@ let g:tex_flavor = 'latex'
 if &shell =~# 'fish$'
   set shell=/bin/bash
 endif
-
-" Use a hack proposed in https://github.com/icymind/NeoSolarized#tmux to make
-" Vim + True Colors + Tmux work better.
-set t_8f=[38;2;%lu;%lu;%lum
-set t_8b=[48;2;%lu;%lu;%lum
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NeoVim specifics
