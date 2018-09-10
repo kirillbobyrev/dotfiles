@@ -8,7 +8,6 @@ else
   call plug#begin('~/.vim/plugged')
 endif
 
-Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/vinarise.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'godlygeek/tabular'
@@ -52,6 +51,13 @@ else
   Plug 'Shougo/deoplete.nvim'
   Plug 'roxma/nvim-yarp'
   Plug 'roxma/vim-hug-neovim-rpc'
+endif
+
+if has('nvim')
+  " :UpdateRemotePlugins is NeoVim command.
+  Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/denite.nvim'
 endif
 
 Plug 'lervag/vimtex', { 'for': 'tex' }
