@@ -12,7 +12,6 @@ snippet lld "long long double"
 long long double $0
 endsnippet
 
-# TODO(kbobyrev): Change both instances accordingly.
 # TODO(kbobyrev): For whatever reason the cursor is on $1 here. Probably I have
 # missed something in the docs.
 snippet fori "for loop: i from 0 to n - 1"
@@ -21,8 +20,7 @@ for (${4:int} ${2:i} = 0; $2 < ${1:n}; ${3:++$2}) {
 }
 endsnippet
 
-# TODO(kbobyrev): Read filename and automatically fill it.
-snippet head "standard personal project file heading"
+snippet head "Generic Header"
 //===--- `!v expand('%:t')` - ${1:Description} ----------------------------*- C++ -*-===//
 //
 // ${2:Project name}
@@ -35,8 +33,7 @@ snippet head "standard personal project file heading"
 //===----------------------------------------------------------------------===//
 endsnippet
 
-# TODO(kbobyrev): Read filename and automatically fill it.
-snippet llvmhead "LLVM source heading"
+snippet llvmhead "LLVM Standard Header"
 //===--- `!v expand('%:t')` - ${1:Description} ----------------------------*- C++ -*-===//
 //
 //                     The LLVM Compiler Infrastructure
@@ -63,12 +60,16 @@ snippet acm "Competetive programming problem solution template"
 #include <iostream>
 #include <map>
 #include <numeric>
+#include <optional>
 #include <queue>
 #include <set>
 #include <sstream>
 #include <string>
+#include <string_view>
+#include <tuple>
 #include <unordered_map>
 #include <unordered_set>
+#include <variant>
 #include <vector>
 
 using namespace std;
@@ -100,7 +101,7 @@ int main(int argc, char *argv[]) {
 }
 endsnippet
 
-snippet guard "pragma #once header guard"
+snippet once "pragma #once header guard"
 #pragma once
 endsnippet
 

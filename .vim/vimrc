@@ -1,6 +1,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins configuration
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 " TODO: Get through all plugins, read docs and customize them.
 if has('nvim')
   call plug#begin('~/.local/share/nvim/plugged')
@@ -65,13 +66,15 @@ Plug 'lervag/vimtex', { 'for': 'tex' }
 
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': ['cpp', 'c'] }
 
-Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-
 Plug 'llvm-mirror/llvm', { 'rtp': 'utils/vim', 'for': 'llvm' }
 
 Plug 'Shirk/vim-gas'
 
+Plug 'neovimhaskell/haskell-vim'
+
 Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
+
+Plug 'mattn/emmet-vim'
 
 " IMPORTANT: This has to be the last one.
 Plug 'ryanoasis/vim-devicons'
@@ -136,10 +139,9 @@ let g:LanguageClient_serverCommands = {
   \ 'c': ['clangd'],
   \ 'cpp': ['clangd'],
   \ 'haskell': ['hie-wrapper', '--lsp'],
-  \ 'rust': ['rustup', 'run', 'nightly', 'rls'],
   \ 'python': ['pyls'],
   \ }
-let g:LanguageClient_serverStderr = '/tmp/clangd.stderr'
+let g:LanguageClient_serverStderr = '/tmp/LanguageClient.stderr'
 
 " Required for operations modifying multiple buffers like rename.
 set hidden
@@ -161,7 +163,7 @@ endfunction()
 
 augroup LSP
   autocmd!
-  autocmd FileType cpp,c,haskell,rust,python call SetLSPShortcuts()
+  autocmd FileType cpp,c,haskell,python call SetLSPShortcuts()
 augroup END
 
 " Echodoc
@@ -227,15 +229,6 @@ set shiftround
 
 " Proper backspace behavior.
 set backspace=indent,eol,start
-
-augroup Rust
-  autocmd!
-  " In Python and Rust 4 spaces should be used instead of 2.
-  " Also, in Python the width limit should be 79 as opposed to 80 used
-  " everywhere else, in Rust the width limit is 110 symbols.
-  autocmd FileType rust   set softtabstop=4| set shiftwidth=4
-  autocmd FileType rust   set colorcolumn=101
-augroup END
 
 augroup Python
   autocmd!
