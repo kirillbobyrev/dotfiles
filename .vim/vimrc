@@ -62,6 +62,8 @@ else
   Plug 'Shougo/denite.nvim'
 endif
 
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
+
 Plug 'lervag/vimtex', { 'for': 'tex' }
 
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': ['cpp', 'c'] }
@@ -70,7 +72,7 @@ Plug 'llvm-mirror/llvm', { 'rtp': 'utils/vim', 'for': 'llvm' }
 
 Plug 'Shirk/vim-gas'
 
-Plug 'neovimhaskell/haskell-vim'
+Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 
 Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
 
@@ -138,8 +140,11 @@ nmap ga <Plug>(EasyAlign)
 let g:LanguageClient_serverCommands = {
   \ 'c': ['clangd'],
   \ 'cpp': ['clangd'],
+  \ 'go': ['go-langserver'],
   \ 'haskell': ['hie-wrapper', '--lsp'],
+  \ 'javascript': ['javascript-typescript-langserver'],
   \ 'python': ['pyls'],
+  \ 'typescript': ['javascript-typescript-langserver'],
   \ }
 let g:LanguageClient_serverStderr = '/tmp/LanguageClient.stderr'
 
@@ -163,7 +168,7 @@ endfunction()
 
 augroup LSP
   autocmd!
-  autocmd FileType cpp,c,haskell,python call SetLSPShortcuts()
+  autocmd FileType cpp,c,go,haskell,python,javascript,typescript call SetLSPShortcuts()
 augroup END
 
 " Echodoc
