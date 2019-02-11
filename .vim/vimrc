@@ -45,7 +45,6 @@ Plug 'autozimu/LanguageClient-neovim', {
   \ 'branch': 'next',
   \ 'do': 'bash install.sh',
   \ }
-Plug 'Shougo/echodoc.vim'
 
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -170,11 +169,6 @@ augroup LSP
   autocmd!
   autocmd FileType cpp,c,go,haskell,python,javascript,typescript call SetLSPShortcuts()
 augroup END
-
-" Echodoc
-set cmdheight=2
-let g:echodoc#enable_at_startup = 1
-let g:echodoc#type = 'signature'
 
 " Deoplete
 let g:deoplete#enable_at_startup = 1
