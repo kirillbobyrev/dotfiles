@@ -75,6 +75,8 @@ Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 
 Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
 
+Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
+
 Plug 'mattn/emmet-vim'
 
 " IMPORTANT: This has to be the last one.
