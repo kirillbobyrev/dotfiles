@@ -23,7 +23,7 @@
         "python": {
             "command": "pyls",
             "rootPatterns": ["setup.py"],
-            "filetypes": ["py"],
+            "filetypes": ["py", "python"],
             "initializationOptions": {}
         }
     }
