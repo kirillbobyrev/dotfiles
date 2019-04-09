@@ -9,6 +9,7 @@ else
   call plug#begin('~/.vim/plugged')
 endif
 
+Plug 'Yggdroot/indentLine'
 Plug 'airblade/vim-gitgutter'
 Plug 'godlygeek/tabular'
 Plug 'haya14busa/incsearch.vim'
@@ -24,11 +25,12 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+Plug 'vimwiki/vimwiki'
 Plug 'wellle/targets.vim'
 
-Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'jistr/vim-nerdtree-tabs'
+Plug 'scrooloose/nerdtree'
 
 if isdirectory('/usr/local/opt/fzf')
   Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
@@ -54,11 +56,17 @@ Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 
 Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
 
+Plug 'fatih/vim-go', { 'for': 'go' }
+
 Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 
 Plug 'mattn/emmet-vim'
 
 Plug 'elzr/vim-json'
+
+" Used only for linting writing such as Markdown documentation or LaTeX
+" documents.
+Plug 'w0rp/ale'
 
 " IMPORTANT: This has to be the last one.
 Plug 'ryanoasis/vim-devicons'
@@ -134,6 +142,13 @@ let g:NERDSpaceDelims = 1
 let g:NERDDefaultAlign = 'left'
 let g:NERDCommentEmptyLines = 1
 
+" ale
+" Don't run anything except the whitelist.
+let g:ale_linters_explicit = 1
+let g:ale_linters = {
+\   '*': ['write-good'],
+\}
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " LSP Configuration (coc.nvim)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -196,6 +211,7 @@ function! s:show_documentation()
 endfunction
 
 " Highlight symbol under cursor on CursorHold
+" TODO(kirillbobyrev): Configure colors for highlighting?
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Remap for rename current word
