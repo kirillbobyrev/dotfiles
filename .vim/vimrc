@@ -27,7 +27,6 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'vimwiki/vimwiki'
 Plug 'wellle/targets.vim'
 
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -53,10 +52,6 @@ Plug 'llvm-mirror/llvm', { 'rtp': 'utils/vim', 'for': 'llvm' }
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': ['cpp', 'c'] }
-
-" Used only for linting writing such as Markdown documentation or LaTeX
-" documents.
-Plug 'w0rp/ale'
 
 " IMPORTANT: This has to be the last one.
 Plug 'ryanoasis/vim-devicons'
@@ -131,13 +126,6 @@ endfunction
 let g:NERDSpaceDelims = 1
 let g:NERDDefaultAlign = 'left'
 let g:NERDCommentEmptyLines = 1
-
-" ale
-" Don't run anything except the whitelist.
-let g:ale_linters_explicit = 1
-let g:ale_linters = {
-\   '*': ['write-good'],
-\}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " LSP Configuration (coc.nvim)
