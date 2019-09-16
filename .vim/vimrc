@@ -291,6 +291,15 @@ augroup Python
   autocmd FileType python set colorcolumn=80
 augroup END
 
+augroup Go
+  autocmd!
+  autocmd FileType go set expandtab!
+  autocmd FileType go set tabstop=4
+  autocmd FileType go set shiftwidth=4
+  autocmd FileType go set softtabstop=4
+  autocmd FileType go set shiftround!
+augroup END
+
 " Add a vertical line to mark the line width limit so that its not exceeded.
 set colorcolumn=81
 highlight ColorColumn ctermbg=DarkMagenta guibg=#ED2939
