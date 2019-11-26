@@ -2,7 +2,7 @@
   "languageserver": {
     "clangd": {
       "command": "clangd",
-      "args": ["--background-index"],
+      "args": [],
       "rootPatterns": ["compile_flags.txt", "compile_commands.json", ".vim/", ".git/", ".hg/"],
       "filetypes": ["c", "cpp", "objc", "objcpp"]
     },
@@ -30,7 +30,7 @@
       }
     },
     "python": {
-      "command": "python",
+      "command": "python3",
       "args": [
         "-mpyls",
         "-vv",

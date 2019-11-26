@@ -1,12 +1,12 @@
 [user]
   email = kbobyrev.opensource@gmail.com
   name = Kirill Bobyrev
-  username = kbobyrev
+  username = kirillbobyrev
 [core]
-  editor = vim
+  editor = nvim
 [web]
   browser = google-chrome
 [color]
   ui = true
 [github]
-  user = kbobyrev
+  user = kirillbobyrev
