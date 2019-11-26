@@ -131,6 +131,9 @@ let g:go_info_mode='gopls'
 " LSP Configuration (coc.nvim)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" The directory where coc-settings.json will be located.
+let g:coc_config_home = $HOME.'/.config/coc'
+
 " if hidden is not set, TextEdit might fail.
 set hidden
 
