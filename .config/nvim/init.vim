@@ -161,10 +161,20 @@ set shiftround
 " Proper backspace behavior.
 set backspace=indent,eol,start
 
+" Add a vertical line to mark the line width limit so that its not exceeded.
+set colorcolumn=81
+highlight ColorColumn ctermbg=DarkMagenta guibg=#ED2939
+
 augroup Python
   autocmd!
   autocmd FileType python set softtabstop=4| set shiftwidth=4
   autocmd FileType python set colorcolumn=80
+augroup END
+
+augroup Rust
+  autocmd!
+  autocmd FileType python set softtabstop=4| set shiftwidth=4
+  autocmd FileType python set colorcolumn=101
 augroup END
 
 augroup Go
@@ -175,10 +185,6 @@ augroup Go
   autocmd FileType go set softtabstop=4
   autocmd FileType go set shiftround!
 augroup END
-
-" Add a vertical line to mark the line width limit so that its not exceeded.
-set colorcolumn=81
-highlight ColorColumn ctermbg=DarkMagenta guibg=#ED2939
 
 " Show both relative line numbers and the current line number (hybrid mode).
 " This way it's easier to move around and do motions.
