@@ -15,6 +15,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/vim-easy-align'
 Plug 'justinmk/vim-sneak'
 Plug 'lifepillar/vim-cheat40'
+Plug 'liuchengxu/vim-which-key'
 Plug 'mattn/emmet-vim'
 Plug 'mhinz/vim-startify'
 Plug 'morhetz/gruvbox'
@@ -32,6 +33,8 @@ Plug 'scrooloose/nerdtree'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
+Plug 'cespare/vim-toml', { 'for': 'toml' }
+Plug 'dag/vim-fish', { 'for': 'fish' }
 Plug 'elzr/vim-json', { 'for': 'json' }
 Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
@@ -41,8 +44,7 @@ Plug 'lervag/vimtex', { 'for': 'tex' }
 Plug 'llvm-mirror/llvm', { 'rtp': 'utils/vim', 'for': 'llvm' }
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 Plug 'octol/vim-cpp-enhanced-highlight', { 'for': ['cpp', 'c'] }
-Plug 'dag/vim-fish', { 'for': 'fish' }
-Plug 'cespare/vim-toml', { 'for': 'toml' }
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 
 " IMPORTANT: This has to be the last one.
 Plug 'ryanoasis/vim-devicons'
@@ -161,20 +163,10 @@ set shiftround
 " Proper backspace behavior.
 set backspace=indent,eol,start
 
-" Add a vertical line to mark the line width limit so that its not exceeded.
-set colorcolumn=81
-highlight ColorColumn ctermbg=DarkMagenta guibg=#ED2939
-
 augroup Python
   autocmd!
   autocmd FileType python set softtabstop=4| set shiftwidth=4
   autocmd FileType python set colorcolumn=80
-augroup END
-
-augroup Rust
-  autocmd!
-  autocmd FileType python set softtabstop=4| set shiftwidth=4
-  autocmd FileType python set colorcolumn=101
 augroup END
 
 augroup Go
@@ -185,6 +177,10 @@ augroup Go
   autocmd FileType go set softtabstop=4
   autocmd FileType go set shiftround!
 augroup END
+
+" Add a vertical line to mark the line width limit so that its not exceeded.
+set colorcolumn=81
+highlight ColorColumn ctermbg=DarkBlue guibg=#2e5090
 
 " Show both relative line numbers and the current line number (hybrid mode).
 " This way it's easier to move around and do motions.
@@ -198,7 +194,7 @@ if !has('nvim') && !has('termguicolors')
   set t_Co=256
 endif
 " Use true colors if available (in NeoVim). Set `termguicolors` for that.
-if has('termguicolors')
+if has ('nvim') && has('termguicolors')
   set termguicolors
   " Use a hack proposed in https://github.com/icymind/NeoSolarized#tmux to make
   " Vim + True Colors + Tmux work better.
