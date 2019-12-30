@@ -2,14 +2,13 @@
 " Plugins configuration
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+" TODO: Figure out what causes the comment to continue AND bundles backspace
+" with the next line when writing right after the comment.
 " TODO: Get through all plugins, read docs and customize them.
 call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'Shirk/vim-gas'
 Plug 'Yggdroot/indentLine'
-Plug 'airblade/vim-gitgutter'
-Plug 'godlygeek/tabular'
-Plug 'haya14busa/incsearch.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'junegunn/vim-easy-align'
@@ -17,6 +16,7 @@ Plug 'justinmk/vim-sneak'
 Plug 'lifepillar/vim-cheat40'
 Plug 'liuchengxu/vim-which-key'
 Plug 'mattn/emmet-vim'
+Plug 'mhinz/vim-signify'
 Plug 'mhinz/vim-startify'
 Plug 'morhetz/gruvbox'
 Plug 'ntpeters/vim-better-whitespace'
@@ -120,21 +120,61 @@ let g:go_def_mode='gopls'
 let g:go_info_mode='gopls'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" NeoVim specifics
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+if has('nvim')
+  " Set NeoVim cursor to the Vim default one, otherwise it shows a blinking thin
+  " line like in most GUI editors.
+  set guicursor=
+endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vim specifics
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" These options are enabled by default in NeoVim.
+if !has('nvim')
+  " Always use UTF-8 encoding.
+  set encoding=utf-8
+  set fileencoding=utf-8
+  scriptencoding utf8
+
+  " Use smarter indent rules for better experience.
+  set autoindent
+
+  " Enable filetype plugin.
+  filetype plugin indent on
+
+  set background=dark
+
+  " Proper backspace behavior.
+  set backspace=indent,eol,start
+
+  " Enable incremental search.
+  set incsearch
+  " Highlight chunks of text matching the search pattern.
+  set hlsearch
+
+  " Enable visual autocomplete menu.
+  set wildmenu
+
+  " Redraw faster.
+  set ttyfast
+
+  " Always show status.
+  set laststatus=2
+
+  " Save more history
+  set history=10000
+endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Always use UTF-8 encoding.
-set encoding=utf-8
-set fileencoding=utf-8
-scriptencoding utf8
-
 " Use Unix line endings.
 set fileformats=unix
-
-" Use smarter indent rules for better experience.
-set autoindent
-" Enable filetype plugin.
-filetype plugin indent on
 
 " Always check spelling to improve grammar and prevent typos.
 set spelllang=en_us
@@ -146,7 +186,6 @@ set spell
 " $TERM_ITALICS in Gruvbox repo. Probably, some .terminfo should be utilized.
 let g:gruvbox_italic = 1
 let g:gruvbox_guisp_fallback = 'bg'
-set background=dark
 colorscheme gruvbox
 
 " Spaces & Tabs
@@ -157,9 +196,6 @@ set expandtab
 set softtabstop=2
 set shiftwidth=2
 set shiftround
-
-" Proper backspace behavior.
-set backspace=indent,eol,start
 
 augroup Python
   autocmd!
@@ -188,7 +224,7 @@ set relativenumber
 " Highlight current line to improve visibility.
 set cursorline
 
-" Use true colors when available.
+" Use true colors when available. Otherwise fall back to 256 colors.
 if has('termguicolors')
   set termguicolors
 else
@@ -199,25 +235,12 @@ endif
 " chunk of code around selected line is visible.
 set scrolloff=10
 
-" Always show status.
-set laststatus=2
-
-" Enable visual autocomplete menu.
-set wildmenu
-
 " Only redraw when necessary so that the editor takes less resources.
 set lazyredraw
-
-" Redraw faster
-set ttyfast
 
 " Highlight matching bracket.
 set showmatch
 
-" Enable incremental search.
-set incsearch
-" Highlight chunks of text matching the search pattern.
-set hlsearch
 " Search ignores case unless an uppercase letter appears in the pattern.
 set ignorecase
 set smartcase
@@ -234,18 +257,11 @@ set diffopt+=internal,algorithm:patience
 " Opens signcolumn by default.
 set signcolumn=yes
 
+" Don't wait for updates too long.
+set updatetime=100
+
 " The fish shell is not very compatible to other shells and unexpectedly
 " breaks things that use 'shell'.
 if &shell =~# 'fish$'
   set shell=/bin/bash
-endif
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" NeoVim specifics
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-if has('nvim')
-  " Set NeoVim cursor to the Vim default one, otherwise it shows a blinking thin
-  " line like in most GUI editors.
-  set guicursor=
 endif
