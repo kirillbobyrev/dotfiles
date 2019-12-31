@@ -24,6 +24,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+Plug 'vim/killersheep'
 Plug 'wellle/targets.vim'
 
 Plug 'Xuyuanp/nerdtree-git-plugin'
