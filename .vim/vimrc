@@ -198,21 +198,6 @@ set softtabstop=2
 set shiftwidth=2
 set shiftround
 
-augroup Python
-  autocmd!
-  autocmd FileType python set softtabstop=4| set shiftwidth=4
-  autocmd FileType python set colorcolumn=80
-augroup END
-
-augroup Go
-  autocmd!
-  autocmd FileType go set expandtab!
-  autocmd FileType go set tabstop=4
-  autocmd FileType go set shiftwidth=4
-  autocmd FileType go set softtabstop=4
-  autocmd FileType go set shiftround!
-augroup END
-
 " Add a vertical line to mark the line width limit so that its not exceeded.
 set colorcolumn=81
 highlight ColorColumn ctermbg=DarkBlue guibg=#2e5090
@@ -253,7 +238,7 @@ set noswapfile
 set nowritebackup
 
 " Use better diff.
-set diffopt+=internal,algorithm:patience
+set diffopt+=internal,algorithm:patience,indent-heuristic
 
 " Opens signcolumn by default.
 set signcolumn=yes
