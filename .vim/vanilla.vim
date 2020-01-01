@@ -1,0 +1,38 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vanilla Vim specifics
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" These options are enabled by default in NeoVim.
+
+" Always use UTF-8 encoding.
+set encoding=utf-8
+set fileencoding=utf-8
+scriptencoding utf8
+
+" Use smarter indent rules for better experience.
+set autoindent
+
+" Enable filetype plugin.
+filetype plugin indent on
+
+set background=dark
+
+" Proper backspace behavior.
+set backspace=indent,eol,start
+
+" Enable incremental search.
+set incsearch
+" Highlight chunks of text matching the search pattern.
+set hlsearch
+
+" Enable visual autocomplete menu.
+set wildmenu
+
+" Redraw faster.
+set ttyfast
+
+" Always show status.
+set laststatus=2
+
+" Save more history
+set history=10000

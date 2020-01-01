@@ -1,174 +1,19 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugins configuration
+" Modularized configuration.
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" TODO: Figure out what causes the comment to continue AND bundles backspace
-" with the next line when writing right after the comment.
-" TODO: Get through all plugins, read docs and customize them.
-call plug#begin('~/.local/share/nvim/plugged')
+" Plugins installation and configuration
+source ~/.vim/plugins.vim
 
-Plug 'Shirk/vim-gas'
-Plug 'Yggdroot/indentLine'
-Plug 'itchyny/lightline.vim'
-Plug 'jiangmiao/auto-pairs'
-Plug 'junegunn/vim-easy-align'
-Plug 'justinmk/vim-sneak'
-Plug 'lifepillar/vim-cheat40'
-Plug 'liuchengxu/vim-which-key'
-Plug 'mattn/emmet-vim'
-Plug 'mhinz/vim-signify'
-Plug 'mhinz/vim-startify'
-Plug 'morhetz/gruvbox'
-Plug 'ntpeters/vim-better-whitespace'
-Plug 'scrooloose/nerdcommenter'
-Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
-Plug 'vim/killersheep'
-Plug 'wellle/targets.vim'
-
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'jistr/vim-nerdtree-tabs'
-Plug 'scrooloose/nerdtree'
-
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-
-Plug 'cespare/vim-toml', { 'for': 'toml' }
-Plug 'dag/vim-fish', { 'for': 'fish' }
-Plug 'elzr/vim-json', { 'for': 'json' }
-Plug 'fatih/vim-go', { 'for': 'go' }
-Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
-Plug 'keith/swift.vim', { 'for': 'swift' }
-Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
-Plug 'lervag/vimtex', { 'for': 'tex' }
-Plug 'llvm-mirror/llvm', { 'rtp': 'utils/vim', 'for': 'llvm' }
-Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
-Plug 'octol/vim-cpp-enhanced-highlight', { 'for': ['cpp', 'c'] }
-Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-
-" IMPORTANT: This has to be the last one.
-Plug 'ryanoasis/vim-devicons'
-
-call plug#end()
-
-" Plugin-specific settings
-
-" UltiSnips
-let g:UltiSnipsExpandTrigger = '<tab>'
-let g:UltiSnipsJumpForwardTrigger = '<c-l>'
-let g:UltiSnipsJumpBackwardTrigger = '<c-h>'
-let g:UltiSnipsEditSplit = 'vertical'
-let g:UltiSnipsRemoveSelectModeMappings = 0
-let g:UltiSnipsSnippetDirectories=[$HOME.'/.config/UltiSnips']
-
-" lightline.vim
-" TODO: Customize lightline more. Ideas:
-" * Use full path to the file in lightline.
-" * Take a look at example configurations of lightline.
-" * Take a look at configurations of powerline, airline, etc.
-function! LightLineFiletype()
-  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
-endfunction
-
-function! LightLineFileformat()
-  return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
-endfunction
-
-" Add diagnostic info for https://github.com/itchyny/lightline.vim
-let g:lightline = {
-  \ 'colorscheme': 'gruvbox',
-  \ 'active': {
-  \   'left': [ [ 'mode', 'paste' ],
-  \             [ 'readonly', 'filename', 'modified' ] ]
-  \ },
-  \ }
-
-" Vimtex
-let g:vimtex_compiler_latexmk = {'callback' : 0}
-" Always use LaTeX.
-let g:tex_flavor = 'latex'
-
-" vim-better-whitespace
-" Highlight trailing whitespace. This makes missing an extra whitespace
-" infinitely harder. Also, use the plugin to remove trailing whitespaces upon
-" saving the file.
-let g:better_whitespace_enabled = 1
-let g:strip_whitespace_on_save = 1
-augroup CommentsHighlight
-  autocmd!
-  highlight ExtraWhitespace ctermbg=DarkMagenta
-augroup END
-
-" vim-easy-align
-" Start interactive EasyAlign in visual mode (e.g. vipga).
-xmap ga <Plug>(EasyAlign)
-" Start interactive EasyAlign for a motion/text object (e.g. gaip).
-nmap ga <Plug>(EasyAlign)
-
-" vim-startify
-function! StartifyEntryFormat()
-  return 'WebDevIconsGetFileTypeSymbol(absolute_path) ." ". entry_path'
-endfunction
-
-" NERD commenter
-let g:NERDSpaceDelims = 1
-let g:NERDDefaultAlign = 'left'
-let g:NERDCommentEmptyLines = 1
-
-" vim-go
-let g:go_def_mode='gopls'
-let g:go_info_mode='gopls'
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" NeoVim specifics
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
+" Neovim and plain Vim-specific configurations.
 if has('nvim')
-  " Set NeoVim cursor to the Vim default one, otherwise it shows a blinking thin
-  " line like in most GUI editors.
-  set guicursor=
+  source ~/.vim/nvim.vim
+else
+  source ~/.vim/vanilla.vim
 endif
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vim specifics
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" These options are enabled by default in NeoVim.
-if !has('nvim')
-  " Always use UTF-8 encoding.
-  set encoding=utf-8
-  set fileencoding=utf-8
-  scriptencoding utf8
-
-  " Use smarter indent rules for better experience.
-  set autoindent
-
-  " Enable filetype plugin.
-  filetype plugin indent on
-
-  set background=dark
-
-  " Proper backspace behavior.
-  set backspace=indent,eol,start
-
-  " Enable incremental search.
-  set incsearch
-  " Highlight chunks of text matching the search pattern.
-  set hlsearch
-
-  " Enable visual autocomplete menu.
-  set wildmenu
-
-  " Redraw faster.
-  set ttyfast
-
-  " Always show status.
-  set laststatus=2
-
-  " Save more history
-  set history=10000
-endif
+" Custom key bindings.
+source ~/.vim/mappings.vim
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " General settings
@@ -191,7 +36,7 @@ colorscheme gruvbox
 
 " Spaces & Tabs
 " Always prefer spaces over tabs, use 2 spaces everywhere except in few
-" languages.
+" languages (set in ~/.vim/ftplugins/*.vim).
 set tabstop=8
 set expandtab
 set softtabstop=2
@@ -203,17 +48,19 @@ set colorcolumn=81
 highlight ColorColumn ctermbg=DarkBlue guibg=#2e5090
 
 " Show both relative line numbers and the current line number (hybrid mode).
-" This way it's easier to move around and do motions.
+" This way it's easier to move around and perform motions.
 set number
 set relativenumber
 
-" Highlight current line to improve visibility.
+" Highlight current line to improve aesthetics.
 set cursorline
 
-" Use true colors when available. Otherwise fall back to 256 colors.
+" Use true colors when available. This should work in most scenarios. If it
+" doesn't, fall back to 256 colors.
 if has('termguicolors')
   set termguicolors
 else
+  echoerr "True colors are not available"
   set t_Co=256
 endif
 
@@ -230,7 +77,8 @@ set showmatch
 " Search ignores case unless an uppercase letter appears in the pattern.
 set ignorecase
 set smartcase
-" Use magic for regular expressions.
+" It is recommended to always keep the 'magic' option at the default setting
+" for regular expressions.
 set magic
 
 " Don't create backup files.
@@ -240,7 +88,9 @@ set nowritebackup
 " Use better diff.
 set diffopt+=internal,algorithm:patience,indent-heuristic
 
-" Opens signcolumn by default.
+" Opens signcolumn by default so that errors, diagnostics and VCS markers
+" (lines added/removed) do not trigger occasionally and shift borders all the
+" time.
 set signcolumn=yes
 
 " Don't wait for updates too long.
