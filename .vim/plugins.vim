@@ -89,6 +89,10 @@ let g:vimtex_compiler_latexmk = {'callback' : 0}
 " Always prefer LaTeX over plain TeX.
 let g:tex_flavor = 'latex'
 
+let g:vimtex_view_general_viewer = 'okular'
+let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
+let g:vimtex_view_general_options_latexmk = '--unique'
+
 " vim-better-whitespace
 " Highlight trailing whitespace. This makes missing an extra whitespace
 " infinitely harder. Also, use this plugin to remove trailing whitespaces upon
