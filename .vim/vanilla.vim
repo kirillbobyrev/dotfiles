@@ -34,5 +34,8 @@ set ttyfast
 " Always show status.
 set laststatus=2
 
-" Save more history
+" Save more history.
 set history=10000
+
+" Show pressed keys in statusline.
+set showcmd

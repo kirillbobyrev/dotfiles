@@ -1,12 +1,11 @@
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Modularized configuration.
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Modularized configuration ------------------------------------------------ {{{
 
 " Plugins installation and configuration
 source ~/.vim/plugins.vim
 
 " Neovim and plain Vim-specific configurations.
 if has('nvim')
+  " TODO: Add ~/.vim/ftplugin to the runtimepath.
   source ~/.vim/nvim.vim
 else
   source ~/.vim/vanilla.vim
@@ -15,9 +14,9 @@ endif
 " Custom key bindings.
 source ~/.vim/mappings.vim
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" General settings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" }}}
+
+" General settings --------------------------------------------------------- {{{
 
 " Use Unix line endings.
 set fileformats=unix
@@ -60,7 +59,7 @@ set cursorline
 if has('termguicolors')
   set termguicolors
 else
-  echoerr "True colors are not available"
+  echoerr 'True colors are not available'
   set t_Co=256
 endif
 
@@ -101,3 +100,12 @@ set updatetime=100
 if &shell =~# 'fish$'
   set shell=/bin/bash
 endif
+
+" Make side scrolling more useful.
+set sidescroll=5
+set listchars+=precedes:<,extends:>
+
+" Use 'very magic' for search patterns by default.
+nnoremap / /\v
+
+" }}}
