@@ -105,7 +105,4 @@ endif
 set sidescroll=5
 set listchars+=precedes:<,extends:>
 
-" Use 'very magic' for search patterns by default.
-nnoremap / /\v
-
 " }}}
