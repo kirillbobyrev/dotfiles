@@ -69,6 +69,7 @@ call plug#end()
 " Plugins customization ---------------------------------------------------- {{{
 
 " UltiSnips
+" TODO: Manage coc.nvim integration.
 let g:UltiSnipsExpandTrigger = '<tab>'
 let g:UltiSnipsJumpForwardTrigger = '<c-l>'
 let g:UltiSnipsJumpBackwardTrigger = '<c-h>'

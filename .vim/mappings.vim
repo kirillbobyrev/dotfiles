@@ -28,11 +28,11 @@ nnoremap ? ?\v
 " Use tab for trigger completion with characters ahead and navigate.  Use
 " command ':verbose imap <tab>' to make sure tab is not mapped by other.
 " plugin.
-inoremap <silent><expr> <TAB>
+imap <silent><expr> <TAB>
   \ pumvisible() ? "\<C-n>" :
   \ <SID>CheckBackSpace() ? "\<TAB>" :
   \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+imap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:CheckBackSpace() abort
   let col = col('.') - 1
@@ -40,11 +40,11 @@ function! s:CheckBackSpace() abort
 endfunction
 
 " Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
+imap <silent><expr> <c-space> coc#refresh()
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
 " position. Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Use `[g` and `]g` to navigate diagnostics.
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
@@ -57,7 +57,7 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window
-nnoremap <silent> K :call <SID>ShowDocumentation()<CR>
+nmap <silent> K :call <SID>ShowDocumentation()<CR>
 
 function! s:ShowDocumentation()
   if (index(['vim','help'], &filetype) >= 0)
@@ -110,20 +110,31 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 
 " Using CocList
 " Show all diagnostics
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+nmap <silent> <space>a  :<C-u>CocList diagnostics<cr>
 " Manage extensions
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+nmap <silent> <space>e  :<C-u>CocList extensions<cr>
 " Show commands
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+nmap <silent> <space>c  :<C-u>CocList commands<cr>
 " Find symbol of current document
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+nmap <silent> <space>o  :<C-u>CocList outline<cr>
 " Search workspace symbols
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+nmap <silent> <space>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+nmap <silent> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+nmap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+nmap <silent> <space>p  :<C-u>CocListResume<CR>
+
+function! s:ClangdSwitchHeaderSource()
+    let l:alter = CocRequest('clangd', 'textDocument/switchSourceHeader', {'uri': 'file://'.expand("%:p")})
+    " remove file:/// from response
+    let l:alter = substitute(l:alter, "file://", "", "")
+    execute 'edit ' . l:alter
+endfunction
+
+" TODO: Move this to $HOME . /.vim/after/ftplugin/cpp.vim
+" TODO: Add mapping to open header/source in a new split/tab.
+autocmd FileType cpp nnoremap <leader>ss :call <SID>ClangdSwitchHeaderSource()<CR>
 
 " }}}
