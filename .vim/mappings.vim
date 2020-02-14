@@ -126,15 +126,4 @@ nmap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list
 nmap <silent> <space>p  :<C-u>CocListResume<CR>
 
-function! s:ClangdSwitchHeaderSource()
-    let l:alter = CocRequest('clangd', 'textDocument/switchSourceHeader', {'uri': 'file://'.expand("%:p")})
-    " remove file:/// from response
-    let l:alter = substitute(l:alter, "file://", "", "")
-    execute 'edit ' . l:alter
-endfunction
-
-" TODO: Move this to $HOME . /.vim/after/ftplugin/cpp.vim
-" TODO: Add mapping to open header/source in a new split/tab.
-autocmd FileType cpp nnoremap <leader>ss :call <SID>ClangdSwitchHeaderSource()<CR>
-
 " }}}

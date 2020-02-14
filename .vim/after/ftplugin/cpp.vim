@@ -1,7 +1,6 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Rust-specific settings.
+" C++-specific settings.
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-setlocal softtabstop=4
-setlocal shiftwidth=4
-setlocal colorcolumn=101
+" TODO: Add mapping to open header/source in a new split/tab.
+nnoremap <buffer> <leader>ss :SwitchHeaderSource<CR>
