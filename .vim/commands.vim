@@ -10,3 +10,6 @@ function! s:ClangdSwitchHeaderSource()
 endfunction
 
 command! SwitchHeaderSource :cal <SID>ClangdSwitchHeaderSource()
+
+command -nargs=? -complete=filetype EditFTPlugin
+  \ execute 'keepj vsplit $VIMFILES/after/ftplugin/' . (empty(<q-args>) ? &filetype : <q-args>) . '.vim'
