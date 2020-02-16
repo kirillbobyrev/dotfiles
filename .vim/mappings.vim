@@ -1,6 +1,14 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Custom key bindings.
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" TODO: Avoid using Escape key.
+
+" Use Space to enter commands.
+noremap <Space> :
+
+" Use 'very magic' for search patterns by default.
+nnoremap / /\v
+nnoremap ? ?\v
 
 " vim-easy-align
 " Start interactive EasyAlign in visual mode (e.g. vipga).
@@ -18,10 +26,6 @@ nnoremap <leader>nt :NERDTreeTabsToggle<cr>
 
 " Clear highlights from the last search.
 nnoremap <leader>nh :nohlsearch
-
-" Use 'very magic' for search patterns by default.
-nnoremap / /\v
-nnoremap ? ?\v
 
 " coc.nvim bindings -------------------------------------------------------- {{{
 
