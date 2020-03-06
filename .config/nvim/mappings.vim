@@ -17,15 +17,15 @@ xnoremap ga <Plug>(EasyAlign)
 nnoremap ga <Plug>(EasyAlign)
 
 " Make it easier to configure the editor on the fly.
-nnoremap <leader>ev :tabedit $HOME/.vim/vimrc<cr>
-nnoremap <leader>em :tabedit $HOME/.vim/mappings.vim<cr>
+nnoremap <leader>ev :tabedit $HOME/.config/nvim/init.vim<cr>
+nnoremap <leader>em :tabedit $HOME/.config/nvim/mappings.vim<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
 " Trigger NERDTree for all tabs.
 nnoremap <leader>nt :NERDTreeTabsToggle<cr>
 
 " Clear highlights from the last search.
-nnoremap <leader>nh :nohlsearch
+nnoremap <leader>nh :nohlsearch<cr>
 
 " coc.nvim bindings -------------------------------------------------------- {{{
 
@@ -70,7 +70,7 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 function! s:show_documentation()
   if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
+    execute 'h ' .. expand('<cword>')
   else
     call CocAction('doHover')
   endif

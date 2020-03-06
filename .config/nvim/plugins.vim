@@ -7,11 +7,7 @@
 " TODO: Figure out what causes the comment to continue AND bundles backspace
 " with the next line when writing right after the comment.
 " TODO: Get through all plugins, read docs and customize them.
-if has('nvim')
-  call plug#begin(stdpath('data') . '/plugged')
-else
-  call plug#begin('~/.vim/plugged')
-endif
+call plug#begin(stdpath('data') .. '/plugged')
 
 Plug 'Shirk/vim-gas'
 Plug 'Yggdroot/indentLine'
@@ -75,7 +71,7 @@ let g:UltiSnipsJumpForwardTrigger = '<c-l>'
 let g:UltiSnipsJumpBackwardTrigger = '<c-h>'
 let g:UltiSnipsEditSplit = 'vertical'
 let g:UltiSnipsRemoveSelectModeMappings = 0
-let g:UltiSnipsSnippetDirectories=[$HOME . '/.config/UltiSnips']
+let g:UltiSnipsSnippetDirectories=[$HOME .. '/.config/UltiSnips']
 
 " lightline.vim
 " TODO: Customize lightline more. Ideas:
@@ -83,11 +79,11 @@ let g:UltiSnipsSnippetDirectories=[$HOME . '/.config/UltiSnips']
 " * Take a look at example configurations of lightline.
 " * Take a look at configurations of powerline, airline, etc.
 function! LightLineFiletype()
-  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype .. ' ' .. WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
 endfunction
 
 function! LightLineFileformat()
-  return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
+  return winwidth(0) > 70 ? (&fileformat .. ' ' .. WebDevIconsGetFileFormatSymbol()) : ''
 endfunction
 
 " Add diagnostic info for lightline.vim
@@ -124,7 +120,7 @@ augroup END
 
 " vim-startify
 function! StartifyEntryFormat()
-  return 'WebDevIconsGetFileTypeSymbol(absolute_path) .' '. entry_path'
+  return 'WebDevIconsGetFileTypeSymbol(absolute_path) ..' '.. entry_path'
 endfunction
 
 " NERD commenter
@@ -151,7 +147,7 @@ let g:sneak#s_next = 1
 set cmdheight=2
 
 " Unify CoC.nvim config across NeoVim and Vim.
-let g:coc_config_home = $HOME . '/.config/coc'
+let g:coc_config_home = $HOME .. '/.config/coc'
 
 " Don't give |ins-completion-menu| messages.
 set shortmess+=c

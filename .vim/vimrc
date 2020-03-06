@@ -1,111 +1,45 @@
-" Modularized configuration ------------------------------------------------ {{{
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vanilla Vim defauts
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Plugins installation and configuration
-source ~/.vim/plugins.vim
+call plug#begin('~/.vim/plugged')
 
-" Neovim and plain Vim-specific configurations.
-if has('nvim')
-  " TODO: Add ~/.vim/ftplugin to the runtimepath.
-  source ~/.vim/nvim.vim
-else
-  source ~/.vim/vanilla.vim
-endif
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" Custom key bindings.
-source ~/.vim/mappings.vim
+call plug#end()
 
-" Custom commands.
-source ~/.vim/commands.vim
+" Always use UTF-8 encoding.
+set encoding=utf-8
+set fileencoding=utf-8
+scriptencoding utf8
 
-" }}}
+" Use smarter indent rules for better experience.
+set autoindent
 
-" General settings --------------------------------------------------------- {{{
+" Enable filetype plugin.
+filetype plugin indent on
 
-" Use Unix line endings.
-set fileformats=unix
+set background=dark
 
-" Always check spelling to improve grammar and prevent typos.
-set spelllang=en_us
-set spell
+" Proper backspace behavior.
+set backspace=indent,eol,start
 
-" Gruvbox colorscheme
-" TODO: Find a neat way to get around italics being disabled in
-" Alacritty (despite being supported) and the strange hack of checking
-" $TERM_ITALICS in Gruvbox repo. Probably, some .terminfo should be utilized.
-let g:gruvbox_italic = 1
-let g:gruvbox_guisp_fallback = 'bg'
-colorscheme gruvbox
+" Enable incremental search.
+set incsearch
+" Highlight chunks of text matching the search pattern.
+set hlsearch
 
-" Spaces & Tabs
-" Always prefer spaces over tabs, use 2 spaces everywhere except in few
-" languages (set in ~/.vim/ftplugins/*.vim).
-set tabstop=8
-set expandtab
-set softtabstop=2
-set shiftwidth=2
-set shiftround
+" Enable visual autocomplete menu.
+set wildmenu
 
-" Add a vertical line to mark the line width limit so that its not exceeded.
-set colorcolumn=81
-highlight ColorColumn ctermbg=DarkBlue guibg=#2e5090
+" Redraw faster.
+set ttyfast
 
-" Show both relative line numbers and the current line number (hybrid mode).
-" This way it's easier to move around and perform motions.
-set number
-set relativenumber
+" Always show status.
+set laststatus=2
 
-" Highlight current line to improve aesthetics.
-set cursorline
+" Save more history.
+set history=10000
 
-" Use true colors when available. This should work in most scenarios. If it
-" doesn't, fall back to 256 colors.
-if has('termguicolors')
-  set termguicolors
-else
-  echoerr 'True colors are not available'
-  set t_Co=256
-endif
-
-" Start scrolling when cursor is few lines off the bound so that a reasonable
-" chunk of code around selected line is visible.
-set scrolloff=10
-
-" Only redraw when necessary so that the editor takes less resources.
-set lazyredraw
-
-" Highlight matching bracket.
-set showmatch
-
-" Search ignores case unless an uppercase letter appears in the pattern.
-set ignorecase
-set smartcase
-" It is recommended to always keep the 'magic' option at the default setting
-" for regular expressions.
-set magic
-
-" Don't create backup files.
-set noswapfile
-set nowritebackup
-
-" Use better diff.
-set diffopt+=internal,algorithm:patience,indent-heuristic
-
-" Opens signcolumn by default so that errors, diagnostics and VCS markers
-" (lines added/removed) do not trigger occasionally and shift borders all the
-" time.
-set signcolumn=yes
-
-" Don't wait for updates too long.
-set updatetime=100
-
-" The fish shell is not very compatible to other shells and unexpectedly
-" breaks things that use 'shell'.
-if &shell =~# 'fish$'
-  set shell=/bin/bash
-endif
-
-" Make side scrolling more useful.
-set sidescroll=5
-set listchars+=precedes:<,extends:>
-
-" }}}
+" Show pressed keys in statusline.
+set showcmd

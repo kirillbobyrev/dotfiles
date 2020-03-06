@@ -1,10 +1,9 @@
 {
   "languageserver": {
-    "clangd": {
-      "command": "clangd",
-      "args": [],
-      "rootPatterns": ["compile_flags.txt", "compile_commands.json", ".vim/", ".git/", ".hg/"],
-      "filetypes": ["c", "cpp"]
+    "rust": {
+      "command": "ra_lsp_server",
+      "filetypes": ["rust"],
+      "rootPatterns": ["Cargo.toml"]
     },
     "golang": {
       "command": "gopls",
@@ -96,5 +95,9 @@
         }
       }
     }
-  }
+  },
+  "suggest.acceptSuggestionOnCommitCharacter": true,
+  "diagnostic.checkCurrentLine": true,
+  "coc.preferences.snippets.enable": true,
+  "coc.preferences.formatOnType": true
 }
