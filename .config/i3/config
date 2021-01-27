@@ -13,11 +13,11 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:monospace 8
+font pango:Fira Code 8
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:Hack 8
+font pango:Fira Code 8
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -146,10 +146,10 @@ mode "resize" {
   # Pressing right will grow the window’s width.
   # Pressing up will shrink the window’s height.
   # Pressing down will grow the window’s height.
-  bindsym j resize shrink width 10 px or 10 ppt
-  bindsym k resize grow height 10 px or 10 ppt
-  bindsym l resize shrink height 10 px or 10 ppt
-  bindsym semicolon resize grow width 10 px or 10 ppt
+  bindsym h resize shrink width 10 px or 10 ppt
+  bindsym j resize grow height 10 px or 10 ppt
+  bindsym k resize shrink height 10 px or 10 ppt
+  bindsym l resize grow width 10 px or 10 ppt
 
   # same bindings, but for the arrow keys
   bindsym Left resize shrink width 10 px or 10 ppt
@@ -164,15 +164,12 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-# Use(less) gaps
-gaps inner 3
-gaps outer 3
-
 # Change desktop wallpaper
-exec --no-startup-id "feh --bg-scale Pictures/Wallpapers/Green.jpg"
+exec --no-startup-id "feh --bg-scale ~/Pictures/Wallpapers/Deer.jpg"
 
 # Use Polybar instead of i3bar
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # Launch redshift
+exec_always --no-startup-id killall redshift
 exec_always --no-startup-id redshift
