@@ -2,12 +2,6 @@
 " Vanilla Vim defauts
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-call plug#begin('~/.vim/plugged')
-
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-call plug#end()
-
 " Always use UTF-8 encoding.
 set encoding=utf-8
 set fileencoding=utf-8
