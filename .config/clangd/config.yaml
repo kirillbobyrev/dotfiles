@@ -1,5 +1,8 @@
 CompileFlags:
-  Add: [-xc++, -Wall, -std=c++20]
+  Add: [-xc++, -std=c++17, -Wall, -Weverything, -Wno-c++98-compat,
+        -Wno-missing-prototypes, -Wno-c++98-compat-pedantic,
+        -Wno-reserved-id-macro]
 Diagnostics:
   ClangTidy:
     Add: [performance*, modernize*]
+    Remove: [modernize-use-trailing-return-type]

@@ -94,10 +94,10 @@ set signcolumn=yes
 " Don't wait for updates too long.
 set updatetime=100
 
-" The fish shell is not very compatible to other shells and unexpectedly
-" breaks things that use 'shell'.
+" The fish shell is not compatible with most shells and unexpectedly breaks
+" things that use 'shell'.
 if &shell =~# 'fish$'
-  set shell=/bin/bash
+  set shell=bash
 endif
 
 " Make side scrolling more useful.
