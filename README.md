@@ -1,6 +1,6 @@
 # dotfiles
 
-This repository cotains configuration files I use on my host system, which is
+This repository contains configuration files I use on my host system, which is
 Arch Linux. I sync those in order to simplify setting up working environment
 whenever I have to.
 
