@@ -50,14 +50,13 @@ Plug 'keith/swift.vim', { 'for': 'swift' }
 Plug 'lervag/vimtex', { 'for': 'tex' }
 Plug 'llvm-mirror/llvm', { 'rtp': 'utils/vim', 'for': 'llvm' }
 Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
-Plug 'octol/vim-cpp-enhanced-highlight', { 'for': ['cpp', 'c'] }
 Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'jackguo380/vim-lsp-cxx-highlight'
+Plug 'jackguo380/vim-lsp-cxx-highlight', { 'for': ['cpp', 'c'] }
 
 " IMPORTANT: This has to be the last one.
 Plug 'ryanoasis/vim-devicons'
