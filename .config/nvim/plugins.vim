@@ -4,22 +4,17 @@
 
 " Installation ------------------------------------------------------------- {{{
 
-" TODO: Figure out what causes the comment to continue AND bundles backspace
-" with the next line when writing right after the comment.
 " TODO: Get through all plugins, read docs and customize them.
 call plug#begin(stdpath('data') .. '/plugged')
 
-Plug 'Shirk/vim-gas'
 Plug 'Yggdroot/indentLine'
 Plug 'dstein64/vim-startuptime'
-Plug 'dyng/ctrlsf.vim'
 Plug 'itchyny/lightline.vim'
 Plug 'jiangmiao/auto-pairs'
-Plug 'junegunn/vim-easy-align'
 Plug 'justinmk/vim-sneak'
 Plug 'lifepillar/vim-cheat40'
+Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
 Plug 'liuchengxu/vim-which-key'
-Plug 'mattn/emmet-vim'
 Plug 'mhinz/vim-signify'
 Plug 'mhinz/vim-startify'
 Plug 'morhetz/gruvbox'
@@ -28,10 +23,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
-Plug 'vim/killersheep'
 Plug 'wellle/targets.vim'
-Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
-Plug 'liuchengxu/vista.vim'
 
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'jistr/vim-nerdtree-tabs'
@@ -53,7 +45,8 @@ Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+" TODO: Fix treesitter not working propertly.
+" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'jackguo380/vim-lsp-cxx-highlight', { 'for': ['cpp', 'c'] }
