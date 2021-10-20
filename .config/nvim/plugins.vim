@@ -49,7 +49,6 @@ Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 " Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'jackguo380/vim-lsp-cxx-highlight', { 'for': ['cpp', 'c'] }
 
 " IMPORTANT: This has to be the last one.
 Plug 'ryanoasis/vim-devicons'

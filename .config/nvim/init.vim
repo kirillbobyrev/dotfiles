@@ -34,8 +34,8 @@ colorscheme gruvbox
 
 " Spaces & Tabs
 " Always prefer spaces over tabs, use 2 spaces everywhere except in few
-" languages (set in ~/.vim/ftplugins/*.vim).
-set tabstop=4
+" languages (set in ~/.config/nvim/after/ftplugins/*.vim).
+set tabstop=2
 set expandtab
 set softtabstop=2
 set shiftwidth=2
