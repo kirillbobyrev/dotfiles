@@ -45,10 +45,9 @@ Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
 
-" TODO: Fix treesitter not working propertly.
-" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
 
 " IMPORTANT: This has to be the last one.
 Plug 'ryanoasis/vim-devicons'
@@ -57,7 +56,16 @@ call plug#end()
 
 " }}}
 
-" Plugins customization ---------------------------------------------------- {{{
+" Plugins settings --------------------------------------------------------- {{{
+
+" Gruvbox colorscheme
+" TODO: Find a neat way to get around italics being disabled in
+" Alacritty (despite being supported) and the strange hack of checking
+" $TERM_ITALICS in Gruvbox repo. Probably, some .terminfo should be utilized.
+let g:gruvbox_italic = 1
+let g:gruvbox_guisp_fallback = 'bg'
+colorscheme gruvbox
+
 
 " UltiSnips
 " TODO: Manage coc.nvim integration.
@@ -67,13 +75,6 @@ let g:UltiSnipsJumpBackwardTrigger = '<c-h>'
 let g:UltiSnipsEditSplit = 'vertical'
 let g:UltiSnipsRemoveSelectModeMappings = 0
 let g:UltiSnipsSnippetDirectories=[$HOME .. '/.config/UltiSnips']
-
-" vim-cpp-enhanced-highlight
-let g:cpp_class_scope_highlight = 1
-let g:cpp_member_variable_highlight = 1
-let g:cpp_class_decl_highlight = 1
-let g:cpp_experimental_template_highlight = 1
-let g:cpp_concepts_highlight = 1
 
 " lightline.vim
 " TODO: Customize lightline more. Ideas:
@@ -153,6 +154,30 @@ set shortmess+=c
 
 " Use autocmd to force lightline update.
 autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
+
+" }}}
+
+" treesitter.nvim ---------------------------------------------------------- {{{
+
+syntax on
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "maintained",
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting = true,
+  },
+  indent = {
+    enable = false,
+  },
+}
+EOF
+
+" Use TreeSitter-based folding.
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+set nofoldenable
 
 " }}}
 

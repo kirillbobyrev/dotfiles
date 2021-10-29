@@ -1,4 +1,4 @@
-" Modularized configuration ------------------------------------------------ {{{
+" Load modularized settings ------------------------------------------------ {{{
 
 " Plugins installation and configuration
 source ~/.config/nvim/plugins.vim
@@ -23,14 +23,6 @@ set fileformats=unix
 " Always check spelling to improve grammar and prevent typos.
 set spelllang=en_us
 set spell
-
-" Gruvbox colorscheme
-" TODO: Find a neat way to get around italics being disabled in
-" Alacritty (despite being supported) and the strange hack of checking
-" $TERM_ITALICS in Gruvbox repo. Probably, some .terminfo should be utilized.
-let g:gruvbox_italic = 1
-let g:gruvbox_guisp_fallback = 'bg'
-colorscheme gruvbox
 
 " Spaces & Tabs
 " Always prefer spaces over tabs, use 2 spaces everywhere except in few
@@ -103,5 +95,8 @@ endif
 " Make side scrolling more useful.
 set sidescroll=5
 set listchars+=precedes:<,extends:>
+
+" Enable syntax highlighting.
+syntax on
 
 " }}}

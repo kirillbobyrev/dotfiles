@@ -3,12 +3,9 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " TODO: Avoid using Escape key.
 
-" Use Space to enter commands.
-noremap <Space> :
-
 " Use 'very magic' for search patterns by default.
-nnoremap / /\v
-nnoremap ? ?\v
+nnoremap / /\V
+nnoremap ? ?\V
 
 " vim-easy-align
 " Start interactive EasyAlign in visual mode (e.g. vipga).
