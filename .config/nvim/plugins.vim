@@ -9,6 +9,7 @@ call plug#begin(stdpath('data') .. '/plugged')
 
 Plug 'Yggdroot/indentLine'
 Plug 'dstein64/vim-startuptime'
+Plug 'editorconfig/editorconfig-vim'
 Plug 'itchyny/lightline.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'justinmk/vim-sneak'
@@ -32,18 +33,12 @@ Plug 'scrooloose/nerdtree'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
-Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript' }
-Plug 'cespare/vim-toml', { 'for': 'toml' }
-Plug 'dag/vim-fish', { 'for': 'fish' }
-Plug 'elzr/vim-json', { 'for': 'json' }
-Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'junegunn/goyo.vim', { 'for': 'markdown' }
-Plug 'keith/swift.vim', { 'for': 'swift' }
 Plug 'lervag/vimtex', { 'for': 'tex' }
-Plug 'llvm-mirror/llvm', { 'rtp': 'utils/vim', 'for': 'llvm' }
-Plug 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
-Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
@@ -114,8 +109,6 @@ let g:vimtex_view_general_options_latexmk = '--unique'
 " Highlight trailing whitespace. This makes missing an extra whitespace
 " infinitely harder. Also, use this plugin to remove trailing whitespaces upon
 " saving the file.
-let g:better_whitespace_enabled = 1
-let g:strip_whitespace_on_save = 1
 augroup comments_highlight
   autocmd!
   highlight ExtraWhitespace ctermbg=DarkMagenta
@@ -131,9 +124,8 @@ let g:NERDSpaceDelims = 1
 let g:NERDDefaultAlign = 'left'
 let g:NERDCommentEmptyLines = 1
 
-" vim-go
-let g:go_def_mode='gopls'
-let g:go_info_mode='gopls'
+" EditorConfig
+let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 
 " indentLine
 let g:indentLine_bufNameExclude = ['_.*', 'NERD_tree.*']
@@ -159,14 +151,12 @@ autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
 " treesitter.nvim ---------------------------------------------------------- {{{
 
-syntax on
-
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
   ensure_installed = "maintained",
   highlight = {
     enable = true,
-    additional_vim_regex_highlighting = true,
+    additional_vim_regex_highlighting = false,
   },
   indent = {
     enable = false,

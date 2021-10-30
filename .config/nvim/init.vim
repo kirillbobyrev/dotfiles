@@ -97,6 +97,6 @@ set sidescroll=5
 set listchars+=precedes:<,extends:>
 
 " Enable syntax highlighting.
-syntax on
+syntax enable
 
 " }}}
