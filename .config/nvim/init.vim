@@ -1,4 +1,4 @@
-" Load modularized settings ------------------------------------------------ {{{
+" Load modularized settings ---------------------------------------------- {{{
 
 " Plugins installation and configuration
 source ~/.config/nvim/plugins.vim
@@ -11,7 +11,7 @@ source ~/.config/nvim/commands.vim
 
 " }}}
 
-" General settings --------------------------------------------------------- {{{
+" General settings ------------------------------------------------------- {{{
 
 " Set NeoVim cursor to the Vim default one, otherwise it shows a blinking thin
 " line like in most GUI editors.

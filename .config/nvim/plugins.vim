@@ -1,20 +1,19 @@
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugins configuration
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Installation ------------------------------------------------------------- {{{
+" Installation ----------------------------------------------------------- {{{
 
 " TODO: Get through all plugins, read docs and customize them.
 call plug#begin(stdpath('data') .. '/plugged')
 
+Plug 'Raimondi/delimitMate'
 Plug 'Yggdroot/indentLine'
 Plug 'dstein64/vim-startuptime'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'itchyny/lightline.vim'
-Plug 'jiangmiao/auto-pairs'
 Plug 'justinmk/vim-sneak'
 Plug 'lifepillar/vim-cheat40'
-Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
 Plug 'liuchengxu/vim-which-key'
 Plug 'mhinz/vim-signify'
 Plug 'mhinz/vim-startify'
@@ -40,9 +39,15 @@ Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 
-Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
+Plug 'neoclide/coc.nvim', {
+      \ 'branch': 'master',
+      \ 'do': 'yarn install --frozen-lockfile',
+      \ }
+" It would be great to have coc.nvim enabled only in a number of files.
+" However, this requires key bindings to be enabled only in these filetypes.
+" \ 'for': ['cpp', 'c', 'rust', 'python', 'go', 'json', 'markdown'],
 
 " IMPORTANT: This has to be the last one.
 Plug 'ryanoasis/vim-devicons'
@@ -51,7 +56,7 @@ call plug#end()
 
 " }}}
 
-" Plugins settings --------------------------------------------------------- {{{
+" Plugins settings ------------------------------------------------------- {{{
 
 " Gruvbox colorscheme
 " TODO: Find a neat way to get around italics being disabled in
@@ -86,15 +91,15 @@ endfunction
 
 " Add diagnostic info for lightline.vim
 let g:lightline = {
-  \ 'colorscheme': 'gruvbox',
-  \ 'active': {
-  \   'left': [ [ 'mode', 'paste' ],
-  \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
-  \ },
-  \ 'component_function': {
-  \   'cocstatus': 'coc#status'
-  \ },
-  \ }
+      \ 'colorscheme': 'gruvbox',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'cocstatus': 'coc#status'
+      \ },
+      \ }
 
 " Vimtex
 let g:vimtex_compiler_latexmk = {'callback' : 0}
@@ -113,13 +118,14 @@ augroup comments_highlight
   autocmd!
   highlight ExtraWhitespace ctermbg=DarkMagenta
 augroup END
+let g:strip_whitespace_on_save = 1
 
 " vim-startify
 function! StartifyEntryFormat()
   return 'WebDevIconsGetFileTypeSymbol(absolute_path) ..' '.. entry_path'
 endfunction
 
-" NERD commenter
+" NERDCommenter
 let g:NERDSpaceDelims = 1
 let g:NERDDefaultAlign = 'left'
 let g:NERDCommentEmptyLines = 1
@@ -133,12 +139,12 @@ let g:indentLine_bufNameExclude = ['_.*', 'NERD_tree.*']
 " sneak
 let g:sneak#s_next = 1
 
-" coc.nvim ----------------------------------------------------------------- {{{
+" coc.nvim --------------------------------------------------------------- {{{
 
 " Give more space for the messages.
 set cmdheight=2
 
-" Unify CoC.nvim config across NeoVim and Vim.
+" Put configuration files into ~/.config/.
 let g:coc_config_home = $HOME .. '/.config/coc'
 
 " Don't give |ins-completion-menu| messages.
@@ -147,9 +153,19 @@ set shortmess+=c
 " Use autocmd to force lightline update.
 autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
 
+" Install extensions.
+let g:coc_global_extensions = [
+      \ 'coc-clangd',
+      \ 'coc-rust-analyzer',
+      \ 'coc-pyright',
+      \ 'coc-go',
+      \ 'coc-markdownlint',
+      \ 'coc-json',
+      \ ]
+
 " }}}
 
-" treesitter.nvim ---------------------------------------------------------- {{{
+" treesitter.nvim x------------------------------------------------------- {{{
 
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
