@@ -165,7 +165,7 @@ let g:coc_global_extensions = [
 
 " }}}
 
-" treesitter.nvim x------------------------------------------------------- {{{
+" treesitter.nvim -------------------------------------------------------- {{{
 
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
