@@ -40,11 +40,9 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
 Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 
-Plug 'neoclide/coc.nvim', {
-      \ 'branch': 'master',
-      \ 'do': 'yarn install --frozen-lockfile',
-      \ }
+Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
 " It would be great to have coc.nvim enabled only in a number of files.
 " However, this requires key bindings to be enabled only in these filetypes.
 " \ 'for': ['cpp', 'c', 'rust', 'python', 'go', 'json', 'markdown'],
@@ -174,8 +172,40 @@ require'nvim-treesitter.configs'.setup {
     enable = true,
     additional_vim_regex_highlighting = false,
   },
-  indent = {
-    enable = false,
+  textobjects = {
+    select = {
+      enable = true,
+
+      -- Automatically jump forward to textobj, similar to targets.vim
+      lookahead = true,
+
+      keymaps = {
+        ["af"] = "@function.outer",
+        ["if"] = "@function.inner",
+        ["ac"] = "@class.outer",
+        ["ic"] = "@class.inner",
+      },
+    },
+    move = {
+      enable = true,
+      set_jumps = true, -- whether to set jumps in the jumplist
+      goto_next_start = {
+        ["]m"] = "@function.outer",
+        ["]]"] = "@class.outer",
+      },
+      goto_next_end = {
+        ["]M"] = "@function.outer",
+        ["]["] = "@class.outer",
+      },
+      goto_previous_start = {
+        ["[m"] = "@function.outer",
+        ["[["] = "@class.outer",
+      },
+      goto_previous_end = {
+        ["[M"] = "@function.outer",
+        ["[]"] = "@class.outer",
+      },
+    },
   },
 }
 EOF

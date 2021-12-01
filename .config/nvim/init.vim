@@ -1,3 +1,6 @@
+" Required by treesitter to be set before it is enabled.
+syntax on
+
 " Load modularized settings ---------------------------------------------- {{{
 
 " Plugins installation and configuration
@@ -95,8 +98,5 @@ endif
 " Make side scrolling more useful.
 set sidescroll=5
 set listchars+=precedes:<,extends:>
-
-" Enable syntax highlighting.
-syntax enable
 
 " }}}
