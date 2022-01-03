@@ -1,7 +1,8 @@
--- Load modularized settings --------------------------------------------- {{{
+-- Load modularized settings ---------------------------------------------------
 
 -- Plugins installation and configuration
-vim.cmd('source ~/.config/nvim/plugins.vim')
+-- vim.cmd('source ~/.config/nvim/plugins.vim')
+require('plugins')
 
 -- Custom key bindings.
 vim.cmd('source ~/.config/nvim/mappings.vim')
@@ -11,7 +12,7 @@ vim.cmd('source ~/.config/nvim/commands.vim')
 
 -- }}}
 
--- General settings ------------------------------------------------------ {{{
+-- Set options -----------------------------------------------------------------
 
 -- Set NeoVim cursor to the Vim default one, otherwise it shows a blinking
 -- thin line like in most GUI editors.
@@ -78,7 +79,7 @@ vim.o.diffopt = 'internal,algorithm:patience,indent-heuristic'
 vim.o.signcolumn = 'yes'
 
 -- Don't wait for updates too long.
-vim.o.updatetime = 100
+vim.o.updatetime = 50
 
 -- The fish shell is not compatible with most shells and unexpectedly breaks
 -- things that use 'shell'.
@@ -93,6 +94,4 @@ vim.o.filetype = 'on'
 vim.o.syntax = 'on'
 
 -- This is a hack for TreeSitter.
-vim.cmd('autocmd BufEnter * :syntax on<BR>')
-
--- }}}
+vim.cmd('colorscheme gruvbox')
