@@ -1,7 +1,6 @@
 -- Load modularized settings ---------------------------------------------------
 
 -- Plugins installation and configuration
--- vim.cmd('source ~/.config/nvim/plugins.vim')
 require('plugins')
 
 -- Custom key bindings.
@@ -20,10 +19,6 @@ vim.o.guicursor = ''
 
 -- Use Unix line endings.
 vim.o.fileformats = 'unix'
-
--- Always check spelling to improve grammar and prevent typos.
-vim.o.spelllang = 'en_us'
-vim.o.spell = true
 
 -- Spaces & Tabs
 -- Always prefer spaces over tabs, use 2 spaces everywhere except in few
@@ -93,5 +88,6 @@ vim.opt.listchars = { precedes = '<', extends = '>' }
 vim.o.filetype = 'on'
 vim.o.syntax = 'on'
 
--- This is a hack for TreeSitter.
-vim.cmd('colorscheme gruvbox')
+-- Sadly, this seems to be required for now:
+-- https://github.com/kyazdani42/nvim-tree.lua/issues/767
+require'nvim-tree'.setup {}

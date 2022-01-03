@@ -1,9 +1,3 @@
-local fn = vim.fn
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-if fn.empty(fn.glob(install_path)) > 0 then
-  packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-end
-
 vim.cmd([[
   augroup packer_user_config
     autocmd!
@@ -11,12 +5,25 @@ vim.cmd([[
   augroup end
 ]])
 
-return require('packer').startup(function()
+require('packer').startup(function()
   use 'wbthomason/packer.nvim'
 
   -- Use Gruvbox colorscheme.
-  use 'morhetz/gruvbox'
+  use {
+    'morhetz/gruvbox',
+    config = function() 
+      vim.o.termguicolors = true
+      vim.cmd('colorscheme gruvbox')
+    end,
+  }
 
+  use {
+    'mhinz/vim-startify',
+    requires = {
+      'kyazdani42/nvim-web-devicons',
+      'morhetz/gruvbox'
+    },
+  }
   use {
     'nvim-lualine/lualine.nvim',
     requires = { 'kyazdani42/nvim-web-devicons', 'morhetz/gruvbox' },
@@ -25,17 +32,38 @@ return require('packer').startup(function()
       require('lualine').setup()
     end,
   }
+  use {
+    'kyazdani42/nvim-tree.lua',
+    requires = {
+      'kyazdani42/nvim-web-devicons',
+    },
+    config = function()
+      require'nvim-tree'.setup()
+    end,
+  }
+
+  use {
+    'Yggdroot/indentLine',
+    ft = {'cpp', 'c', 'rust', 'python', 'lua'},
+  }
 
   use 'justinmk/vim-sneak'
   use 'mhinz/vim-signify'
-  use {
-    'mhinz/vim-startify',
-    requires = {'kyazdani42/nvim-web-devicons' },
-  }
+  use 'b3nj5m1n/kommentary'
+  use 'wellle/targets.vim'
 
-  -- Automatically set up your configuration after cloning packer.nvim
-  -- Put this at the end after all plugins
-  if packer_bootstrap then
-    require('packer').sync()
-  end
+  -- Connect to LSP servers.
+  use {
+    'neovim/nvim-lspconfig',
+    config = function()
+      require('lspconfig').clangd.setup {}
+      require('lspconfig').rust_analyzer.setup {}
+    end,
+  }
+  use {
+    'simrat39/rust-tools.nvim',
+    config = function()
+      require('rust-tools').setup()
+    end,
+  }
 end)
