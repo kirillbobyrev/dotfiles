@@ -267,6 +267,10 @@ colors:
   # window is not focused.
   #unfocused_hollow: true
 
+cursor:
+  style:
+    blinking: Never
+
 # Live config reload (changes require restart)
 #live_config_reload: true
 
