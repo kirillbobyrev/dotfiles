@@ -95,7 +95,6 @@ require('packer').startup(function()
     config = function()
       require('rust-tools').setup()
       require('rust-tools.inlay_hints').set_inlay_hints()
-      require('rust-tools.inlay_hints').toggle_inlay_hints()
     end,
   }
 end)
