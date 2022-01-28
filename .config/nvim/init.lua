@@ -15,7 +15,7 @@ vim.cmd('source ~/.config/nvim/commands.vim')
 
 -- Set NeoVim cursor to the Vim default one, otherwise it shows a blinking
 -- thin line like in most GUI editors.
-vim.o.guicursor = ''
+vim.o.guicursor = ""
 
 -- Use Unix line endings.
 vim.o.fileformats = 'unix'
@@ -74,7 +74,7 @@ vim.o.diffopt = 'internal,algorithm:patience,indent-heuristic'
 vim.o.signcolumn = 'yes'
 
 -- Don't wait for updates too long.
-vim.o.updatetime = 50
+vim.o.updatetime = 100
 
 -- The fish shell is not compatible with most shells and unexpectedly breaks
 -- things that use 'shell'.

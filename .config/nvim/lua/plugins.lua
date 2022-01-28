@@ -44,7 +44,14 @@ require('packer').startup(function()
 
   use {
     'Yggdroot/indentLine',
-    ft = {'cpp', 'c', 'rust', 'python', 'lua'},
+    ft = { 'cpp', 'c', 'rust', 'python', 'lua', 'yaml' },
+  }
+
+  use {
+    'windwp/nvim-autopairs',
+    config = function()
+      require('nvim-autopairs').setup()
+    end,
   }
 
   use 'justinmk/vim-sneak'
@@ -61,9 +68,34 @@ require('packer').startup(function()
     end,
   }
   use {
+    'hrsh7th/nvim-cmp',
+    requires = {
+      'hrsh7th/cmp-nvim-lsp',
+    },
+    config = function()
+      local cmp = require('cmp')
+      cmp.setup({
+        mapping = {
+          ['<CR>'] = cmp.mapping.confirm({ select = true }),
+        },
+        sources = {
+          { name = 'nvim_lsp' },
+        }
+      })
+    end,
+  }
+  use {
+    'ray-x/lsp_signature.nvim',
+    config = function()
+      require('lsp_signature').setup()
+    end,
+  }
+  use {
     'simrat39/rust-tools.nvim',
     config = function()
       require('rust-tools').setup()
+      require('rust-tools.inlay_hints').set_inlay_hints()
+      require('rust-tools.inlay_hints').toggle_inlay_hints()
     end,
   }
 end)
