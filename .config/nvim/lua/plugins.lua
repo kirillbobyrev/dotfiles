@@ -32,15 +32,15 @@ require('packer').startup(function()
       require('lualine').setup()
     end,
   }
-  use {
-    'kyazdani42/nvim-tree.lua',
-    requires = {
-      'kyazdani42/nvim-web-devicons',
-    },
-    config = function()
-      require'nvim-tree'.setup()
-    end,
-  }
+  -- use {
+  --   'kyazdani42/nvim-tree.lua',
+  --   requires = {
+  --     'kyazdani42/nvim-web-devicons',
+  --   },
+  --   config = function()
+  --     require'nvim-tree'.setup()
+  --   end,
+  -- }
 
   use {
     'Yggdroot/indentLine',
@@ -56,8 +56,17 @@ require('packer').startup(function()
 
   use 'justinmk/vim-sneak'
   use 'mhinz/vim-signify'
-  use 'b3nj5m1n/kommentary'
+  use {
+    'b3nj5m1n/kommentary',
+    config = function()
+      require('kommentary.config').configure_language("default", {
+        prefer_single_line_comments = true,
+      })
+    end,
+  }
   use 'wellle/targets.vim'
+
+  use 'ledger/vim-ledger'
 
   -- Connect to LSP servers.
   use {
@@ -92,9 +101,13 @@ require('packer').startup(function()
   }
   use {
     'simrat39/rust-tools.nvim',
+    requires = {
+      'neovim/nvim-lspconfig',
+    },
     config = function()
       require('rust-tools').setup()
       require('rust-tools.inlay_hints').set_inlay_hints()
     end,
   }
+
 end)

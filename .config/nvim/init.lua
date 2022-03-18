@@ -13,10 +13,6 @@ vim.cmd('source ~/.config/nvim/commands.vim')
 
 -- Set options -----------------------------------------------------------------
 
--- Set NeoVim cursor to the Vim default one, otherwise it shows a blinking
--- thin line like in most GUI editors.
-vim.o.guicursor = ""
-
 -- Use Unix line endings.
 vim.o.fileformats = 'unix'
 
@@ -88,6 +84,5 @@ vim.opt.listchars = { precedes = '<', extends = '>' }
 vim.o.filetype = 'on'
 vim.o.syntax = 'on'
 
--- Sadly, this seems to be required for now:
--- https://github.com/kyazdani42/nvim-tree.lua/issues/767
-require'nvim-tree'.setup {}
+-- Use global statusline.
+vim.o.laststatus = 3
