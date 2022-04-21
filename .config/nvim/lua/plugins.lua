@@ -70,13 +70,6 @@ require('packer').startup(function()
 
   -- Connect to LSP servers.
   use {
-    'neovim/nvim-lspconfig',
-    config = function()
-      require('lspconfig').clangd.setup {}
-      require('lspconfig').rust_analyzer.setup {}
-    end,
-  }
-  use {
     'hrsh7th/nvim-cmp',
     requires = {
       'hrsh7th/cmp-nvim-lsp',
@@ -84,13 +77,39 @@ require('packer').startup(function()
     config = function()
       local cmp = require('cmp')
       cmp.setup({
-        mapping = {
+        mapping = cmp.mapping.preset.insert({
+          ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+          ['<C-f>'] = cmp.mapping.scroll_docs(4),
+          ['<C-Space>'] = cmp.mapping.complete(),
+          ['<C-e>'] = cmp.mapping.abort(),
           ['<CR>'] = cmp.mapping.confirm({ select = true }),
-        },
-        sources = {
+          ['<Tab>'] = function(fallback)
+            if cmp.visible() then
+              cmp.select_next_item()
+            else
+              fallback()
+            end
+          end,
+        }),
+        sources = cmp.config.sources({
           { name = 'nvim_lsp' },
-        }
+        }, {
+          { name = 'buffer' },
+        }),
       })
+    end,
+  }
+  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  use {
+    'neovim/nvim-lspconfig',
+    config = function()
+      require('lspconfig').clangd.setup {
+        cmd = {"clangd", "-log=verbose"},
+        capabilities = capabilities,
+      }
+      require('lspconfig').rust_analyzer.setup {
+        capabilities = capabilities,
+      }
     end,
   }
   use {
