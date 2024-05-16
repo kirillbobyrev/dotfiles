@@ -8,9 +8,6 @@ vim.o.shiftwidth = 2
 vim.o.number = true
 vim.o.relativenumber = true
 
--- Use true colors whenever possible.
-vim.o.termguicolors = true
-
 -- Highlight matching bracket.
 vim.o.showmatch = true
 
