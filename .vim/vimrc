@@ -1,26 +1,40 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vanilla Vim defauts
+" Enchaned Vim defauts
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Always use UTF-8 encoding.
+" Disable Vi compatibility and use Vim’s full features.
+set nocompatible
+
+" Always use UTF-8.
 set encoding=utf-8
 set fileencoding=utf-8
 scriptencoding utf8
 
-" Use smarter indent rules for better experience.
-set autoindent
-
-" Enable filetype plugin.
+" Enable syntax highlighting and filetype-specific plugins/indentation.
+syntax enable
 filetype plugin indent on
 
+" Enable true colors and system clipboard integration.
+set termguicolors
+set clipboard=unnamedplus
+
+" Enable mouse support.
+set mouse=a
+
+" Use smarter indent rules.
+set autoindent
+
+" Use dark background.
 set background=dark
 
 " Proper backspace behavior.
 set backspace=indent,eol,start
 
-" Enable incremental search.
+" Search settings: incremental search, ignore case by default,
+" but use smart case when uppercase letters are used.
 set incsearch
-" Highlight chunks of text matching the search pattern.
+set ignorecase
+set smartcase
 set hlsearch
 
 " Enable visual autocomplete menu.
@@ -29,11 +43,24 @@ set wildmenu
 " Redraw faster.
 set ttyfast
 
-" Always show status.
+" Always show the status line.
 set laststatus=2
 
 " Save more history.
 set history=10000
 
-" Show pressed keys in statusline.
+" Show pressed keys in the status line.
 set showcmd
+
+" Better split behavior: new horizontal splits open below, vertical splits open to the right.
+set splitbelow
+set splitright
+
+" Reduce update time for smoother CursorHold events.
+set updatetime=300
+
+" Highlight the current line.
+set cursorline
+
+" Show matching brackets briefly.
+set showmatch

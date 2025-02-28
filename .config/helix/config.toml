@@ -1,8 +1,0 @@
-theme = "gruvbox"
-
-[editor]
-line-number = "relative"
-mouse = false
-true-color = true
-rulers = [80]
-bufferline = "always"

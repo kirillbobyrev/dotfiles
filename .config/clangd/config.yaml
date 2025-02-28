@@ -1,7 +1,5 @@
 CompileFlags:
-  Add: [-xc++, -std=c++17, -Wall, -Weverything, -Wno-c++98-compat,
-        -Wno-missing-prototypes, -Wno-c++98-compat-pedantic,
-        -Wno-reserved-id-macro]
+  Add: [-xc++, -std=c++20]
 Diagnostics:
   ClangTidy:
     Add: [performance*, modernize*]
