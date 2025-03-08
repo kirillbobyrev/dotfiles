@@ -43,6 +43,11 @@ require("lazy").setup({
     },
   },
   {
+    'NoahTheDuke/vim-just',
+    config = function()
+    end
+  },
+  {
     'numToStr/Comment.nvim',
     opts = {},
   },
