@@ -4,8 +4,6 @@
   username = kirillbobyrev
 [core]
   editor = nvim
-[web]
-  browser = google-chrome
 [color]
   ui = true
 [github]

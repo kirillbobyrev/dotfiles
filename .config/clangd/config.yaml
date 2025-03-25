@@ -1,5 +1,5 @@
 CompileFlags:
-  Add: [-xc++, -std=c++20]
+  Add: [-xc++, -std=c++26]
 Diagnostics:
   ClangTidy:
     Add: [performance*, modernize*]
