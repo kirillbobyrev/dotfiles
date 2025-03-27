@@ -116,19 +116,16 @@ require("lazy").setup({
     end,
   },
 
-  -- LSP Configuration & Formatting (Focused: C++/Python/Shell/Lua, Manual Install Required!)
+  -- LSP Configuration (Focused: C++/Python)
   {
     "neovim/nvim-lspconfig",
     event = { "BufReadPost", "BufNewFile" },
     dependencies = {
       "hrsh7th/cmp-nvim-lsp", -- Needed for capabilities
-      "stevearc/conform.nvim", -- Formatting
-      { 'folke/neodev.nvim', opts = {} }, -- Lua dev for config
     },
     config = function()
       local lspconfig = require("lspconfig")
       local cmp_nvim_lsp = require("cmp_nvim_lsp")
-      local conform = require("conform")
       local capabilities = cmp_nvim_lsp.default_capabilities()
 
       local function lsp_keymaps(bufnr)
@@ -147,42 +144,23 @@ require("lazy").setup({
 
       local on_attach = function(client, bufnr)
         lsp_keymaps(bufnr)
-        -- Disable LSP formatting if conform is handling it
-        client.server_capabilities.documentFormattingProvider = false
-        client.server_capabilities.documentRangeFormattingProvider = false
       end
 
       -- ======================================================================
       -- MANUAL LSP SERVER CONFIGURATION
       -- ======================================================================
       -- Clangd
-      -- Pyright
+      -- Ruff
       -- ======================================================================
 
       -- Setup clangd (C/C++)
       lspconfig.clangd.setup({ capabilities = capabilities, on_attach = on_attach })
 
-      -- Setup pyright (Python) - Choose this or python-lsp-server (pylsp)
-      lspconfig.pyright.setup({ capabilities = capabilities, on_attach = on_attach })
-
-      -- Configure conform.nvim (Formatter) - Manual Install Required
-      conform.setup({
-        formatters_by_ft = {
-          c = { "clang-format" },
-          cpp = { "clang-format" },
-          python = { "isort", "black" },
-          markdown = { "prettier" },
-        },
-        format_on_save = { timeout_ms = 500, lsp_fallback = false }, -- Optional: format on save
-      })
+      -- Setup ruff (Python)
+      lspconfig.ruff.setup({ capabilities = capabilities, on_attach = on_attach })
 
       -- Configure diagnostics appearance
-      vim.diagnostic.config({ virtual_text = false, signs = true, underline = true, update_in_insert = false, severity_sort = true })
-      local signs = { Error = " ", Warn = " ", Info = " ", Hint = " " }
-      for type, icon in pairs(signs) do
-        local hl = "DiagnosticSign" .. type
-        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-      end
+      vim.diagnostic.config({ virtual_lines = true })
     end
   },
 
@@ -203,16 +181,6 @@ require("lazy").setup({
     }
   },
 
-  -- REMOVED: Git Integration (gitsigns.nvim)
-
-  -- Indent Lines
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    main = "ibl",
-    event = { "BufReadPost", "BufNewFile" },
-    opts = { indent = { char = "│" }, scope = { enabled = false }, exclude = { filetypes = { "help", "alpha", "dashboard", "neo-tree", "Trouble", "lazy" } } },
-  },
-
   -- Keymap Helper
   {
     'folke/which-key.nvim',
@@ -221,28 +189,106 @@ require("lazy").setup({
     config = function(_, opts) require('which-key').setup(opts) end,
   },
 
-  -- Better UI for Select/Input
   {
-    "stevearc/dressing.nvim",
-    event = "VeryLazy",
-    dependencies = { "nvim-telescope/telescope.nvim" },
-    opts = { input = { enabled = true }, select = { enabled = true, backend = { "telescope", "builtin" }, telescope = {} } },
+    "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
+    ---@type snacks.Config
+    opts = {
+      animate = { enabled = true },
+      bigfile = { enabled = true },
+      dashboard = { enabled = true },
+      explorer = { enabled = true },
+      indent = { enabled = true },
+      input = { enabled = true },
+      notifier = {
+        enabled = true,
+        timeout = 3000,
+      },
+      picker = { enabled = true },
+      quickfile = { enabled = true },
+      rename = { enabled = true },
+      scope = { enabled = true },
+      layout = { enabled = true },
+      scroll = { enabled = true },
+      statuscolumn = { enabled = true },
+      words = { enabled = true },
+      styles = {
+        notification = {
+          wo = { wrap = true } -- Wrap notifications
+        }
+      }
+    },
   },
 
-  -- Utility: Commenting
-  -- Commenting
+  { 'echasnovski/mini.icons', version = false },
+
   {
-    'numToStr/Comment.nvim',
+    "folke/noice.nvim",
+    event = "VeryLazy",
+    opts = {},
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+    },
     config = function()
-      require('Comment').setup()
-      vim.keymap.del("n", "gc")
-      vim.keymap.del("n", "gb")
-      local wk = require('which-key')
-      wk.add({
-        { "gb", group = "Comment toggle blockwise" },
-        { "gc", group = "Comment toggle linewise" },
+      require("noice").setup({
+        lsp = {
+          -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+          override = {
+            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+            ["vim.lsp.util.stylize_markdown"] = true,
+            ["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+          },
+        },
+        -- you can enable a preset for easier configuration
+        presets = {
+          bottom_search = true, -- use a classic bottom cmdline for search
+          command_palette = true, -- position the cmdline and popupmenu together
+          long_message_to_split = true, -- long messages will be sent to a split
+          inc_rename = false, -- enables an input dialog for inc-rename.nvim
+          lsp_doc_border = false, -- add a border to hover docs and signature help
+        },
       })
     end
+  },
+
+  {
+    "folke/trouble.nvim",
+    opts = {},
+    cmd = "Trouble",
+    keys = {
+      {
+        "<leader>xx",
+        "<cmd>Trouble diagnostics toggle<cr>",
+        desc = "Diagnostics (Trouble)",
+      },
+      {
+        "<leader>xX",
+        "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+        desc = "Buffer Diagnostics (Trouble)",
+      },
+      {
+        "<leader>cs",
+        "<cmd>Trouble symbols toggle focus=false<cr>",
+        desc = "Symbols (Trouble)",
+      },
+      {
+        "<leader>cl",
+        "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+        desc = "LSP Definitions / references / ... (Trouble)",
+      },
+      {
+        "<leader>xL",
+        "<cmd>Trouble loclist toggle<cr>",
+        desc = "Location List (Trouble)",
+      },
+      {
+        "<leader>xQ",
+        "<cmd>Trouble qflist toggle<cr>",
+        desc = "Quickfix List (Trouble)",
+      },
+    },
   },
 
   -- Utility: Autopairs
@@ -261,9 +307,7 @@ map('n', '<leader>fg', '<cmd>Telescope live_grep<cr>', { desc = 'Live Grep' })
 map('n', '<leader>fb', '<cmd>Telescope buffers<cr>', { desc = 'Find Buffers' })
 map('n', '<leader>fh', '<cmd>Telescope help_tags<cr>', { desc = 'Help Tags' })
 map('n', '<leader>fo', '<cmd>Telescope oldfiles<cr>', { desc = 'Find Old Files' })
-map({ 'n', 'v' }, '<leader>lf', function() require('conform').format({ async = true, lsp_fallback = false }) end, { desc = 'Format Code' })
 map('n', '<C-h>', '<C-w>h', { desc = 'Window Left', silent = true })
 map('n', '<C-j>', '<C-w>j', { desc = 'Window Down', silent = true })
 map('n', '<C-k>', '<C-w>k', { desc = 'Window Up', silent = true })
 map('n', '<C-l>', '<C-w>l', { desc = 'Window Right', silent = true })
-map('n', '<leader>bd', '<cmd>bd<CR>', { desc = 'Close Buffer' })
