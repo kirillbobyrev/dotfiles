@@ -32,6 +32,8 @@ opt.splitbelow = true        -- Horizontal splits will automatically be below
 opt.splitright = true        -- Vertical splits will automatically be to the right
 opt.timeoutlen = 300         -- Lower timeout for key sequences
 opt.updatetime = 200         -- Faster update time
+opt.cursorline = true
+opt.termguicolors = true
 
 -- [[ Plugin Management with lazy.nvim ]]
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -159,6 +161,8 @@ require("lazy").setup({
       -- Setup ruff (Python)
       lspconfig.ruff.setup({ capabilities = capabilities, on_attach = on_attach })
 
+      lspconfig.lua_ls.setup({})
+
       -- Configure diagnostics appearance
       vim.diagnostic.config({ virtual_lines = true })
     end
@@ -199,7 +203,7 @@ require("lazy").setup({
       bigfile = { enabled = true },
       dashboard = { enabled = true },
       explorer = { enabled = true },
-      indent = { enabled = true },
+      indent = { enabled = false },
       input = { enabled = true },
       notifier = {
         enabled = true,
@@ -208,9 +212,9 @@ require("lazy").setup({
       picker = { enabled = true },
       quickfile = { enabled = true },
       rename = { enabled = true },
-      scope = { enabled = true },
+      scope = { enabled = false },
       layout = { enabled = true },
-      scroll = { enabled = true },
+      scroll = { enabled = false },
       statuscolumn = { enabled = true },
       words = { enabled = true },
       styles = {
