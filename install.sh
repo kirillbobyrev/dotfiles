@@ -21,16 +21,16 @@ create_symlink() {
             local current_source
             current_source="$(readlink "$target")"
             if [ "$current_source" = "$source" ]; then
-                echo "  ✓ $target already linked correctly"
+                echo "  [OK] $target already linked correctly"
                 return
             fi
         fi
-        echo "  → Backing up existing $target to ${target}.backup"
+        echo "  [BACKUP] Backing up existing $target to ${target}.backup"
         mv "$target" "${target}.backup"
     fi
     
     ln -s "$source" "$target"
-    echo "  ✓ Linked $target -> $source"
+    echo "  [OK] Linked $target -> $source"
 }
 
 # Install shell configuration files
@@ -59,7 +59,7 @@ if [ -d "$DOTFILES_DIR/.config" ]; then
 fi
 
 echo ""
-echo "✓ Dotfiles installation complete!"
+echo "[SUCCESS] Dotfiles installation complete!"
 echo ""
 echo "Note: If you're using zsh, you may want to restart your shell or run:"
 echo "  source ~/.zshrc"
