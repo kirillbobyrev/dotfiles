@@ -70,9 +70,16 @@ remove_symlink() {
 restore_backup() {
     local target="$1"
     
-    # Find the most recent backup
+    # Find the most recent backup (portable across Linux and macOS/BSD)
     local latest_backup
-    latest_backup=$(find "$(dirname "$target")" -maxdepth 1 -name "$(basename "$target").backup.*" -type f -printf '%T@ %p\n' 2>/dev/null | sort -rn | head -n 1 | cut -d' ' -f2-)
+    # Try GNU stat first, then BSD stat
+    if stat -c '%Y' "$(dirname "$target")" >/dev/null 2>&1; then
+        # GNU stat (Linux)
+        latest_backup=$(find "$(dirname "$target")" -maxdepth 1 -name "$(basename "$target").backup.*" -type f -exec stat -c '%Y %n' {} \; 2>/dev/null | sort -rn | head -n 1 | cut -d' ' -f2-)
+    else
+        # BSD stat (macOS)
+        latest_backup=$(find "$(dirname "$target")" -maxdepth 1 -name "$(basename "$target").backup.*" -type f -exec stat -f '%m %N' {} \; 2>/dev/null | sort -rn | head -n 1 | cut -d' ' -f2-)
+    fi
     
     if [ -n "$latest_backup" ] && [ -e "$latest_backup" ]; then
         print_info "Found backup: $latest_backup"
