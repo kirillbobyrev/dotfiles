@@ -47,12 +47,16 @@ echo "Installing .config directory contents..."
 mkdir -p "$HOME/.config"
 
 # Symlink each subdirectory in .config
-for config_dir in "$DOTFILES_DIR/.config"/*; do
-    if [ -d "$config_dir" ]; then
-        config_name="$(basename "$config_dir")"
-        create_symlink "$config_dir" "$HOME/.config/$config_name"
-    fi
-done
+if [ -d "$DOTFILES_DIR/.config" ]; then
+    shopt -s nullglob
+    for config_dir in "$DOTFILES_DIR/.config"/*; do
+        if [ -d "$config_dir" ]; then
+            config_name="$(basename "$config_dir")"
+            create_symlink "$config_dir" "$HOME/.config/$config_name"
+        fi
+    done
+    shopt -u nullglob
+fi
 
 echo ""
 echo "✓ Dotfiles installation complete!"
