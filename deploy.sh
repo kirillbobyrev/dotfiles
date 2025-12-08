@@ -38,7 +38,8 @@ print_error() {
 # Function to create a backup of an existing file or directory
 backup_file() {
     local file="$1"
-    local backup="${file}.backup.$(date +%Y%m%d_%H%M%S)"
+    local backup
+    backup="${file}.backup.$(date +%Y%m%d_%H%M%S)"
     
     if [ -e "$file" ] && [ ! -L "$file" ]; then
         mv "$file" "$backup"
@@ -65,7 +66,8 @@ create_symlink() {
     fi
     
     # Create parent directory if it doesn't exist
-    local target_dir=$(dirname "$target")
+    local target_dir
+    target_dir=$(dirname "$target")
     if [ ! -d "$target_dir" ]; then
         mkdir -p "$target_dir"
         print_info "Created directory: $target_dir"
@@ -99,7 +101,8 @@ deploy_dotfiles() {
     print_info "Deploying .config subdirectories..."
     for config_dir in "$DOTFILES_DIR/.config"/*; do
         if [ -d "$config_dir" ]; then
-            local dir_name=$(basename "$config_dir")
+            local dir_name
+            dir_name=$(basename "$config_dir")
             create_symlink "$config_dir" "$HOME/.config/$dir_name"
         fi
     done

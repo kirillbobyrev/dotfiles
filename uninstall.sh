@@ -41,8 +41,10 @@ remove_symlink() {
     local expected_source="$2"
     
     if [ -L "$target" ]; then
-        local actual_source=$(readlink -f "$target")
-        local expected_source_abs=$(readlink -f "$expected_source")
+        local actual_source
+        local expected_source_abs
+        actual_source=$(readlink -f "$target")
+        expected_source_abs=$(readlink -f "$expected_source")
         
         if [ "$actual_source" = "$expected_source_abs" ]; then
             if ! rm "$target" 2>/dev/null; then
@@ -67,10 +69,10 @@ remove_symlink() {
 # Function to find and optionally restore the most recent backup
 restore_backup() {
     local target="$1"
-    local backup_pattern="${target}.backup.*"
     
     # Find the most recent backup
-    local latest_backup=$(ls -t "${backup_pattern}" 2>/dev/null | head -n 1)
+    local latest_backup
+    latest_backup=$(find "$(dirname "$target")" -maxdepth 1 -name "$(basename "$target").backup.*" -type f -printf '%T@ %p\n' 2>/dev/null | sort -rn | head -n 1 | cut -d' ' -f2-)
     
     if [ -n "$latest_backup" ] && [ -e "$latest_backup" ]; then
         print_info "Found backup: $latest_backup"
@@ -104,8 +106,10 @@ uninstall_dotfiles() {
     print_info "Removing .config subdirectories..."
     for config_dir in "$DOTFILES_DIR/.config"/*; do
         if [ -d "$config_dir" ]; then
-            local dir_name=$(basename "$config_dir")
-            local target="$HOME/.config/$dir_name"
+            local dir_name
+            local target
+            dir_name=$(basename "$config_dir")
+            target="$HOME/.config/$dir_name"
             remove_symlink "$target" "$config_dir" && restore_backup "$target"
         fi
     done
