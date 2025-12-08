@@ -45,7 +45,10 @@ remove_symlink() {
         local expected_source_abs=$(readlink -f "$expected_source")
         
         if [ "$actual_source" = "$expected_source_abs" ]; then
-            rm "$target"
+            if ! rm "$target" 2>/dev/null; then
+                print_error "Failed to remove symlink: $target"
+                return 1
+            fi
             print_success "Removed symlink: $target"
             return 0
         else
@@ -67,7 +70,7 @@ restore_backup() {
     local backup_pattern="${target}.backup.*"
     
     # Find the most recent backup
-    local latest_backup=$(ls -t ${backup_pattern} 2>/dev/null | head -n 1)
+    local latest_backup=$(ls -t "${backup_pattern}" 2>/dev/null | head -n 1)
     
     if [ -n "$latest_backup" ] && [ -e "$latest_backup" ]; then
         print_info "Found backup: $latest_backup"

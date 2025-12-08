@@ -72,7 +72,10 @@ create_symlink() {
     fi
     
     # Create the symlink
-    ln -s "$source" "$target"
+    if ! ln -s "$source" "$target" 2>/dev/null; then
+        print_error "Failed to create symlink: $target -> $source"
+        return 1
+    fi
     print_success "Linked: $target -> $source"
 }
 
