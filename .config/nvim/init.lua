@@ -61,48 +61,37 @@ require("lazy").setup({
   "nvim-tree/nvim-web-devicons",
   "MunifTanjim/nui.nvim",
 
-  -- Color Scheme: Catppuccin (Modern and Beautiful)
+  -- Color Scheme: Gruvbox
   {
-    "catppuccin/nvim",
-    name = "catppuccin",
+    "ellisonleao/gruvbox.nvim",
     priority = 1000,
     config = function()
-      require("catppuccin").setup({
-        flavour = "mocha",
-        background = { light = "latte", dark = "mocha" },
-        transparent_background = false,
-        show_end_of_buffer = false,
-        term_colors = true,
-        dim_inactive = { enabled = false, shade = "dark", percentage = 0.15 },
-        no_italic = false,
-        no_bold = false,
-        no_underline = false,
-        styles = {
-          comments = { "italic" },
-          conditionals = { "italic" },
-          loops = {},
-          functions = {},
-          keywords = {},
-          strings = {},
-          variables = {},
-          numbers = {},
-          booleans = {},
-          properties = {},
-          types = {},
-          operators = {},
+      require("gruvbox").setup({
+        terminal_colors = true,
+        undercurl = true,
+        underline = true,
+        bold = true,
+        italic = {
+          strings = true,
+          emphasis = true,
+          comments = true,
+          operators = false,
+          folds = true,
         },
-        integrations = {
-          cmp = true,
-          gitsigns = true,
-          nvimtree = true,
-          treesitter = true,
-          notify = true,
-          mini = { enabled = true },
-          telescope = { enabled = true },
-          which_key = true,
-        },
+        strikethrough = true,
+        invert_selection = false,
+        invert_signs = false,
+        invert_tabline = false,
+        invert_intend_guides = false,
+        inverse = true,
+        contrast = "",
+        palette_overrides = {},
+        overrides = {},
+        dim_inactive = false,
+        transparent_mode = false,
       })
-      vim.cmd.colorscheme("catppuccin")
+      vim.o.background = "dark"
+      vim.cmd.colorscheme("gruvbox")
     end,
   },
 
@@ -126,7 +115,7 @@ require("lazy").setup({
       }
       return {
         options = {
-          theme = "catppuccin",
+          theme = "gruvbox",
           globalstatus = true,
           disabled_filetypes = { statusline = { "dashboard", "alpha", "starter" } },
         },
@@ -344,7 +333,14 @@ require("lazy").setup({
               on_attach = on_attach,
               settings = {
                 Lua = {
-                  workspace = { checkThirdParty = false },
+                  runtime = { version = "LuaJIT" },
+                  workspace = {
+                    checkThirdParty = false,
+                    library = {
+                      vim.env.VIMRUNTIME,
+                      "${3rd}/luv/library",
+                    },
+                  },
                   codeLens = { enable = true },
                   completion = { callSnippet = "Replace" },
                   diagnostics = { globals = { "vim" } },
